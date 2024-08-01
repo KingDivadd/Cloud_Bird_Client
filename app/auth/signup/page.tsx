@@ -13,17 +13,16 @@ import { signup_user_role } from '@/constants';
 const Signup = () => {
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
-    const [auth, setAuth] = useState({firstName: '', lastName: '', email: '', phone: '', password: '' })
-    const [inputError, setInputError] = useState({firstNameError: false, lastNameError: false, emailError: false, phoneError: false, passwordError: false})
+    const [auth, setAuth] = useState({first_name: '', last_name: '', email: '', password: '', user_role: '' })
+    const [inputError, setInputError] = useState({first_nameError: false, last_nameError: false, emailError: false, passwordError: false})
     const [loading, setLoading] = useState(false); 
     const [alert, setAlert] = useState({message: '', type: ''})
     const [current_stage, setCurrent_stage] = useState('role')
 
     useEffect(() => {
-        if (auth.firstName){setInputError({...inputError, firstNameError: false})}
-        if (auth.lastName){setInputError({...inputError, lastNameError: false})}
+        if (auth.first_name){setInputError({...inputError, first_nameError: false})}
+        if (auth.last_name){setInputError({...inputError, last_nameError: false})}
         if (auth.email){setInputError({...inputError, emailError: false})}
-        if (auth.phone){setInputError({...inputError, phoneError: false})}
         if (auth.password){setInputError({...inputError, passwordError: false})}
     }, [auth])
 
@@ -39,32 +38,33 @@ const Signup = () => {
     }
 
 
-    function triggerAlert(message: string, type: string){
+    function showAlert(message: string, type: string){
         setAlert({message: message, type: type})
             setTimeout(() => {
                 setAlert({message: '', type: ''})
             }, 3000);
     }
     
-    async function createAccount(e:any){
+    async function create_account(e:any){
         e.preventDefault()
-        if (!auth.firstName || !auth.lastName || !auth.email || !auth.phone || !auth.password){
-            triggerAlert("Please fill all fields", "warning")
-            setInputError({...inputError, emailError: auth.email === "", firstNameError: auth.firstName === '', lastNameError: auth.lastName === '', passwordError: auth.password === '', phoneError: auth.phone === ''})
+        if (!auth.first_name || !auth.last_name || !auth.email || !auth.password){
+            showAlert("Please fill all fields", "warning")
+            setInputError({...inputError, emailError: auth.email === "", first_nameError: auth.first_name === '', last_nameError: auth.last_name === '', passwordError: auth.password === ''})
         }else {
             setLoading(true); 
             console.log(auth);
-
-            setTimeout(() => {
-            setLoading(false);
-            // Handle successful login here
-            router.push('/auth/login')
-            }, 3000);
+            showAlert('Account created succesfully', 'success')
+            setLoading(false)
         }   
     }
 
     function handleSubmit(){
 
+    }
+
+    function save_role(role:any){
+        setAuth({...auth, user_role: role.id})
+        setCurrent_stage('details')
     }
 
     return (
@@ -90,19 +90,26 @@ const Signup = () => {
                             <h4 className="text-lg">In order to preceed, you need to select your</h4>
                         </span>
 
-                        <div className="w-full  user_role_cont flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px] max-w-max ">
-                            <div className="flex flex flex-wrap overflow-auto gap-[20px] bg-red-200 ">
-                                {signup_user_role.map((data, ind)=>{
-                                    const {title, description} = data
-                                    return(
-                                        <div key={ind} className="w-[400px] h-[175px] bg-white border border-gray-300 hover:shadow-lg cursor-pointer rounded-lg p-4">
-                                            <h2 className="text-xl font-semibold">{title}</h2>
-                                            <p className="mt-2 text-gray-600">{description}</p>
+                        <div className="w-full flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px]">
+                            <div className="flex flex-wrap gap-[30px] justify-center max-w-max">
+                                {signup_user_role.map((data, ind) => {
+                                    const {title, description, id} = data;
+                                    return (
+                                        <div key={ind} className="w-[400px] h-[175px] bg-white border border-gray-400 cursor-pointer rounded-lg p-[20px] hover:border-blue-600 group" onClick={()=>save_role(data)} >
+                                            <h2 className="text-xl text-slate-600 font-semibold group-hover:text-blue-600 mb-[20px] ">{title}</h2>
+                                            {description.map((dat, ind)=>{
+                                                return(
+
+                                                    <p key={ind} className="mt-2 text-slate-600 group-hover:text-blue-600">{dat}</p>
+                                                )
+                                            })}
                                         </div>
-                                    )
+                                    );
                                 })}
                             </div>
                         </div>
+
+
 
                         
                     </div>
@@ -119,29 +126,25 @@ const Signup = () => {
                         objectFit="cover" 
                     />
                 </div>
-                <div className="w-[55%] rounded-[20px] h-full flex items-start justify-start " >
-                    <div className="w-full h-full flex flex-col items-start justify-start gap-10">
+                <div className="w-[55%] rounded-[20px] h-full flex items-center justify-start " >
+                    <div className="w-full h-auto flex flex-col items-start justify-start gap-10  ">
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-2">
                             <h2 className="text-3xl font-semibold text-black">Create Account</h2>
-                            <p className="text-sm text-blue-400 cursor-pointer hover:text-amber-600 hover:underline" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
                         </span>
                         <form action="" className='w-[80%] mx-auto flex flex-col gap-[20px]'>
                             <span className="w-full flex flex-col items-start jusitify-start gap-2">
                                 <h4 className="text-md ">First Name</h4>
-                                <input onChange={handleChange} value={auth.firstName} name='firstName' type="text" className={inputError.firstNameError ? 'signup-input-error':'signup-input'} />
+                                <input onChange={handleChange} value={auth.first_name} name='first_name' type="text" className={inputError.first_nameError ? 'signup-input-error':'signup-input'} />
                             </span>
                             <span className="w-full flex flex-col items-start jusitify-start gap-2">
                                 <h4 className="text-md ">Last Name</h4>
-                                <input onChange={handleChange} value={auth.lastName} name='lastName' type="text" className={inputError.lastNameError ? 'signup-input-error':'signup-input'} />
+                                <input onChange={handleChange} value={auth.last_name} name='last_name' type="text" className={inputError.last_nameError ? 'signup-input-error':'signup-input'} />
                             </span>
                             <span className="w-full flex flex-col items-start jusitify-start gap-2">
                                 <h4 className="text-md ">Email</h4>
                                 <input onChange={handleChange} value={auth.email} name='email' type="text" className={inputError.emailError ? 'signup-input-error':'signup-input'} />
                             </span>
-                            <span className="w-full flex flex-col items-start jusitify-start gap-2">
-                                <h4 className="text-md ">Phone</h4>
-                                <input onChange={handleChange} value={auth.phone} name='phone' type="text" className={inputError.phoneError ? 'signup-input-error':'signup-input'} />
-                            </span>
+                            
                             <span className="w-full flex flex-col items-start justify-start gap-2">
                                 <h4 className="text-md font-light">Password</h4>
                                 <span className="w-full relative bg-red-100 ">
@@ -152,14 +155,23 @@ const Signup = () => {
                                 </span>
                             </span>
 
-                            <button className="mt-[10px] w-full h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-500 flex items-center justify-center" onClick={createAccount} disabled={loading}>
-                                {loading ? (
-                                <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                </svg>
-                                ) : 'Create Account'}
-                            </button>
+                            <p className="text-sm text-blue-400 cursor-pointer hover:text-amber-600 hover:underline mt-[10px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
+
+
+                            <div className="w-full flex items-center justify-between mt-[10px]">
+                                <button type="button" className="w-[150px] h-[50px] bg-amber-600 hover:bg-amber-700 rounded-[5px] text-white " onClick={()=>setCurrent_stage('role')}>
+                                    Change Role
+                                </button>
+                            
+                                <button className="mt-[10px] w-[150px] h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-700 flex items-center justify-center" onClick={create_account} disabled={loading}>
+                                    {loading ? (
+                                    <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                    </svg>
+                                    ) : 'Create Account'}
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

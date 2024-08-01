@@ -108,10 +108,10 @@ export const authentications  = [
 // ------------------------------------------------------------------------------------------------------------------------------------------------
 
 export const signup_user_role = [
-  {title: 'Client', description: '', id: 'CLIENT'},
-  {title: 'Client Manager', description: '', id: 'CLIENT_MANAGER'},
-  {title: 'Affiliate', description: '', id: 'AFFILIATE'},
-  {title: 'Team Member', description: '', id: 'TEAM_MEMBER'},
+  {title: 'Client', description: ['Manages personal credit repair process.', 'Accesses credit reports and dispute status.'], id: 'CLIENT'},
+  {title: 'Client Manager', description: ['Oversees multiple client accounts.', 'Manages client credit repair processes and communications.'], id: 'CLIENT_MANAGER'},
+  {title: 'Affiliate', description: ['Refers clients to the credit repair service.', 'Tracks referral status and commission.'], id: 'AFFILIATE'},
+  {title: 'Team Member', description: ['Supports credit repair tasks.', 'Assists in dispute management and client communications.'], id: 'TEAM_MEMBER'},
 ]
 
 
