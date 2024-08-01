@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat";
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+::-moz-scrollbar {
+    width: 0px;
+}
+
+::-moz-scrollbar-thumb {
+    @apply bg-sky-700 rounded-[5px];
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-sky-700 rounded-b-[5px] cursor-pointer;
+}
+
+.custom-calendar {
+    @apply rounded-[5px]
+}
+
+.custom-calendar .react-calendar__month-view__weekdays {
+    @apply border-b border-gray-300 mb-[5px];
+    font-family: "Montserrat", sans-serif;
+}
+
+.custom-calendar .react-calendar__month-view__weekdays__weekday abbr {
+    @apply text-blue-600 font-semibold text-[13px];
+    text-decoration: none;
+}
+
+.cont-1-scrollbar::-webkit-scrollbar {
+    @apply w-[8px] h-[5px]
+}
+
+.cont-1-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-[3px]
+}
+
+.normal-input {
+    @apply h-[40px] w-[100%] outline-none p-[0] pr-[10px] pl-[10px] border border-gray-400 rounded-[3px]
+}
+
+.normal-input-error {
+    @apply h-[40px] w-[100%] outline-none p-[0] pr-[10px] pl-[10px] border-2 border-red-500 rounded-[5px]
+}
+
+.normal-input:focus {
+    @apply border-2 border-blue-500
+}
+
+.signup-input {
+    @apply h-[50px] w-[100%] outline-none p-[0] pr-[10px] pl-[10px] border border-gray-400 rounded-[5px]
+}
+
+.signup-input:focus {
+    @apply border-2 border-blue-500
+}
+
+.signup-input-error {
+    @apply h-[50px] w-[100%] outline-none p-[0] pr-[10px] pl-[10px] border-2 border-red-500 rounded-[5px]
+}
+
+.password-input {
+    @apply h-[50px] w-[100%] outline-none p-[0] pr-[40px] pl-[10px] border border-gray-400 rounded-[5px]
+}
+
+.password-input:focus {
+    @apply border-2 border-blue-500
+}
+
+.password-input-error {
+    @apply h-[50px] w-[100%] outline-none p-[0] pr-[40px] pl-[10px] border-2 border-red-500 rounded-[5px]
+}
+
+.nav-input {
+    @apply h-[40px] w-[100%] outline-none p-[0] pr-[50px] pl-[10px] border border-gray-400 rounded-[3px]
+}
+
+.nav-input-error {
+    @apply h-[40px] w-[100%] outline-none p-[0] pr-[50px] pl-[10px] border-2 border-red-500 rounded-[5px]
+}
+
+.nav-input:focus {
+    @apply border-2 border-blue-500
+}
+
+.checkbox-40 {
+    @apply h-[17px] w-[17px]
+}
+
+.sidebar-logout-navigation:hover::before {
+    height: 45px;
+    width: 5px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: orangered;
+}
+
+.sidebar-logout-navigation {
+    @apply relative h-[45px] flex flex-row items-center justify-start cursor-pointer ml-[10px] gap-3 pl-[10px] text-black;
+    width: calc(100% - 20px)
+}
+
+.sidebar-logout-navigation:hover {
+    @apply bg-red-100 text-[orangered]
+}
+
+.sidebar-navigation {
+    @apply relative h-[45px] flex flex-row items-center justify-start cursor-pointer w-full gap-3 pl-[10px] text-black
+}
+
+.sidebar-navigation:hover::before {
+    @apply h-[45px] w-[5px] absolute top-0 left-0 bg-[#1858CD];
+    content: '';
+}
+
+.sidebar-navigation:hover {
+    @apply bg-blue-100 text-[#1858CD]
+}
+
+.active-sidebar-navigation {
+    @apply relative h-[45px] flex flex-row items-center justify-start cursor-pointer w-full gap-3 pl-[10px] text-blue-700 bg-blue-100
+}
+
+.active-sidebar-navigation::before {
+    @apply h-[45px] w-[5px] absolute top-0 left-0 bg-[#1858CD];
+    content: '';
+}
+
+.recent-activity-table-list {
+    @apply w-full h-[40px] flex flex-row items-center justify-start cursor-pointer;
+}
+
+.recent-activity-table-list:hover {
+    @apply bg-gray-100
+}
+
+.approval-flow-table-list {
+    @apply w-full gap-1 flex flex-row items-center justify-center border-b border-gray-300 pt-[10px];
+}
+
+.job-list-table-list {
+    @apply w-full gap-1 flex flex-row items-center justify-center border-b border-gray-300;
+}
+
+.customer-notification-cont::-webkit-scrollbar {
+    @apply w-[7px] h-[7px]
+}
+
+.customer-notification-cont::-webkit-scrollbar-thumb {
+    @apply w-[7px] h-[7px] bg-gray-300
+}
+
+.approval-flow-table-list:hover {
+    @apply bg-gray-100
+}
+
+.approval-flow-table-list:last-child {
+    @apply border-b-0
+}
+
+.cont-1 {
+    height: calc(100vh - 50px);
+}
+
+.view-contract-details-cont {
+    @apply w-full flex flex-row items-center justify-between bg-white p-[10px] rounded-[5px] border border-blue-600 gap-[10px] cursor-pointer;
+    height: calc(100vh - 180px);
+}
+
+.notification-list-cont {
+    height: calc(100vh - 225px);
+}
+
+.notification-detail-cont {
+    height: calc(100vh - 175px)
+}
+
+.user-list-cont {
+    height: calc(100vh - 250px)
+}
+
+.admin-side-bar-cont {
+    @apply my-auto bg-white;
+    height: calc(100vh - 50px - 20px);
+}
+
+.email-notification-cont {
+    height: calc(100vh - 510px)
+}
+
+.push-notification-cont {
+    height: calc(100vh - 510px)
+}
+
+.admin-left-setting-cont {
+    @apply w-1/2 flex flex-col gap-3 items-start justify-start;
+    height: calc(100vh - 70px)
+}
+
+.pipeline-cont {
+    height: calc(100vh - 370px);
+}
+
+.ops-lead-cont {
+    height: calc(100vh - 335px)
+}
+
+.funnel-cont {
+    @apply overflow-y-auto pb-[10px];
+    height: calc(100vh - 330px)
+}
+
+.invoice-img-cont {
+    height: calc(100vh - 220px)
+}
+
+.all-project-cont {
+    height: calc(100vh - 330px)
+}
+
+.customer-notification-cont {
+    height: calc(100vh - 270px)
+}
+
+.uploaded-photos-cont {
+    height: calc(100vh - 300px)
+}
+
+.uploaded-photos-cont::-webkit-scrollbar {
+    width: 7px;
+    height: 7px
+}
+
+.uploaded-photos-cont::-webkit-scrollbar-thumb {
+    @apply w-[7px] h-[7px] bg-blue-600
+}
+
+.uploaded-photos-cont-2 {
+    height: calc(100vh - 160px)
+}
+
+.bill-sheet-cont {
+    height: calc(100vh - 230px)
+}
+
+.overdue-row {
+    @apply w-full h-[40px] flex flex-row items-center justify-start cursor-pointer bg-red-200 text-red-700;
+}
+
+.quick-access-bar {
+    @apply h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] bg-white rounded-[5px] border border-blue-500
+}
+
+.quick-access-bar:hover {
+    @apply bg-blue-600 text-white h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] rounded-[5px] cursor-pointer
+}
+
+.regular-drop-element {
+    @apply h-[35px] flex flex-row items-center justify-start w-full pl-[10px] cursor-pointer
+}
+
+.regular-drop-element:hover {
+    @apply bg-gray-100
+}
+
+.regular-drop-element:first-child {
+    @apply rounded-t-[5px]
+}
+
+.regular-drop-element:last-child {
+    @apply rounded-b-[5px]
+}
+
+.active-notification-list-select {
+    @apply w-1/4 flex items-center justify-center bg-blue-600 border border-blue-600 rounded-[3px] h-full text-white;
+}
+
+.notification-list-select {
+    @apply w-1/4 flex items-center justify-center border border-blue-600 rounded-[3px] h-full text-black;
+}
+
+.notification-list-select:hover {
+    @apply cursor-pointer bg-blue-200 text-blue-600
+}
+
+.notification-list-item {
+    @apply relative min-h-[55px] w-full flex flex-col items-start justify-start p-[10px] pl-[15px] border border-blue-500 gap-2 border-b-0;
+}
+
+.notification-list-item:hover {
+    @apply cursor-pointer bg-white;
+}
+
+.notification-list-item:first-child {
+    @apply border-t border-blue-500 rounded-t-[3px];
+}
+
+.notification-list-item:last-child {
+    @apply border-b border-blue-500 rounded-b-[3px];
+}
+
+.notification-list-status-bar {
+    @apply absolute h-[20px] w-[5px] top-[10px] right-[10px] rounded-[20px];
+}
+
+.active-notifcation-toggle {
+    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-blue-500 rounded-[10px] p-[3px] px-[1px] bg-blue-500;
+}
+
+.notifcation-toggle {
+    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-blue-500 rounded-[10px] p-[3px] px-[1px] bg-gray-300;
+}
+
+.image-custom-button {
+    @apply h-[40px] rounded-[3px] text-white bg-blue-600 w-full
+}
+
+.image-custom-button:hover {
+    @apply bg-blue-500;
+}
+
+.report-tab {
+    @apply cursor-pointer
+}
+
+.report-tab:hover {
+    @apply underline text-blue-600
+}
+
+.active-report-tab {
+    @apply text-blue-600;
+}
+
+.permit-cont-1 {
+    height: calc(100vh - 50px - 330px);
+}
+
+.permit-cont-3 {
+    height: calc(100vh - 330px);
+}
+
+.permit-cont-4 {
+    height: calc(100vh - 250px);
+}
+
+.permit-cont-2 {
+    max-height: calc(100vh - 50px - 330px);
+    min-height: 200px;
+}
+
+
+/* ------------------------------------------------------------------------------------------------- */
+
+.user_role_cont {
+    height: calc(100vh - 220px);
+}
