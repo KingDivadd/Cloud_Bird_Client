@@ -7,6 +7,7 @@ import { IoEye } from 'react-icons/io5';
 import Alert from "../../component/alert"
 import { CiLock } from 'react-icons/ci';
 import { signup_user_role } from '@/constants';
+import { post_request } from '@/app/api';
 
 
 
@@ -53,6 +54,33 @@ const Signup = () => {
         }else {
             setLoading(true); 
             console.log(auth);
+
+            try {
+                
+                const response = await post_request('auth/user-signup', auth)
+
+                if (response.status == 201){
+
+                    showAlert(response.data.msg, "success")
+
+                    setAuth({first_name: '', last_name: '', email: '', password: '', user_role: '' })
+
+                    setLoading(false)
+
+                    router.push('/auth/login')
+                    
+                }else{
+                    showAlert(response.response.data.err, "error")
+                    setLoading(false)
+                    return;
+                }
+
+            } catch (err:any) {
+                showAlert('Something went worong, try again later ', 'error')
+                setLoading(false)
+            }
+
+
             showAlert('Account created succesfully', 'success')
             setLoading(false)
         }   
@@ -69,7 +97,7 @@ const Signup = () => {
 
     return (
         <div className="relative w-full h-[100vh] p-[20px] flex items-center jusitify-center ">
-            <span className="w-1/2 flex items-center justify-end absolute top-[10px] right-[10px] ">
+            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
             {current_stage == 'role' && 
@@ -87,7 +115,8 @@ const Signup = () => {
                     <div className="w-full h-full flex flex-col items-start justify-start gap-10 my-[30px]  ">
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
                             <h2 className="text-3xl font-semibold text-amber-600">What are you registering as?</h2>
-                            <h4 className="text-lg">In order to preceed, you need to select your</h4>
+                            <h4 className="text-lg">In order to preceed, you need to select one.</h4>
+                            <p className="text-md font-normal text-blue-500 cursor-pointer hover:underline mt-[5px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
                         </span>
 
                         <div className="w-full flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px]">
@@ -95,12 +124,12 @@ const Signup = () => {
                                 {signup_user_role.map((data, ind) => {
                                     const {title, description, id} = data;
                                     return (
-                                        <div key={ind} className="w-[400px] h-[175px] bg-white border border-gray-400 cursor-pointer rounded-lg p-[20px] hover:border-blue-600 group" onClick={()=>save_role(data)} >
-                                            <h2 className="text-xl text-slate-600 font-semibold group-hover:text-blue-600 mb-[20px] ">{title}</h2>
+                                        <div key={ind} className="w-[400px] min-h-[175px] bg-white border border-gray-400 cursor-pointer rounded-lg p-[20px] hover:border-amber-600 group" onClick={()=>save_role(data)} >
+                                            <h2 className="text-xl text-slate-600 font-semibold group-hover:text-amber-600 mb-[20px] ">{title}</h2>
                                             {description.map((dat, ind)=>{
                                                 return(
 
-                                                    <p key={ind} className="mt-2 text-slate-600 group-hover:text-blue-600">{dat}</p>
+                                                    <p key={ind} className="mt-2 text-slate-600 group-hover:text-amber-600">{dat}</p>
                                                 )
                                             })}
                                         </div>
@@ -109,9 +138,6 @@ const Signup = () => {
                             </div>
                         </div>
 
-
-
-                        
                     </div>
                 </div>
 

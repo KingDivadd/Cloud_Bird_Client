@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { CiLock } from "react-icons/ci";
 import Alert from '../../component/alert'
+import { post_request } from '../../api/index';
 
 const ForgetPassword = () => {
     const router = useRouter();
@@ -21,7 +22,14 @@ const ForgetPassword = () => {
         setAuth({...auth, email: e.target.value})
     }
 
-    function getOtp(e:any){
+    function showAlert(message: string, type: string){
+        setAlert({message: message, type: type})
+            setTimeout(() => {
+                setAlert({message: '', type: ''})
+            }, 3000);
+    }
+
+    async function getOtp(e:any){
         e.preventDefault()
         if (!auth.email){
             setAlert({message: 'Please provide your registered email address', type: 'warning'})
@@ -29,23 +37,46 @@ const ForgetPassword = () => {
             setTimeout(() => {
                 setAlert({message: '', type: ''})
             }, 3000);
-        }else{
-            setLoading(true); // Set loading to true when the request starts
-            console.log(auth);
+        }else {
+            setLoading(true);
             
-            // Simulate a login request with a timeout
-            setTimeout(() => {
-                setLoading(false); // Set loading to false when the request completes
-            // Handle successful login here
-                router.push('/auth/verifyotp')
-            }, 3000);
+            try {
+                
+                const response = await post_request('auth/generate-otp', auth)
+                                
+                if (response.status == 201 || response.status == 200){
+                    
+                    showAlert(response.data.msg, "success")
+
+                    sessionStorage.setItem('email', auth.email)
+
+                    setAuth({email: '' })
+                    
+                    setLoading(false)
+                    
+                    router.push('/auth/verify-otp')
+                    
+                }
+                else{
+                    showAlert(response.response.data.err, "error")
+                    setLoading(false)
+                    return;
+                }
+
+            } catch (err:any) {
+
+                console.log(err);
+                
+                showAlert('Something went worong, try again later ', 'error')
+                setLoading(false)
+            }
         }
 
     }
 
     return (
         <div className="w-full relative h-[100vh] p-[20px] flex items-center justify-center">
-            <span className="w-1/2 flex items-center justify-end absolute top-[10px] right-[10px] ">
+            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">

@@ -7,6 +7,7 @@ import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import Alert from "../../component/alert"
 import { authentications } from '@/constants';
+import { post_request } from '@/app/api';
 
 const Login = () => {
     const router = useRouter();
@@ -47,36 +48,47 @@ const Login = () => {
             return;
         } else {
             setLoading(true);
-    
-            const user = authentications.find(data => data.email === auth.email);
-    
-            if (user) {
-                // Email exists, check password
-                if (user.password === auth.password) {
-                    console.log(auth);
-                    setTimeout(() => {
-                        setLoading(false);
-                        showAlert("Login successful", "success");
-                        setAuth({ email: '', password: '' });
-                        router.push('/home');
-                        // Handle successful login here
-                    }, 3000);
-                } else {
-                    // Password does not match
-                    setLoading(false);
-                    showAlert("Incorrect password", "error");
+            
+            try {
+                
+                const response = await post_request('auth/user-login', auth)
+                                
+                if (response.status == 201 || response.status == 200){
+                    
+                    showAlert(response.data.msg, "success")
+
+                    setAuth({email: '', password: '' })
+                    
+                    setLoading(false)
+
+                    localStorage.setItem('key' ,response.headers.get('x-id-key'));                    
+                    
+                    // router.push('/home')
+                    
+                }else if (response.response.status == 401){
+                    showAlert(response.response.data.err, "error")
+                    setAuth({...auth, password: '' })
+                    setLoading(false)
                 }
-            } else {
-                // Email does not exist
-                setLoading(false);
-                showAlert("Email does not exist", "error");
+                else{
+                    showAlert(response.response.data.err, "error")
+                    setLoading(false)
+                    return;
+                }
+
+            } catch (err:any) {
+
+                console.log(err);
+                
+                showAlert('Something went worong, try again later ', 'error')
+                setLoading(false)
             }
         }
     }
 
     return (
         <div className=" relative w-full h-[100vh] p-[20px] flex items-center justify-center">
-            <span className="w-1/2 flex items-center justify-end absolute top-[10px] right-[10px] ">
+            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
@@ -125,7 +137,7 @@ const Login = () => {
                         <span className="w-[80%] flex flex-row items-center justify-between h-[40px] mx-auto">
                         <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup</p>
 
-                        <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/forgetpassword') }}>Forget Password</p>
+                        <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/forget-password') }}>Forget Password</p>
                         </span>
                     </div>
                 </div>

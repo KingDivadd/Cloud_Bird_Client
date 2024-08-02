@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { CiUnlock } from "react-icons/ci";
 import { IoMdEyeOff } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
-import Alert from '@/app/component/alert';
+import Alert from '../../component/alert'
+import { patch_request } from '../../api';
 
 const RecoverPassword = () => {
     const router = useRouter();
@@ -31,6 +32,13 @@ const RecoverPassword = () => {
         setAuth({...auth, [name]:value})
     }
 
+    function showAlert(message: string, type: string){
+        setAlert({message: message, type: type})
+            setTimeout(() => {
+                setAlert({message: '', type: ''})
+            }, 3000);
+    }
+
     async function handleSubmit (e:any) {
         e.preventDefault()
         if (!auth.password || !auth.newPassword){
@@ -45,16 +53,54 @@ const RecoverPassword = () => {
                 setTimeout(() => {
                     setAlert({message: '', type: ''})
                 }, 3000);
-            }else {
-                setLoading(true); // Set loading to true when the request starts
-                console.log(auth);
+            } else {
+
+                let payload;
+
+                const email = sessionStorage.getItem('email') || null
+
+                if (email == null || !email){
+                    router.push('/auth/forget-password')
+                }else{
+                    payload = {email: email, password: auth.password}
+                }
+                setLoading(true);
                 
-                // Simulate a login request with a timeout
-                setTimeout(() => {
-                    setLoading(false); // Set loading to false when the request completes
-                // Handle successful login here
-                    router.push('/auth/login')
-                }, 3000);
+                try {
+                    const response = await patch_request('auth/reset-password', payload)
+                                    
+                    if (response.status == 201 || response.status == 200){
+                        
+                        showAlert(response.data.msg, "success")
+    
+                        setAuth({newPassword: '', password: '' })
+
+                        sessionStorage.removeItem('email')
+                        
+                        setLoading(false)
+    
+                        localStorage.setItem('key' ,response.headers.get('x-id-key'));                    
+                        
+                        router.push('/auth/login')
+                        
+                    }else if (response.response.status == 401){
+                        showAlert(response.response.data.err, "error")
+                        setAuth({newPassword: '', password: '' })
+                        setLoading(false)
+                    }
+                    else{
+                        showAlert(response.response.data.err, "error")
+                        setLoading(false)
+                        return;
+                    }
+    
+                } catch (err:any) {
+    
+                    console.log(err);
+                    
+                    showAlert('Something went worong, try again later ', 'error')
+                    setLoading(false)
+                }
             }
         }
     }
@@ -63,7 +109,7 @@ const RecoverPassword = () => {
 
     return (
         <div className="w-full relative h-[100vh] p-[20px] flex items-center justify-center">
-            <span className="w-1/2 flex items-center justify-end absolute top-[10px] right-[10px] ">
+            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />}
             </span>
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
