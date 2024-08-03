@@ -1,24 +1,26 @@
 
 'use client'
 import React, {useState, useEffect} from 'react'
-import AdminDashboard from '../component/dashboardComponent/adminDashboard'
-import SalesDashboard from '../component/salesDeptComponent/salesDashboard'
-import OpsDashboard from "../component/opsDeptComponent/opsDashboard"
-import CustomerDashboard from "../component/customerComponent/customerDashboard"
-import InstallerDashboard from "../component/installerComponent/installerDashboard"
-import PermitPortalDashboard from "../component/permitRoleComponent/permitDashboard"
+import Admin_dashboard from '../pages/admin_dashboard'
+
+import { useRouter } from 'next/navigation'
 
 const Dashboard = () => {
+    const router = useRouter()
     const [userRole, setUserRole] = useState('admin')
+
+    useEffect(() => {
+        const user_role = localStorage.getItem('user_role')
+        if (!user_role || user_role == null || !['ADMIN', 'CLIENT', 'CLIENT_MANAGER', 'TEAM_MEMBER', 'AFFILIATE'].includes(user_role) ){
+            router.push('/auth/login')
+        }else{
+            setUserRole(user_role)
+        }
+    }, [])
+
     return (
         <div className="">
-            {userRole === 'admin' && <AdminDashboard />  }
-            {/* {userRole === 'admin' && <SalesDashboard />  } */}
-            {/* {userRole === 'admin' && <OpsDashboard />  } */}
-            {/* {userRole === 'admiun' && <CustomerDashboard />  } */}
-            {/* {userRole === 'admin' && <InstallerDashboard />  } */}
-            {/* {userRole === 'admin' && <PermitPortalDashboard />  } */}
-
+            {userRole === 'ADMIN' && <Admin_dashboard />  }
 
         </div>
     )

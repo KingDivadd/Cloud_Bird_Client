@@ -61,7 +61,11 @@ const Login = () => {
                     
                     setLoading(false)
 
-                    localStorage.setItem('key' ,response.headers.get('x-id-key'));                    
+                    localStorage.setItem('key' ,response.headers.get('x-id-key'));       
+                    
+                    console.log(response.data.user_data.user_role)
+                    
+                    localStorage.setItem('user_role', response.data.user_data.user_role )
                     
                     // router.push('/home')
                     

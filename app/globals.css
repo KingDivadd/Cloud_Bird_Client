@@ -371,3 +371,45 @@
 .user_role_cont {
     height: calc(100vh - 220px);
 }
+
+.side-bar-item {
+    @apply relative flex items-center justify-center w-[60px] h-[50px];
+}
+
+.active-side-bar-item-icon {
+    @apply w-[40px] h-[40px] m-auto p-[5px] bg-[#404040] text-slate-200 rounded-[5px] cursor-pointer;
+}
+
+.side-bar-item-icon {
+    @apply w-[40px] h-[40px] m-auto p-[5px] text-slate-200 rounded-[5px] cursor-pointer;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    /* Smooth transition for opacity and background color */
+}
+
+.side-bar-item-desc {
+    @apply absolute top-1/2 transform -translate-y-1/2 h-[40px] bg-[#404040] text-slate-100 flex items-center px-[10px] rounded-[5px];
+    left: 100%;
+    margin-left: 10px;
+    /* Add some space between the icon and the description */
+    opacity: 0;
+    /* Hide the description by default */
+    transition: opacity 0.3s ease-in-out;
+    /* Smooth transition for visibility */
+    white-space: nowrap;
+    /* Prevent text from wrapping */
+    width: max-content;
+    /* Adjust width to accommodate content */
+}
+
+
+/* Apply hover effect when side-bar-item-icon is hovered */
+
+.side-bar-item-icon:hover~.side-bar-item-desc {
+    opacity: 1;
+    /* Show the description when the side-bar-item-icon is hovered */
+}
+
+.side-bar-item-icon:hover {
+    @apply bg-[#404040];
+    /* Change background color on hover */
+}
