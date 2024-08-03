@@ -112,14 +112,14 @@ const Signup = () => {
                 </div>
 
                 <div className="w-[60%] rounded-[20px] h-full flex items-start justify-start overflow-hidden ">
-                    <div className="w-full h-full flex flex-col items-start justify-start gap-10 my-[30px]  ">
+                    <div className="w-full h-full flex flex-col items-start justify-start gap-[25px] my-[30px]  ">
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
                             <h2 className="text-3xl font-semibold text-amber-600">What are you registering as?</h2>
                             <h4 className="text-lg">In order to preceed, you need to select one.</h4>
                             <p className="text-md font-normal text-blue-500 cursor-pointer hover:underline mt-[5px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
                         </span>
 
-                        <div className="w-full flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px]">
+                        <div className="w-full h-[475px] flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px]">
                             <div className="flex flex-wrap gap-[30px] justify-center max-w-max">
                                 {signup_user_role.map((data, ind) => {
                                     const {title, description, id} = data;
@@ -172,7 +172,7 @@ const Signup = () => {
                             </span>
                             
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md font-light">Password</h4>
+                                <h4 className="text-md">Password</h4>
                                 <span className="w-full relative bg-red-100 ">
                                     <input  type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ? 'password-input-error':'password-input'} value={auth.password} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-blue-600' onClick={handlePassword} >
@@ -181,15 +181,15 @@ const Signup = () => {
                                 </span>
                             </span>
 
-                            <p className="text-sm text-blue-400 cursor-pointer hover:text-amber-600 hover:underline mt-[10px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
+                            <p className="text-sm text-blue-600 cursor-pointer hover:text-amber-600 hover:underline mt-[10px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
 
 
                             <div className="w-full flex items-center justify-between mt-[10px]">
-                                <button type="button" className="w-[150px] h-[50px] bg-amber-600 hover:bg-amber-700 rounded-[5px] text-white " onClick={()=>setCurrent_stage('role')}>
+                                <button type="button" className="w-[200px] h-[50px] bg-amber-600 hover:bg-amber-700 rounded-[5px] text-white " onClick={()=>setCurrent_stage('role')}>
                                     Change Role
                                 </button>
                             
-                                <button className="mt-[10px] w-[150px] h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-700 flex items-center justify-center" onClick={create_account} disabled={loading}>
+                                <button className="mt-[10px] w-[200px] h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-700 flex items-center justify-center" onClick={create_account} disabled={loading}>
                                     {loading ? (
                                     <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>

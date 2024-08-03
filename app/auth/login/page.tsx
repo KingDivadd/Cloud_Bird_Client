@@ -105,7 +105,7 @@ const Login = () => {
                     />
                 </div>
                 <div className="w-[55%] rounded-[20px] h-full flex items-start justify-start">
-                    <div className="w-full h-full flex flex-col items-start justify-start gap-10 mt-[60px]">
+                    <div className="w-full h-full flex flex-col items-start justify-center gap-10 my-auto ">
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
                             <h2 className="text-3xl font-semibold text-black">Welcome Back.</h2>
                             <span className='text-white bg-amber-600 p-[10px] rounded-[100%] '><CiLock size={25} /></span>
@@ -114,13 +114,13 @@ const Login = () => {
 
                         
 
-                        <form action="" className='w-[80%] mx-auto flex flex-col gap-[30px]'>
+                        <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[30px]'>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md font-light">Email</h4>
+                                <h4 className="text-md ">Email</h4>
                                 <input type="email" name='email' className={inputError.emailError ? 'signup-input-error' : 'signup-input'} value={auth.email} onChange={handleChange} />
                             </span>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md font-light">Password</h4>
+                                <h4 className="text-md ">Password</h4>
                                 <span className="w-full relative bg-red-100 ">
                                     <input type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ? 'password-input-error' : 'password-input'} value={auth.password} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-blue-600' onClick={handlePassword} >
@@ -138,10 +138,10 @@ const Login = () => {
                             </button>
                         </form>
 
-                        <span className="w-[80%] flex flex-row items-center justify-between h-[40px] mx-auto">
-                        <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup</p>
+                        <span className="w-full md:w-[90%] xl:w-[80%] flex flex-row items-center justify-between h-[40px] mx-auto">
+                            <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup</p>
 
-                        <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/forget-password') }}>Forget Password</p>
+                            <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/forget-password') }}>Forget Password</p>
                         </span>
                     </div>
                 </div>

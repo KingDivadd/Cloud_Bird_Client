@@ -6,8 +6,8 @@ import Dashboard from '../component/admin_component/dashboard'
 const Admin_dashboard = () => {
     return (
         <div className="flex items-start justify-center w-full h-[100vh] ">
-            <div className="bg-[#000000] flex flex-row items-start justify-between h-full w-full">
-                <div className="h-full w-[60px] bg-amber-500 flex items-start justify-center border-r border-[#404040] ">
+            <div className="bg-red-500 flex flex-row items-start justify-between h-full w-full">
+                <div className="h-full w-[60px] bg-amber-500 flex items-start justify-center  ">
                     <Admin_side_bar />
                 </div>
 

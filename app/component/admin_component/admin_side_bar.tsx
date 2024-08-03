@@ -24,7 +24,7 @@ const Admin_side_bar = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-start justify-start bg-[#000000]">
+        <div className="w-full h-full flex flex-col items-start justify-start bg-slate-800">
             <div className="w-full h-[70px] flex items-center justify-center font-semibold text-white ">CRS</div>
 
             <div className="w-full flex flex-col  items-center justify-start pt-[20px]" style={{height: 'calc( 100% - 140px )'}} >
