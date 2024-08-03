@@ -102,7 +102,7 @@ const Signup = () => {
             </span>
             {current_stage == 'role' && 
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
-                <div className="relative w-[40%] h-full rounded-[20px] overflow-hidden">
+                <div className="border border-teal-500 relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden">
                     <Image 
                         src="/auth2.png" 
                         alt="Authentication" 
@@ -111,12 +111,12 @@ const Signup = () => {
                     />
                 </div>
 
-                <div className="w-[60%] rounded-[20px] h-full flex items-start justify-start overflow-hidden ">
+                <div className="max-sm:w-full w-[50%] lg:w-[55%] rounded-[20px] h-full flex items-start justify-start overflow-hidden ">
                     <div className="w-full h-full flex flex-col items-start justify-start gap-[25px] my-[30px]  ">
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
                             <h2 className="text-3xl font-semibold text-amber-600">What are you registering as?</h2>
                             <h4 className="text-lg">In order to preceed, you need to select one.</h4>
-                            <p className="text-md font-normal text-blue-500 cursor-pointer hover:underline mt-[5px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
+                            <p className="text-md font-normal text-teal-500 cursor-pointer hover:underline mt-[5px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
                         </span>
 
                         <div className="w-full h-[475px] flex items-start justify-center p-[20px] overflow-y-auto rounded-[15px]">
@@ -157,7 +157,7 @@ const Signup = () => {
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-2">
                             <h2 className="text-3xl font-semibold text-black">Create Account</h2>
                         </span>
-                        <form action="" className='w-[80%] mx-auto flex flex-col gap-[20px]'>
+                        <form action="" className='w-[80%] mx-auw-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[20px]'>
                             <span className="w-full flex flex-col items-start jusitify-start gap-2">
                                 <h4 className="text-md ">First Name</h4>
                                 <input onChange={handleChange} value={auth.first_name} name='first_name' type="text" className={inputError.first_nameError ? 'signup-input-error':'signup-input'} />
@@ -175,13 +175,13 @@ const Signup = () => {
                                 <h4 className="text-md">Password</h4>
                                 <span className="w-full relative bg-red-100 ">
                                     <input  type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ? 'password-input-error':'password-input'} value={auth.password} onChange={handleChange} />
-                                    <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-blue-600' onClick={handlePassword} >
+                                    <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
                                         {showPassword ? <IoEye size={20} className='cursor-pointer' />: <IoMdEyeOff size={20} className='cursor-pointer' /> }
                                     </span>
                                 </span>
                             </span>
 
-                            <p className="text-sm text-blue-600 cursor-pointer hover:text-amber-600 hover:underline mt-[10px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
+                            <p className="text-sm text-teal-600 cursor-pointer hover:text-amber-600 hover:underline mt-[10px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
 
 
                             <div className="w-full flex items-center justify-between mt-[10px]">
@@ -189,7 +189,7 @@ const Signup = () => {
                                     Change Role
                                 </button>
                             
-                                <button className="mt-[10px] w-[200px] h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-700 flex items-center justify-center" onClick={create_account} disabled={loading}>
+                                <button className=" w-[200px] h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-700 flex items-center justify-center" onClick={create_account} disabled={loading}>
                                     {loading ? (
                                     <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>

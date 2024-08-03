@@ -38,7 +38,7 @@
 }
 
 .custom-calendar .react-calendar__month-view__weekdays__weekday abbr {
-    @apply text-blue-600 font-semibold text-[13px];
+    @apply text-teal-600 font-semibold text-[13px];
     text-decoration: none;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .normal-input:focus {
-    @apply border-2 border-blue-500
+    @apply border-2 border-teal-500
 }
 
 .signup-input {
@@ -67,7 +67,7 @@
 }
 
 .signup-input:focus {
-    @apply border-2 border-blue-500
+    @apply border-2 border-teal-500
 }
 
 .signup-input-error {
@@ -79,7 +79,7 @@
 }
 
 .password-input:focus {
-    @apply border-2 border-blue-500
+    @apply border-2 border-teal-500
 }
 
 .password-input-error {
@@ -95,7 +95,7 @@
 }
 
 .nav-input:focus {
-    @apply border-2 border-blue-500
+    @apply border-2 border-teal-500
 }
 
 .checkbox-40 {
@@ -131,11 +131,11 @@
 }
 
 .sidebar-navigation:hover {
-    @apply bg-blue-100 text-[#1858CD]
+    @apply bg-teal-100 text-[#1858CD]
 }
 
 .active-sidebar-navigation {
-    @apply relative h-[45px] flex flex-row items-center justify-start cursor-pointer w-full gap-3 pl-[10px] text-blue-700 bg-blue-100
+    @apply relative h-[45px] flex flex-row items-center justify-start cursor-pointer w-full gap-3 pl-[10px] text-teal-700 bg-teal-100
 }
 
 .active-sidebar-navigation::before {
@@ -180,7 +180,7 @@
 }
 
 .view-contract-details-cont {
-    @apply w-full flex flex-row items-center justify-between bg-white p-[10px] rounded-[5px] border border-blue-600 gap-[10px] cursor-pointer;
+    @apply w-full flex flex-row items-center justify-between bg-white p-[10px] rounded-[5px] border border-teal-600 gap-[10px] cursor-pointer;
     height: calc(100vh - 180px);
 }
 
@@ -249,7 +249,7 @@
 }
 
 .uploaded-photos-cont::-webkit-scrollbar-thumb {
-    @apply w-[7px] h-[7px] bg-blue-600
+    @apply w-[7px] h-[7px] bg-teal-600
 }
 
 .uploaded-photos-cont-2 {
@@ -265,11 +265,11 @@
 }
 
 .quick-access-bar {
-    @apply h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] bg-white rounded-[5px] border border-blue-500
+    @apply h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] bg-white rounded-[5px] border border-teal-500
 }
 
 .quick-access-bar:hover {
-    @apply bg-blue-600 text-white h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] rounded-[5px] cursor-pointer
+    @apply bg-teal-600 text-white h-[120px] flex flex-row items-start justify-start p-[10px] pt-[20px] gap-[20px] rounded-[5px] cursor-pointer
 }
 
 .regular-drop-element {
@@ -289,19 +289,19 @@
 }
 
 .active-notification-list-select {
-    @apply w-1/4 flex items-center justify-center bg-blue-600 border border-blue-600 rounded-[3px] h-full text-white;
+    @apply w-1/4 flex items-center justify-center bg-teal-600 border border-teal-600 rounded-[3px] h-full text-white;
 }
 
 .notification-list-select {
-    @apply w-1/4 flex items-center justify-center border border-blue-600 rounded-[3px] h-full text-black;
+    @apply w-1/4 flex items-center justify-center border border-teal-600 rounded-[3px] h-full text-black;
 }
 
 .notification-list-select:hover {
-    @apply cursor-pointer bg-blue-200 text-blue-600
+    @apply cursor-pointer bg-teal-200 text-teal-600
 }
 
 .notification-list-item {
-    @apply relative min-h-[55px] w-full flex flex-col items-start justify-start p-[10px] pl-[15px] border border-blue-500 gap-2 border-b-0;
+    @apply relative min-h-[55px] w-full flex flex-col items-start justify-start p-[10px] pl-[15px] border border-teal-500 gap-2 border-b-0;
 }
 
 .notification-list-item:hover {
@@ -309,11 +309,11 @@
 }
 
 .notification-list-item:first-child {
-    @apply border-t border-blue-500 rounded-t-[3px];
+    @apply border-t border-teal-500 rounded-t-[3px];
 }
 
 .notification-list-item:last-child {
-    @apply border-b border-blue-500 rounded-b-[3px];
+    @apply border-b border-teal-500 rounded-b-[3px];
 }
 
 .notification-list-status-bar {
@@ -321,19 +321,19 @@
 }
 
 .active-notifcation-toggle {
-    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-blue-500 rounded-[10px] p-[3px] px-[1px] bg-blue-500;
+    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-teal-500 rounded-[10px] p-[3px] px-[1px] bg-teal-500;
 }
 
 .notifcation-toggle {
-    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-blue-500 rounded-[10px] p-[3px] px-[1px] bg-gray-300;
+    @apply w-auto h-[20px] flex flex-row items-center justify-center border border-teal-500 rounded-[10px] p-[3px] px-[1px] bg-gray-300;
 }
 
 .image-custom-button {
-    @apply h-[40px] rounded-[3px] text-white bg-blue-600 w-full
+    @apply h-[40px] rounded-[3px] text-white bg-teal-600 w-full
 }
 
 .image-custom-button:hover {
-    @apply bg-blue-500;
+    @apply bg-teal-500;
 }
 
 .report-tab {
@@ -341,11 +341,11 @@
 }
 
 .report-tab:hover {
-    @apply underline text-blue-600
+    @apply underline text-teal-600
 }
 
 .active-report-tab {
-    @apply text-blue-600;
+    @apply text-teal-600;
 }
 
 .permit-cont-1 {
@@ -377,41 +377,30 @@
 }
 
 .active-side-bar-item-icon {
-    @apply w-[40px] h-[40px] m-auto p-[5px] bg-[#404040] text-slate-200 rounded-[5px] cursor-pointer;
+    @apply w-[40px] h-[40px] m-auto p-[5px] bg-slate-600 text-slate-200 rounded-[5px] cursor-pointer;
 }
 
 .side-bar-item-icon {
     @apply w-[40px] h-[40px] m-auto p-[5px] text-slate-200 rounded-[5px] cursor-pointer;
     transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    /* Smooth transition for opacity and background color */
 }
 
 .side-bar-item-desc {
-    @apply absolute top-1/2 transform -translate-y-1/2 h-[40px] bg-[#404040] text-slate-100 flex items-center px-[10px] rounded-[5px];
+    @apply absolute top-1/2 transform -translate-y-1/2 h-[40px] bg-slate-600 text-slate-100 flex items-center px-[10px] rounded-[5px];
     left: 100%;
     margin-left: 10px;
-    /* Add some space between the icon and the description */
     opacity: 0;
-    /* Hide the description by default */
     transition: opacity 0.3s ease-in-out;
-    /* Smooth transition for visibility */
     white-space: nowrap;
-    /* Prevent text from wrapping */
     width: max-content;
-    /* Adjust width to accommodate content */
 }
-
-
-/* Apply hover effect when side-bar-item-icon is hovered */
 
 .side-bar-item-icon:hover~.side-bar-item-desc {
     opacity: 1;
-    /* Show the description when the side-bar-item-icon is hovered */
 }
 
 .side-bar-item-icon:hover {
-    @apply bg-[#404040];
-    /* Change background color on hover */
+    @apply bg-slate-600;
 }
 
 .gradient-1 {
