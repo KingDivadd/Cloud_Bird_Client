@@ -17,16 +17,16 @@ const Hero = () => {
     };
 
     return (
-        <div className="w-full bg-white flex flex-col jusitify-start items-center lg:flex-row lg:items-start lg:jusitify-center gap-[20px] sm:gap-[40px] lg:gap-[10px] pt-[20px] pb-[20px]">
+        <div className="w-full bg-white flex flex-col jusitify-start items-center lg:flex-row lg:items-start lg:jusitify-center gap-[20px] sm:gap-[40px] lg:gap-[10px] sm:pt-[20px] pb-[20px]">
             {/* left side */}
-            <div className="w-full lg:w-[45%] min-h-[50vh] lg:h-[94.5vh] flex items-start justify-start px-[15px] sm:px-[30px] lg:pl-[40px] xl:px-[70px] pt-[20px]">
+            <div className="w-full lg:w-[45%] min-h-[50vh] lg:h-[94.5vh] flex items-start justify-start px-[15px] sm:px-[30px] lg:pl-[40px] xl:px-[70px] sm:pt-[20px]">
                 <div className="w-full h-auto flex flex-col justify-start items-start">
                     {/* the icon and logo */}
                     <nav className="w-full flex flex-row items-center justify-between gap-3 h-[50px]">
                         {/* logo goes here */}
                         <h3 className="font-bold text-2xl sm:text-3xl">CRS</h3>
                         <span 
-                            className={`max-lg:block hidden h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] cursor-pointer transition-transform ${menuOpen ? 'rotate-90' : ''}`}
+                            className={`max-lg:block hidden h-[35px] w-[35px] sm:h-[40px] sm:w-[40px] cursor-pointer transition-transform ${menuOpen ? 'rotate-90' : ''}`}
                             onClick={toggleMenu}
                         >
                             <BiMenu size={'100%'} />
@@ -42,23 +42,18 @@ const Hero = () => {
                             >
                                 <BiX size={30} />
                             </span>
-                            <ul className="w-full flex flex-col gap-4">
-                                <li className='w-full flex justify-center'>
-                                    <Link href='/' className='w-full text-slate-800 text-center font-sm hover:underline ' onClick={toggleMenu}>Home</Link>
-                                </li>
-                                <li className='w-full flex justify-center'>
-                                    <Link href='#platformfeatures'w-full className='text-slate-800 text-center font-sm hover:underline' onClick={toggleMenu}>Features</Link>
-                                </li>
-                                <li className='w-full flex justify-center'>
-                                    <Link href='#reviews' className='w-full text-slate-800 text-center font-sm hover:underline' onClick={toggleMenu}>Reviews</Link>
-                                </li>
-                                <li>
-                                    <button className="w-full text-slate-800 text-center font-sm hover:underline " onClick={() => { router.push('/auth/signup'); toggleMenu(); }}>Signup</button>
-                                </li>
-                                <li>
-                                    <button className="w-full text-slate-800 text-center font-sm hover:underline " onClick={() => { router.push('/auth/login'); toggleMenu(); }}>Login</button>
-                                </li>
-                            </ul>
+                            <span className="w-full flex flex-col justify-start items-center gap-4">
+                                
+                                <button className="mx-auto w-[175px] h-[45px] bg-white text-slate-800 rounded-[25px] hover:bg-slate-100" onClick={() => { router.push('/') }}>Home</button>
+                                
+                                <button className="mx-auto w-[175px] h-[45px] bg-white text-slate-800 rounded-[25px] hover:bg-slate-100" onClick={() => { router.push('#platformfeatures') }}>Features</button>
+                                
+                                <button className="mx-auto w-[175px] h-[45px] bg-white text-slate-800 rounded-[25px] hover:bg-slate-100" onClick={() => { router.push('#reviews') }}>Reviews</button>
+                                
+                                <button className="mx-auto w-[175px] h-[45px] bg-white text-slate-800 rounded-[25px] hover:bg-slate-100" onClick={() => { router.push('/auth/login') }}>Login</button>
+
+                                <button className="mx-auto w-[175px] h-[45px] bg-slate-800 text-slate-200 rounded-[25px] hover:bg-slate-700" onClick={() => { router.push('/auth/signup') }}>Signup</button>
+                            </span>
                         </div>
                     )}
 
