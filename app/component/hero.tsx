@@ -42,21 +42,21 @@ const Hero = () => {
                             >
                                 <BiX size={30} />
                             </span>
-                            <ul className="flex flex-col gap-4">
-                                <li>
-                                    <Link href='/' className='w-full text-slate-800 text-center font-sm hover:underline' onClick={toggleMenu}>Home</Link>
+                            <ul className="w-full flex flex-col gap-4">
+                                <li className='w-full flex justify-center'>
+                                    <Link href='/' className='w-full text-slate-800 text-center font-sm hover:underline ' onClick={toggleMenu}>Home</Link>
                                 </li>
-                                <li>
+                                <li className='w-full flex justify-center'>
                                     <Link href='#platformfeatures'w-full className='text-slate-800 text-center font-sm hover:underline' onClick={toggleMenu}>Features</Link>
                                 </li>
-                                <li>
+                                <li className='w-full flex justify-center'>
                                     <Link href='#reviews' className='w-full text-slate-800 text-center font-sm hover:underline' onClick={toggleMenu}>Reviews</Link>
                                 </li>
                                 <li>
-                                    <button className="w-full text-slate-800 text-center font-sm hover:underline text-left" onClick={() => { router.push('/auth/signup'); toggleMenu(); }}>Signup</button>
+                                    <button className="w-full text-slate-800 text-center font-sm hover:underline " onClick={() => { router.push('/auth/signup'); toggleMenu(); }}>Signup</button>
                                 </li>
                                 <li>
-                                    <button className="w-full text-slate-800 text-center font-sm hover:underline text-left" onClick={() => { router.push('/auth/login'); toggleMenu(); }}>Login</button>
+                                    <button className="w-full text-slate-800 text-center font-sm hover:underline " onClick={() => { router.push('/auth/login'); toggleMenu(); }}>Login</button>
                                 </li>
                             </ul>
                         </div>
