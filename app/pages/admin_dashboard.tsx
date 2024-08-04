@@ -5,13 +5,13 @@ import Dashboard from '../component/admin_component/dashboard'
 
 const Admin_dashboard = () => {
     return (
-        <div className="flex items-start justify-center w-full h-[100vh] ">
-            <div className="bg-red-500 flex flex-row items-start justify-between h-full w-full">
+        <div className="bg-slate-700 flex items-start justify-center w-full h-[100vh] ">
+            <div className="flex flex-row items-start justify-between h-full w-full">
                 <div className="hidden sm:block h-full w-[60px] flex items-start justify-center  ">
                     <Admin_side_bar />
                 </div>
 
-                <div className=" h-full flex flex-col items-center justify-start " >
+                <div className="w-full h-full flex flex-col items-center justify-start " >
                     <Dashboard />
                 </div>
             </div>

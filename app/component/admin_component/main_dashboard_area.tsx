@@ -69,7 +69,7 @@ const Main_dashboard_area = () => {
                     <div className="max-lg:w-full w-[77%] max-md:flex-wrap max-md:justify-between min-h-[130px] flex items-center gap-[15px] ">
                         {[1,2,3,4,5,6].map((data, ind)=>{
                             return(
-                                <div className="w-1/6 max-md:w-[175px]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
+                                <div className="w-1/6 max-sm:w-[150px] max-md:w-[175px]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
                                     <span className="max-md:w-[35px] max-md:w-[35px] w-[45px] h-[45px] text-amber-500 "><GoPeople size={'100%'} /> </span>
                                     <p className="text-sm max-md:text-[14px] font-normal text-slate-200">All Client</p>
                                     <p className="text-lg max-md:text-sm font-semibold text-slate-200">23</p>
