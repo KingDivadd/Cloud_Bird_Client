@@ -96,7 +96,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="relative w-full h-[100vh] p-[20px] flex items-center jusitify-center ">
+        <div className="relative w-full h-[100vh] p-[20px] flex items-center jusitify-center bg-slate-800 ">
             <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
@@ -111,11 +111,20 @@ const Signup = () => {
                     />
                 </div>
 
-                <div className="max-sm:w-full w-[50%] lg:w-[55%] rounded-[20px] h-full flex items-start justify-start overflow-hidden ">
+                <div className="max-sm:w-full w-[50%] lg:w-[55%] rounded-[20px] h-full flex items-start justify-start overflow-hidden bg-black">
                     <div className="w-full h-full flex flex-col items-start justify-start gap-[25px] my-[30px]  ">
+                        <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
+                            <Image
+                                src="/logo.jpg"
+                                alt="Authentication"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
-                            <h2 className="text-3xl font-semibold text-amber-600">What are you registering as?</h2>
-                            <h4 className="text-lg">In order to preceed, you need to select one.</h4>
+                            <h2 className="text-2xl lg:text-3xl max-sm:w-[95%] font-semibold text-amber-600 text-center">What are you registering as?</h2>
+                            <h4 className="text-md sm:text-lg max-sm:w-[90%] text-slate-200 text-center">In order to preceed, you need to select one.</h4>
                             <p className="text-md font-normal text-teal-500 cursor-pointer hover:underline mt-[5px]" onClick={()=> {router.push('/auth/login')}} >Already have an account login</p>
                         </span>
 
@@ -124,7 +133,7 @@ const Signup = () => {
                                 {signup_user_role.map((data, ind) => {
                                     const {title, description, id} = data;
                                     return (
-                                        <div key={ind} className="w-[400px] min-h-[175px] bg-white border border-gray-400 cursor-pointer rounded-lg p-[20px] hover:border-amber-600 group" onClick={()=>save_role(data)} >
+                                        <div key={ind} className="w-[] sm:w-[400px] min-h-[175px] bg-white border border-gray-400 cursor-pointer rounded-lg p-[20px] hover:border-amber-600 group" onClick={()=>save_role(data)} >
                                             <h2 className="text-xl text-slate-600 font-semibold group-hover:text-amber-600 mb-[20px] ">{title}</h2>
                                             {description.map((dat, ind)=>{
                                                 return(

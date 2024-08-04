@@ -94,7 +94,7 @@ const Login = () => {
     }
 
     return (
-        <div className=" relative w-full h-[100vh] p-[20px] flex items-center justify-center">
+        <div className=" relative w-full h-[100vh] p-[20px] flex items-center justify-center bg-slate-800">
             <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
@@ -111,7 +111,7 @@ const Login = () => {
 
 
                 <div className=" max-sm:w-full w-[50%] lg:w-[55%] rounded-[20px] h-full flex items-start justify-start">
-                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start max-sm:mt-[20px] gap-10 max-sm:gap-[15px] my-auto ">
+                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start max-sm:mt-[20px] gap-10 max-sm:gap-[15px] my-auto bg-black rounded-[20px] ">
                         <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
                             <Image
                                 src="/logo.jpg"
@@ -122,20 +122,20 @@ const Login = () => {
                         </div>
 
                         <span className="mx-auto w-auto flex flex-col items-center justify-start gap-[15px] sm:gap-[25px]">
-                            <h2 className="text-2xl lg:text-3xl font-semibold text-black text-center">Welcome Back.</h2>
+                            <h2 className="text-2xl lg:text-3xl font-semibold text-slate-200 text-center">Welcome Back.</h2>
                             <span className='text-white bg-teal-500  h-[45px] w-[45px] p-[10px] rounded-[100%] '>
                                 {unlock_icon ? <CiUnlock size={'100%'} />: <CiLock size={'100%'} /> }
                                 </span>
-                            <h4 className=" text-md  lg:text-lg">Sign in</h4>
+                            <h4 className=" text-md  lg:text-lg text-slate-200 ">Sign in</h4>
                         </span>
 
                         <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[15px] sm:gap-[30px]'>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md ">Email</h4>
+                                <h4 className="text-md  text-slate-200 ">Email</h4>
                                 <input type="email" name='email' className={inputError.emailError ? 'signup-input-error' : 'signup-input'} value={auth.email} onChange={handleChange} />
                             </span>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md ">Password</h4>
+                                <h4 className="text-md  text-slate-200 ">Password</h4>
                                 <span className="w-full relative bg-red-100 ">
                                     <input type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ? 'password-input-error' : 'password-input'} value={auth.password} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
