@@ -11,13 +11,13 @@ const PlatformFeatures = () => {
                     {/* left  */}
                     <div className="w-full lg:w-[60%] h-full flex flex-col items-start justify-start gap-[15px] xl:gap-[20px] ">
                         
-                        <span className="bg-slate-200 w-full h-[400px] sm:p-[20px] p-[15px] flex flex-col justify-start items-between gap-3 bg-gray-100 rounded-[5px] ">
+                        <span className="bg-slate-200 w-full h-[400px] sm:p-[20px] p-[15px] flex flex-col justify-start items-between gap-3 bg-gray-100 rounded-[10px] ">
                             <h4 className="font-bold text-lg">User Role Management</h4>
                             <p className="text-sm font-light">Tailored access and control for various roles</p>
                             <span className="w-full h-[400px] flex flex-row items-center justify-between  "></span>
                         </span>
 
-                        <span className="bg-slate-200 w-full h-[400px] sm:p-[20px] p-[15px] flex flex-col justify-start items-between gap-3 bg-gray-100 rounded-[5px] ">
+                        <span className="bg-slate-200 w-full h-[400px] sm:p-[20px] p-[15px] flex flex-col justify-start items-between gap-3 bg-gray-100 rounded-[10px] ">
                             <h4 className="font-bold text-lg">Integrated Lead Management</h4>
                             <p className="text-sm font-light">Track and manage leads with calender integration</p>
                             <span className="w-full h-[250px] flex flex-row items-center justify-between  "></span>
