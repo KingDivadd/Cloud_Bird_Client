@@ -95,21 +95,21 @@ const Navigation = () => {
                             </span>
                         </span>
 
-                        <span className=" h-[40px] w-full flex tiems-center justify-start gap-[10px]" >
+                        <span className=" h-[40px] w-full flex items-center justify-start gap-[10px]" >
                             <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('dashboard')} >
                                 <TbSmartHome size={'100%'} />
                             </span>
-                            <p className="text-md font-normal text-black ">Dashboard</p>
+                            <p className="text-md font-normal text-black flex item-center ">Dashboard</p>
                         </span>
 
-                        <span className=" h-[40px] w-full flex tiems-center justify-start gap-[10px]" >
+                        <span className=" h-[40px] w-full flex items-center justify-start gap-[10px]" >
                             <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('user-management')} >
                                 <LiaUserEditSolid size={'100%'} />
                             </span>
                             <p className="text-md font-normal text-black ">User Management</p>
                         </span>
 
-                        <span className=" h-[40px] w-full flex tiems-center justify-start gap-[10px]" >
+                        <span className=" h-[40px] w-full flex items-center justify-start gap-[10px]" >
                             <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('notification')} >
                                 <IoMdNotificationsOutline size={'100%'} />
                             </span>
