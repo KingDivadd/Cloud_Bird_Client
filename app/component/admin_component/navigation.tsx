@@ -103,10 +103,17 @@ const Navigation = () => {
                         </span>
 
                         <span className=" h-[40px] w-full flex tiems-center justify-start gap-[10px]" >
-                            <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('dashboard')} >
+                            <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('user-management')} >
                                 <LiaUserEditSolid size={'100%'} />
                             </span>
                             <p className="text-md font-normal text-black ">User Management</p>
+                        </span>
+
+                        <span className=" h-[40px] w-full flex tiems-center justify-start gap-[10px]" >
+                            <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> save_side_route('notification')} >
+                                <IoMdNotificationsOutline size={'100%'} />
+                            </span>
+                            <p className="text-md font-normal text-black ">Notification</p>
                         </span>
 
                     </span>
