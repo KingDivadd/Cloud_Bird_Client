@@ -48,10 +48,10 @@ const Main_dashboard_area = () => {
 
                         </div>
 
-                        <div className="max-lg:hidden xl:hidden w-[35%] flex flex-wrap  justify-between items-between h-full gap-[15px] sm:gap-[20px] ">
+                        <div className="max-lg:hidden xl:hidden w-[35%] flex flex-wrap  justify-between items-between h-full gap-[15px] ">
                         {[1,2,3,4,5,6].map((data, ind)=>{
                             return(
-                                <div className="lg:w-[45%] h-[143px]  rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
+                                <div className="  rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] " style={{width: 'calc(50% - 7.5px)', height: 'calc((100% / 3) - 15px )'}} >
                                     <span className="w-[45px] h-[45px] text-amber-500 "><GoPeople size={'100%'} /> </span>
                                     <p className="text-sm font-normal text-slate-200">All Client</p>
                                     <p className="text-lg font-semibold text-slate-200">23</p>
@@ -64,12 +64,12 @@ const Main_dashboard_area = () => {
 
                 </div>
 
-                <div className="max-lg:block hidden xl:block w-full  flex flex-row items-start justify-start gap-[15px] sm:gap-[20px] p-[15px] pb-0 ">
+                <div className="max-lg:flex hidden xl:flex w-full  flex flex-row items-start justify-between gap-[15px] sm:gap-[20px] px-[15px] pb-0 ">
 
-                    <div className="max-lg:w-full w-[77%] max-md:flex-wrap max-md:justify-between min-h-[130px] flex items-center gap-[15px] ">
+                    <div className=" max-xl:w-full w-[77%] max-md:flex-wrap max-md:justify-between min-h-[130px] flex items-center gap-[15px] ">
                         {[1,2,3,4,5,6].map((data, ind)=>{
                             return(
-                                <div className="w-1/6 max-sm:w-[150px] max-md:w-[175px]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
+                                <div className="w-1/6 max-sm:w-[47.5%] max-md:w-[31%]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
                                     <span className="max-md:w-[35px] max-md:w-[35px] w-[45px] h-[45px] text-amber-500 "><GoPeople size={'100%'} /> </span>
                                     <p className="text-sm max-md:text-[14px] font-normal text-slate-200">All Client</p>
                                     <p className="text-lg max-md:text-sm font-semibold text-slate-200">23</p>
@@ -78,13 +78,12 @@ const Main_dashboard_area = () => {
                         })}
                     </div>
 
-                    <div className="max-lg:hidden w-[23%] hidden h-[150px]  ">
-
+                    <div className="w-[23%]  max-xl:hidden h-[150px ] ">
                     </div>
 
                 </div>
 
-                <div className="w-full  flex  flex-row items-start justify-start gap-[15px] p-[15px] pb-0 ">
+                <div className="w-full  flex  flex-row items-start justify-start gap-[15px] px-[15px] pb-0 ">
 
                     <div className="w-[77%] max-xl:w-full  flex max-lg:flex-col items-center gap-[15px] ">
                         <div className="w-[60%] max-lg:w-full h-[400px] bg-slate-700 rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
@@ -123,14 +122,14 @@ const Main_dashboard_area = () => {
 
                     </div>
 
-                    <div className="w-[23%] max-xl:w-full hidden h-[150px]  ">
+                    <div className="w-[23%] max-xl:w-full max-xl:hidden h-[150px]  ">
 
                     </div>
 
 
                 </div>
 
-                <div className="w-full  flex flex-row items-start justify-start gap-[15px] p-[15px] pb-0 ">
+                <div className="w-full  flex flex-row items-start justify-start gap-[15px] px-[15px] pb-0 ">
 
                     <div className="w-[77%] max-xl:w-full  flex items-center max-lg:flex-col gap-[15px] ">
                         <div className="w-[60%] max-lg:w-full h-[400px] bg-slate-700 h-[400px] rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
@@ -169,14 +168,14 @@ const Main_dashboard_area = () => {
 
                     </div>
 
-                    <div className="w-[23%] max-xl:w-full hidden h-[150px]  ">
+                    <div className="w-[23%] max-xl:w-full max-xl:hidden h-[150px]  ">
 
                     </div>
 
 
                 </div>
 
-                <div className="w-full  flex flex-row items-start justify-start gap-[15px] p-[15px] pb-[25px] ">
+                <div className="w-full  flex flex-row items-start justify-start gap-[15px] px-[15px] pb-[25px] ">
 
                     <div className="w-[77%] max-xl:w-full h-[400px] flex items-center gap-[15px] ">
                         <div className="w-full h-full bg-slate-700 rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
@@ -187,7 +186,7 @@ const Main_dashboard_area = () => {
 
                     </div>
 
-                    <div className="w-[23%] max-xl:w-full hidden h-[150px]  ">
+                    <div className="w-[23%] max-xl:w-full max-xl:hidden h-[150px]  ">
 
                     </div>
 
