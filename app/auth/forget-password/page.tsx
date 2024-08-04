@@ -75,12 +75,12 @@ const ForgetPassword = () => {
     }
 
     return (
-        <div className="w-full relative h-[100vh] p-[20px] flex items-center justify-center">
-            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
+        <div className="relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-800">
+            <span className="w-[90%] md:w-1/2  flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
-                <div className="relative w-[45%] h-full rounded-[20px] overflow-hidden">
+                <div className="relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden auth-bg">
                     <Image 
                         src="/auth2.png" 
                         alt="Authentication" 
@@ -88,21 +88,32 @@ const ForgetPassword = () => {
                         objectFit="cover" 
                     />
                 </div>
-                <div className="w-[55%] rounded-[20px] h-full flex items-start justify-start">
-                    <div className="w-full h-full flex flex-col items-start justify-start gap-10 mt-[60px]">
-                        <span className="mx-auto w-auto flex flex-col items-center justify-start gap-5">
-                            <h2 className="text-3xl font-semibold text-black">Recover Password</h2>
-                            <span className='text-white bg-amber-600 p-[10px] rounded-[100%] '> <CiLock size={25} /> </span>
-                            <h4 className="text-lg">Enter your email address</h4>
+
+                <div className=" max-sm:w-full w-[50%] lg:w-[55%] h-full flex items-start justify-start ">
+                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start  gap-10 max-sm:gap-[15px] my-auto bg-black sm:rounded-[20px]  max-sm:p-[20px] max-md:px-[20px]">
+
+                        <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
+                            <Image
+                                src="/logo.jpg"
+                                alt="Authentication"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+
+                        <span className="mx-auto sm:w-[97.5%] flex flex-col items-center justify-start gap-[15px] sm:gap-[25px]">
+                            <h2 className="text-2xl lg:text-3xl font-semibold text-slate-200 text-center">Recover Password.</h2>
+                            <span className='text-white bg-teal-500  h-[45px] w-[45px] p-[10px] rounded-[100%]  '> <CiLock size={'100%'} /> </span>
+                            <h4 className="text-md sm:text-lg text-slate-200 text-center ">Enter your email address</h4>
                         </span>
 
-                        <form action="" className='w-[80%] mx-auto flex flex-col gap-[30px]'>
+                        <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[15px] sm:gap-[30px]'>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md font-light">Email</h4>
+                                <h4 className="text-md text-slate-200">Email</h4>
                                 <input value={auth.email} onChange={handleChange} type="email" className={inputError.emailError? 'signup-input-error':'signup-input'} />
                             </span>
                             
-                            <button className="mt-[10px] w-full h-[50px] text-white bg-blue-600 rounded-[5px] hover:bg-blue-500 flex items-center justify-center" onClick={getOtp} disabled={loading}>
+                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center" onClick={getOtp} disabled={loading}>
                                 {loading ? (
                                 <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
@@ -112,12 +123,12 @@ const ForgetPassword = () => {
                             </button>
                         </form>
 
-                        <span className="w-[80%] flex flex-row items-center justify-between h-[40px] mx-auto"> 
-                            <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup</p>
+                        <span className="w-full md:w-[90%] xl:w-[80%] flex flex-wrap md:flex-row items-center justify-between h-[40px] mx-auto">
+                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]  text-center w-full lg:w-auto" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup.</p>
 
-                            <p className="text-sm text-blue-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/login') }}>Back to Login</p>
-                        
+                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]  text-center w-full lg:w-auto" onClick={() => { router.push('/auth/login') }}>Back to Login</p>
                         </span>
+
                     </div>
                 </div>
             </div>

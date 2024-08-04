@@ -94,15 +94,15 @@ const Login = () => {
     }
 
     return (
-        <div className=" relative w-full h-[100vh] p-[20px] flex items-center justify-center bg-slate-800">
-            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
+        <div className=" relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-800">
+            <span className="w-[90%] md:w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] z-20 ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
             
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
-                <div className="border border-teal-500 relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden auth-bg">
+                <div className=" relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden auth-bg">
                     <Image
-                        src=""
+                        src="/auth2.png"
                         alt="Authentication"
                         layout="fill"
                         objectFit="cover"
@@ -110,8 +110,9 @@ const Login = () => {
                 </div>
 
 
-                <div className=" max-sm:w-full w-[50%] lg:w-[55%] rounded-[20px] h-full flex items-start justify-start">
-                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start max-sm:mt-[20px] gap-10 max-sm:gap-[15px] my-auto bg-black rounded-[20px] ">
+                <div className=" max-sm:w-full w-[50%] lg:w-[55%] h-full flex items-start justify-start ">
+                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start  gap-10 max-sm:gap-[15px] my-auto bg-black sm:rounded-[20px]  max-sm:p-[20px] max-md:px-[20px] ">
+
                         <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
                             <Image
                                 src="/logo.jpg"
@@ -136,7 +137,7 @@ const Login = () => {
                             </span>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
                                 <h4 className="text-md  text-slate-200 ">Password</h4>
-                                <span className="w-full relative bg-red-100 ">
+                                <span className="w-full relative  ">
                                     <input type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ? 'password-input-error' : 'password-input'} value={auth.password} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
                                         {showPassword ? <IoEye size={20} className='cursor-pointer' /> : <IoMdEyeOff size={20} className='cursor-pointer' />}
@@ -154,9 +155,9 @@ const Login = () => {
                         </form>
 
                         <span className="w-full md:w-[90%] xl:w-[80%] flex flex-wrap md:flex-row items-center justify-between h-[40px] mx-auto">
-                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px] max-sm:w-full text-center" onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup.</p>
+                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]  text-center w-full lg:w-auto " onClick={() => { router.push('/auth/signup') }}>Don't have an account, Signup.</p>
 
-                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]  max-sm:w-full text-center" onClick={() => { router.push('/auth/forget-password') }}>Forget Password</p>
+                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]  text-center w-full lg:w-auto" onClick={() => { router.push('/auth/forget-password') }}>Forget Password</p>
                         </span>
                     </div>
                 </div>
