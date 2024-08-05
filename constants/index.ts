@@ -162,4 +162,12 @@ export const signup_user_role = [
   {title: 'Team Member', description: ['Supports credit repair tasks.', 'Assists in dispute management and client communications.'], id: 'TEAM_MEMBER'},
 ]
 
+export const dash_item = [
+  {title: 'All client', amount: 23, icon: ''},
+  {title: 'Active client', amount: 10, icon: ''},
+  {title: 'All Leads', amount: 27, icon: ''},
+  {title: 'Active Leads', amount: 13, icon: ''},
+  {title: 'Pending Invoices', amount: 9, icon: ''},
+  {title: 'Invoice Paid', amount: 19, icon: ''},
+]
 

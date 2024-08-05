@@ -2,6 +2,11 @@
 import React,{useState, useEffect} from 'react'
 import { GoPeople } from "react-icons/go";
 import { RiSearchLine } from "react-icons/ri";
+import { IoWarningOutline } from "react-icons/io5";
+import { IoIosSquareOutline, IoMdClose } from "react-icons/io";
+import { IoIosCheckboxOutline } from "react-icons/io";
+import { AiOutlineMail } from 'react-icons/ai';
+import { dash_item } from '@/constants';
 
 
 const Main_dashboard_area = () => {
@@ -40,7 +45,25 @@ const Main_dashboard_area = () => {
                                 <div className="w-full">
                                     {[1,2,3,4,5,6,7,8,9,1,2,3].map((data, ind)=>{
                                         return(
-                                            <div className="h-[60px] w-full  "> </div>
+                                            <span key={ind} className="min-h-[50px] w-full flex items-center justify-between gap-[15px] border-b border-slate-500 ">
+                                                <span className="w-[25px] h-[25px] text-teal-300 flex items-center justify-center"><AiOutlineMail /> </span>
+
+                                                <span className="h-full flex flex-col gap-[3px] justify-center item-start" style={{width: 'calc(100% - 25px)'}}>
+                                                    <span className="w-full flex items-center justify-between">
+                                                        <p className="text-[14px]  text-slate-200">Logged in to customer Porter </p>
+                                                        <span className="h-[20px] w-[20px] rounded-[100%] bg-slate-800 p-[3px] text-slate-200 hover:bg-red-600 cursor-pointer flex items-center justify-center ">
+                                                            <IoMdClose size={'100%'} />
+                                                        </span>
+                                                        {/* <p className="text-xs font-light text-slate-400">dismiss</p> */}
+                                                    </span>
+
+                                                    <span className="w-full flex items-center justify-between">
+                                                        <p className="text-[14px] font-nomal text-slate-200">Bill Palmer </p>
+                                                        <p className="text-[13px] font-light text-slate-300">5hrs ago</p>
+                                                    </span>
+
+                                                </span>
+                                            </span>
                                         )
                                     })}
                                 </div>
@@ -49,12 +72,12 @@ const Main_dashboard_area = () => {
                         </div>
 
                         <div className="max-lg:hidden xl:hidden w-[35%] flex flex-wrap  justify-between items-between h-full gap-[15px] ">
-                        {[1,2,3,4,5,6].map((data, ind)=>{
+                        {dash_item.map((data:any, ind:number)=>{
                             return(
-                                <div className="  rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] " style={{width: 'calc(50% - 7.5px)', height: 'calc((100% / 3) - 15px )'}} >
+                                <div key={ind} className="rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] " style={{width: 'calc(50% - 7.5px)', height: 'calc((100% / 3) - 15px )'}} >
                                     <span className="w-[45px] h-[45px] text-amber-500 "><GoPeople size={'100%'} /> </span>
-                                    <p className="text-sm font-normal text-slate-200">All Client</p>
-                                    <p className="text-lg font-semibold text-slate-200">23</p>
+                                    <p className="text-sm font-normal text-slate-200">{data.title}</p>
+                                    <p className="text-lg font-semibold text-slate-200">{data.amount}</p>
                                 </div>
                             )
                         })}
@@ -67,12 +90,12 @@ const Main_dashboard_area = () => {
                 <div className="max-lg:flex hidden xl:flex w-full  flex flex-row items-start justify-between gap-[15px] sm:gap-[20px] px-[15px] pb-0 ">
 
                     <div className=" max-xl:w-full w-[77%] max-md:flex-wrap max-md:justify-between min-h-[130px] flex items-center gap-[15px] ">
-                        {[1,2,3,4,5,6].map((data, ind)=>{
+                        {dash_item.map((data:any, ind:number)=>{
                             return(
-                                <div className="w-1/6 max-sm:w-[47.5%] max-md:w-[31%]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
+                                <div key={ind} className="w-1/6 max-sm:w-[47.5%] max-md:w-[31%]  h-[135px] rounded-[5px] bg-slate-700 flex flex-col items-center justify-center gap-[3px] ">
                                     <span className="max-md:w-[35px] max-md:w-[35px] w-[45px] h-[45px] text-amber-500 "><GoPeople size={'100%'} /> </span>
-                                    <p className="text-sm max-md:text-[14px] font-normal text-slate-200">All Client</p>
-                                    <p className="text-lg max-md:text-sm font-semibold text-slate-200">23</p>
+                                    <p className="text-sm max-md:text-[14px] font-normal text-slate-200">{data.title}</p>
+                                    <p className="text-lg max-md:text-sm font-semibold text-slate-200">{data.amount}</p>
                                 </div>
                             )
                         })}
@@ -87,7 +110,7 @@ const Main_dashboard_area = () => {
 
                     <div className="w-[77%] max-xl:w-full  flex max-lg:flex-col items-center gap-[15px] ">
                         <div className="w-[60%] max-lg:w-full h-[400px] bg-slate-700 rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
-                            <span className="w-full flex items-center justify-between">
+                            <span className="w-full h-[40px] flex items-center justify-between">
                                 <span className="flex items-center justify-start gap-[5px] ">
                                     <p className="text-sm font-semibold text-slate-200">New Customer</p>
                                     <p className="text-xs font-light text-slate-200">Showing 1 - 5 of 10</p>
@@ -99,12 +122,34 @@ const Main_dashboard_area = () => {
                                 </span>
                             </span>
 
-                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 "></span>
+                            <span className="w-full rounded-[5px] h-[45px] bg-slate-800 flex flex-row items-center justify-between px-[10px]">
+                                <p className="text-xs w-[25%] text-slate-200 ">Name</p>
+                                <p className="text-xs w-[25%] text-slate-200 ">Assigned To</p>
+                                <p className="text-xs w-[25%] text-slate-200 ">Signup Date</p>
+                                <p className="text-xs w-[25%] text-slate-200 "></p>
+                            </span>
+
+                            <div className="w-full  bg-slate-600 rounded-[5px] flex flex-col items-start justify-start overflow-y-auto" style={{height: 'calc(100% - 85px)'}}>
+                                <div className='flex flex-col items-start justify-start w-full' >
+                                    {[1,2,3,4,5,6,7,8,9,0].map((data, ind)=>{
+                                        return(
+                                            <span key={ind} className=" h-[50px] w-full flex px-[10px] flex items-center justify-between hover:bg-slate-700  ">
+                                                <p className="text-xs w-[25%] text-slate-300 ">Andrew Madison</p>
+                                                <p className="text-xs w-[25%] text-slate-300 ">Cerena Williams</p>
+                                                <p className="text-xs w-[25%] text-slate-300 ">05-08-2024</p>
+                                                <span className="text-xs w-[25%] text-slate-300 ">
+
+                                                </span>
+                                            </span>
+                                        )
+                                })}
+                                </div>
+                            </div>
 
                         </div>
                         
                         <div className="w-[40%] max-lg:w-full h-[400px]  bg-slate-700 rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
-                            <span className="w-full flex items-center justify-between">
+                            <span className="w-full h-[40px] flex items-center justify-between">
                                 <span className="flex items-center justify-start gap-[5px] ">
                                     <p className="text-sm font-semibold text-slate-200">Reminders</p>
                                     <p className="text-xs font-light text-slate-200">Showing 1 - 5 of 10</p>
@@ -116,7 +161,33 @@ const Main_dashboard_area = () => {
                                 </span>
                             </span>
 
-                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 "></span>
+                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 h-[45px] px-[10px] flex items-center justify-between gap-[20px] ">
+                                <p className="text-xs text-slate-200">Important Alerts</p>
+                                <p className="text-xs text-slate-200">Action</p>
+                            </span>
+
+                            <div className="w-full flex items-start justify-start bg-slate-600 rounded-[5px] overflow-y-auto " style={{height: 'calc(100% - 85px)'}} >
+                                <div className="w-full flex flex-col items-start justify-start">
+                                    {[1,2,3,4,5,6,7].map((data, ind)=>{
+                                        return(
+                                            <span key={ind} className=" h-[50px] w-full flex px-[10px] flex items-center justify-between gap-[15px] hover:bg-slate-700  ">
+                                                <span className="w-[25px] h-[25px] text-red-500 flex items-center justify-center">
+                                                    <IoWarningOutline size={'100%'} /> 
+                                                </span>
+
+                                                <span className="h-full flex flex-col items-start justify-center overflow-x-auto" style={{width: 'calc(100% - 50px)'}}>
+                                                    <p className="text-xs font-normal text-teal-100">Reminder One</p>
+                                                    <p className="text-xs font-light text-slate-300 truncate overflow-hidden text-overflow-ellipsis max-w-md">Here is a short descrition of reminder one</p>
+                                                </span>
+
+                                                <span className="w-[25px] h-[25px] text-slate-200 flex items-center justify-center cursor-pointer">
+                                                    <IoIosSquareOutline size={'100%'} /> 
+                                                </span>
+                                            </span>
+                                        )
+                                    })}
+                                </div>
+                            </div>
 
                         </div>
 
@@ -133,7 +204,7 @@ const Main_dashboard_area = () => {
 
                     <div className="w-[77%] max-xl:w-full  flex items-center max-lg:flex-col gap-[15px] ">
                         <div className="w-[60%] max-lg:w-full h-[400px] bg-slate-700 h-[400px] rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
-                            <span className="w-full flex items-center justify-between">
+                            <span className="w-full h-[40px] flex items-center justify-between">
                                 <span className="flex items-center justify-start gap-[5px] ">
                                     <p className="text-sm font-semibold text-slate-200">Active Leads</p>
                                     <p className="text-xs font-light text-slate-200">Showing 1 - 5 of 10</p>
@@ -145,12 +216,35 @@ const Main_dashboard_area = () => {
                                 </span>
                             </span>
 
-                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 "></span>
+                            <span className="w-full rounded-[5px] h-[45px] bg-slate-800 px-[10px] flex items-center justify-between ">
+                                <p className="text-xs text-slate-200 font-normal w-[25%] ">Name</p>
+                                <p className="text-xs text-slate-200 font-normal w-[20%] ">Date</p>
+                                <p className="text-xs text-slate-200 font-normal w-[25%] ">Assigned To</p>
+                                <p className="text-xs text-slate-200 font-normal w-[20%] ">Status</p>
+                                <p className="text-xs text-slate-200 font-normal w-[10%] "></p>
+                            </span>
+
+                            <div className="w-full  bg-slate-600 rounded-[5px] flex flex-col items-start justify-start overflow-y-auto" style={{height: 'calc(100% - 85px)'}}>
+                                <div className='flex flex-col items-start justify-start w-full' >
+                                    {[1,2,3,4,5,6,7,8,9,0].map((data, ind)=>{
+                                        return(
+                                            <span key={ind} className=" h-[50px] w-full flex px-[10px] flex items-center justify-between hover:bg-slate-700  ">
+                                                <p className="text-xs w-[25%] text-slate-300 ">Andrew Madison</p>
+                                                <p className="text-xs w-[20%] text-slate-300  ">05-08-2024</p>
+                                                <p className="text-xs w-[25%] text-slate-300 ">Cerena Williams</p>
+                                                <p className="text-xs w-[25%] text-slate-300 ">{ind % 2 == 1 ? "In Progress":"Contacted" }</p>
+                                                <p className="text-xs w-[10%] text-teal-300 hover:underline cursor-pointer ">view</p>
+                                            </span>
+                                        )
+                                })}
+                                </div>
+                            </div>
 
                         </div>
                         
                         <div className="w-[40%] max-lg:w-full h-[400px] bg-slate-700 rounded-[5px] p-[15px] gap-[10px] flex flex-col items-start justify-start ">
-                            <span className="w-full flex items-center justify-between">
+                                    {/*  */}
+                            <span className="w-full h-[40px] flex items-center justify-between">
                                 <span className="flex items-center justify-start gap-[5px] ">
                                     <p className="text-sm font-semibold text-slate-200">Messages</p>
                                     <p className="text-xs font-light text-slate-200">Showing 1 - 5 of 10</p>
@@ -162,7 +256,32 @@ const Main_dashboard_area = () => {
                                 </span>
                             </span>
 
-                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 "></span>
+                            <span className="w-full rounded-[5px] h-[40px] bg-slate-800 h-[45px] px-[10px] flex items-center justify-between gap-[20px] ">
+                                <p className="text-xs text-slate-200">Name & Messages</p>
+                                <p className="text-xs text-slate-200">Action</p>
+                            </span>
+
+                            <div className="w-full flex items-start justify-start bg-slate-600 rounded-[5px] overflow-y-auto " style={{height: 'calc(100% - 85px)'}} >
+                                <div className="w-full flex flex-col items-start justify-start">
+                                    {[1,2,3,4,5,6,7].map((data, ind)=>{
+                                        return(
+                                            <span key={ind} className=" h-[50px] w-full flex px-[10px] gap-[15px] flex items-center justify-between hover:bg-slate-700  ">
+                                                <span className="w-[25px] h-[25px] text-teal-400 flex items-center justify-center">
+                                                    <AiOutlineMail size={'100%'} /> 
+                                                </span>
+
+                                                <span className="h-full flex flex-col items-start justify-center overflow-x-auto" style={{width: 'calc(100% - 85px)'}}>
+                                                    <p className="text-xs font-normal text-teal-100">Reminder One</p>
+                                                    <p className="text-xs font-light text-slate-300 truncate overflow-hidden text-overflow-ellipsis max-w-md">Here is a short descrition of reminder one</p>
+                                                </span>
+
+                                                <p className="text-xs font-normal text-teal-100 hover:underline w-[50px] text-end cursor-pointer">View</p>
+                                            </span>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                                    {/*  */}
 
                         </div>
 
