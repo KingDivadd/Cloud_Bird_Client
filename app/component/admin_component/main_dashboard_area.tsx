@@ -7,6 +7,7 @@ import { IoIosSquareOutline, IoMdClose } from "react-icons/io";
 import { IoIosCheckboxOutline } from "react-icons/io";
 import { AiOutlineMail } from 'react-icons/ai';
 import { dash_item } from '@/constants';
+import { BiDollar } from 'react-icons/bi';
 
 
 const Main_dashboard_area = () => {
@@ -25,11 +26,77 @@ const Main_dashboard_area = () => {
                                 <p className="text-xs font-normal text-slate-400">The sum of all amount in my wallet</p>
                             </div>
 
-                            <div className="w-full rounded-[7.5px] gradient-1 " style={{height: 'calc( 100vh - 50px - 20px )'}} > </div>
+                            <div className="w-full rounded-[7.5px] gradient-1 p-[10px] flex flex-col items-start gap-[10px] justify-start " style={{height: 'calc( 100vh - 50px - 20px )'}} > 
+                                <span className="w-full h-[30%] rounded-[3px] flex items-center justify-between gap-[10px] ">
+                                    <div className="w-[55%] h-full flex items-start justify-start p-[10px] sm:p-[20px] ">
+                                        <span className="h-[50px] w-[50px] text-sky-300 "><BiDollar size={'100%'} />  </span>
+                                        <p className="text-3xl text-slate-200 mt-[4px]">23,450.97</p>
+                                    </div>
+                                    <div className="w-[45%] h-full flex flex-col items-end justify-start px-[15px] py-[30px] ">
+                                        <p className="text-xs text-slate-300 w-full text-end ">Compared to last month </p>
+                                        <p className="text-xs text-green-500"> 36%</p>
+                                    </div>
+
+                                </span>
+
+                                <span className="w-full h-[70%] rounded-[3px] bg-slate-700"></span>
+                            </div>
 
                         </div>
 
-                        <div className="max-md:w-full w-1/2 h-[480px] bg-slate-700 rounded-[7.5px] ">
+                        <div className="max-md:w-full w-1/2 h-[480px] flex flex-col items-start justify-start gap-[25px] ">
+
+                            <div className="w-full flex flex-col items-start justify-start h-1/3 gap-[20px] ">
+                                <span className="w-full flex flex-col items-start justify-between h-[50px]  ">
+                                    <p className="text-md font-semibold text-slate-200">Affiliate Sale</p>
+                                    <p className="text-xs font-normal text-slate-400">The sum of all amount from affiliate sale</p>
+                                </span>
+
+                                <div className="w-full h-full gradient-1 rounded-[7.5px] flex items-start justify-start ">
+                                    <div className="w-[55%] h-full flex items-start justify-start p-[10px] sm:p-[20px] ">
+                                        <span className="h-[50px] w-[50px] text-sky-300 "><BiDollar size={'100%'} />  </span>
+                                        <p className="text-3xl text-slate-200 mt-[4px]">13,450.97</p>
+                                    </div>
+                                    <div className="w-[45%] h-full flex flex-col items-end justify-start px-[15px] py-[30px] ">
+                                        <p className="text-xs text-slate-300 w-full text-end ">Compared to last month </p>
+                                        <p className="text-xs text-green-500"> 36%</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div className="w-full flex flex-col items-start justify-start h-1/3 gap-[20px] ">
+                                <span className="w-full flex flex-col items-start justify-between h-[30px]  ">
+                                    <p className="text-md font-semibold text-slate-200">Invoice Due</p>
+                                </span>
+
+                                <div className="w-full h-full gradient-1 rounded-[7.5px] flex items-start justify-start ">
+                                    <div className="w-[55%] h-full flex items-start justify-start p-[10px] sm:p-[20px] ">
+                                        <span className="h-[50px] w-[50px] text-sky-300 "><BiDollar size={'100%'} />  </span>
+                                        <p className="text-3xl text-slate-200 mt-[4px]">13,450.97</p>
+                                    </div>
+                                    <div className="w-[45%] h-full flex flex-col items-end justify-start px-[15px] py-[30px] ">
+                                        <p className="text-xs text-slate-300 w-full text-end ">Compared to last month </p>
+                                        <p className="text-xs text-green-500"> 36%</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div className="w-full flex flex-col items-start justify-start h-1/3 gap-[20px] ">
+                                <div className="w-full h-full gradient-1 rounded-[7.5px] flex items-start justify-between ">
+                                    <div className="w-[60%] h-full flex flex-col items-start justify-start pl-[30px] py-[20px] ">
+                                        <p className="text-2xl text-slate-200 w-full text-start ">Active Leads </p>
+                                    </div>
+                                    <div className="w-[40%] h-full flex flex-col items-end justify-start p-[10px] sm:p-[20px] ">
+                                        <p className="text-3xl text-slate-200 mt-[4px]">0</p>
+                                        <p className="text-sm text-slate-200">Last Month: <strong>0</strong> </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
 
 
@@ -38,7 +105,7 @@ const Main_dashboard_area = () => {
                     <div className="w-full xl:w-[23%] h-full flex items-start justify-between gap-[15px] ">
                         <div className="max-lg:w-full w-[65%] xl:w-full  max-md:w-full h-[480px] bg-slate-700 rounded-[7.5px] p-[15px] flex flex-col items-start justify-start gap-[10px] ">
                             <span className="w-full h-[45px] px-[10px] flex items-center rounded-[5px] bg-slate-800  ">
-                                <p className="text-sm text-slate-200"> Alerts & Notifications</p>
+                                <p className="text-xs text-slate-200"> Alerts & Notifications</p>
                             </span>
 
                             <div className=" w-full flex flex-col items-start rounded-[5px] overflow-y-auto " style={{height: 'calc(100% - 45px )'}} >
