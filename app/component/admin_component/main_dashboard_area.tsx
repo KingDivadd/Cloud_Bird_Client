@@ -65,10 +65,10 @@ const Main_dashboard_area = () => {
 
                             </div>
 
-                            <div className="w-full flex flex-col items-start justify-start h-1/3 gap-[20px] ">
-                                <span className="w-full flex flex-col items-start justify-between h-[30px]  ">
+                            <div className="w-full flex flex-col items-start justify-start h-1/3 gap-[10px] ">
+                                {/* <span className="w-full flex flex-col items-start justify-between h-[30px]  ">
                                     <p className="text-md font-semibold text-slate-200">Invoice Due</p>
-                                </span>
+                                </span> */}
 
                                 <div className="w-full h-full gradient-1 rounded-[7.5px] flex items-start justify-start ">
                                     <div className="w-[55%] h-full flex items-start justify-start p-[10px] sm:p-[20px] ">
