@@ -7,8 +7,12 @@ import { BiMenu, BiX } from "react-icons/bi";
 import Admin_side_bar from './admin_side_bar';
 import { TbSmartHome } from 'react-icons/tb';
 import { LiaUserEditSolid } from 'react-icons/lia';
+import { LuLogOut } from 'react-icons/lu';
+import { useRouter } from 'next/navigation';
+import { CiLogout } from 'react-icons/ci';
 
 const Navigation = () => {
+    const router = useRouter()
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const [side_route, setSide_route] = useState('')
@@ -52,7 +56,8 @@ const Navigation = () => {
                     <span className="block sm:hidden w-[35px] h-[35px] text-slate-200 cursor-pointer" onClick={toggleMenu}>
                         <BiMenu size={'100%'} />
                     </span>
-                    <p className="text-lg text-slate-100 font-semibold">Dashboard</p>
+                    {side_route == 'dashboard' && <p className="text-lg text-slate-100 font-semibold">Dashboard</p>}
+                    {side_route == 'user-management' && <p className="text-lg text-slate-100 font-semibold">User Management</p>}
                 </span>
                 <span className="w-[50%] md:w-[65%] flex items-center justify-end gap-[25px]">
                     <span className="h-full flex items-center justify-between gap-[10px]">
@@ -114,6 +119,13 @@ const Navigation = () => {
                                 <IoMdNotificationsOutline size={'100%'} />
                             </span>
                             <p className="text-md font-normal text-black ">Notification</p>
+                        </span>
+
+                        <span className=" h-[40px] w-full flex items-center justify-start gap-[10px]" >
+                            <span className={"w-[30px] h-[30px] flex items-center justify-center text-slate-800 "} onClick={()=> router.push('/auth/login')}  >
+                                <CiLogout size={'100%'} />
+                            </span>
+                            <p className="text-md font-normal text-black ">Logout</p>
                         </span>
 
                     </span>

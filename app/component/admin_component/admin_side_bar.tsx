@@ -5,9 +5,13 @@ import { TbSmartHome } from "react-icons/tb";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { LuLogOut } from "react-icons/lu";
 
-const Admin_side_bar = () => {
+interface SideRouteProps {
+    side_route: string;
+    setSide_route: (nav: string) => void;
+}
+
+const Admin_side_bar = ({side_route, setSide_route}: SideRouteProps) => {
     const router = useRouter()
-    const [side_route, setSide_route] = useState('')
 
     useEffect(() => {
         const item = sessionStorage.getItem('side_route')

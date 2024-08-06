@@ -296,3 +296,12 @@ export const paymentSection = [
     {phase: "Electrical Completion", status: "Pending", amount: "$500", dateReceived: "N/A"},
 
 ]
+
+export interface User_Management_Props {
+    forEach(arg0: (data: any, ind: number) => void): unknown;
+    filter(arg0: (user: any) => any): unknown;
+    map(arg0: (data: any) => void): unknown;
+    total_number_of_pages:number;
+    total_number_of_users:number;
+    users:any;
+}
