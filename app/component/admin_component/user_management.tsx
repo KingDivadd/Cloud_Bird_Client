@@ -161,7 +161,7 @@ const User_management = () => {
             pages.push(
             <p
                 key={i}
-                className={`text-sm font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer ${
+                className={`text-[15px] font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer ${
                 page_number === i ? 'bg-slate-200 text-slate-800' : ''
                 }`}
                 onClick={() => app_users_action(i)}
@@ -186,7 +186,7 @@ const User_management = () => {
             pages.push(
             <p
                 key={i}
-                className={`text-sm font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer ${
+                className={`text-[15px] font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer ${
                 page_number === i ? 'bg-blue-500 text-white' : ''
                 }`}
                 onClick={() => app_users_action(i)}
@@ -213,21 +213,24 @@ const User_management = () => {
 
     return (
         <div className="w-full flex items-start justif-start p-[15px] " style={{height: 'calc(100vh - 70px)'}}>
-            <div className="w-full h-full flex items-start justify-start bg-slate-700 rounded-[10px] ">
-                {/*  */}
-                
-                <div className="w-full min-h-[150px] flex flex-col rounded-[5px] ">
+            <div className="w-full h-full flex flex-col gap-[15px] items-start justify-start  rounded-[10px] ">
+                <div className="w-full h-[40px] flex items-center justify-start ">
+                    <span className=" xl:w-[25%]">
+                        <input type="text" name="" placeholder="Search by name or email" className="dark-normal-input" />
+                    </span>
+                </div>
+                <div className="w-full min-h-[150px] flex flex-col rounded-[5px] border border-slate-600 ">
                     <span className="w-full h-[50px] flex flex-row items-center justify-start bg-slate-800 rounded-t-[5px] border-b border-slate-600 ">
-                        <p className="text-sm font-normal w-[13%] px-2 text-slate-200 ">Last Name</p>
-                        <p className="text-sm font-normal w-[13%] px-2 text-slate-200 ">First Name</p>
-                        <p className="text-sm font-normal w-[29%] px-2 text-slate-200 ">Email</p>
-                        <p className="text-sm font-normal w-[12.5%] px-2 text-slate-200 ">Role</p>
-                        <p className="text-sm font-normal w-[12.5%] px-2 text-slate-200 ">Status</p>
-                        <p className="text-sm font-normal w-[10%] px-2 text-slate-200 ">Action</p>
-                        <p className="text-sm font-normal w-[10%] px-2 text-slate-200 "></p>
+                        <p className="text-[15px] font-normal w-[13%] px-2 text-slate-200 ">Last Name</p>
+                        <p className="text-[15px] font-normal w-[13%] px-2 text-slate-200 ">First Name</p>
+                        <p className="text-[15px] font-normal w-[29%] px-2 text-slate-200 ">Email</p>
+                        <p className="text-[15px] font-normal w-[12.5%] px-2 text-slate-200 ">Role</p>
+                        <p className="text-[15px] font-normal w-[12.5%] px-2 text-slate-200 ">Status</p>
+                        <p className="text-[15px] font-normal w-[10%] px-2 text-slate-200 ">Action</p>
+                        <p className="text-[15px] font-normal w-[10%] px-2 text-slate-200 "></p>
                     </span>
 
-                    <div className="w-full flex flex-col justify-start items-start user-list-cont overflow-y-auto ">
+                    <div className="w-full flex flex-col justify-start items-start user-list-cont overflow-y-auto  ">
                         
                         {filtered_users !== null ?
                         
@@ -236,14 +239,14 @@ const User_management = () => {
                                 const {last_name, first_name, email, user_role, active_status} = data
                                 return (
                                     <span key={ind} className="recent-activity-table-list " >
-                                        <p className="text-sm w-[13%] px-2 text-slate-200 "> {last_name} </p>
-                                        <p className="text-sm w-[13%] px-2 text-slate-200 "> {first_name} </p>
-                                        <p className="text-sm w-[29%] px-2 text-slate-200 "> {email} </p>
-                                        <p className="text-sm w-[12.50%] px-2 text-slate-200 "> {user_role} </p>
-                                        <p className={active_status ? "text-sm text-green-500 w-[12.5%] px-2 text-slate-200 ": "text-sm text-red-500 w-[15%] px-2 text-slate-200 "}>{active_status ? "Active" : "InActive"}</p>
-                                        <p className="text-sm w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-600 hover:text-lime-600" onClick={()=>{edit_user(data)}} ><MdEdit size={16} /> Edit</p>
+                                        <p className="text-[15px] w-[13%] px-2 text-slate-200 "> {last_name} </p>
+                                        <p className="text-[15px] w-[13%] px-2 text-slate-200 "> {first_name} </p>
+                                        <p className="text-[15px] w-[29%] px-2 text-slate-200 "> {email} </p>
+                                        <p className="text-[15px] w-[12.50%] px-2 text-slate-200 "> {user_role.replace(/_/g, ' ')} </p>
+                                        <p className={active_status ? "text-[15px] text-green-500 w-[12.5%] px-2 ": "text-[15px] text-red-500 w-[15%] px-2 "}>{active_status ? "Active" : "InActive"}</p>
+                                        <p className="text-[15px] w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 hover:text-lime-600 cursor-pointer" onClick={()=>{edit_user(data)}} ><MdEdit size={16} /> Edit</p>
                                         
-                                        <p className="text-sm w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-600 hover:text-red-400"  onClick={()=>delete_user(data)} ><MdDeleteForever size={18} /> Delete</p>
+                                        <p className="text-[15px] w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2  hover:text-red-400 cursor-pointer"  onClick={()=>delete_user(data)} ><MdDeleteForever size={18} /> Delete</p>
                                     </span>
                                 )
                             })}
@@ -260,14 +263,14 @@ const User_management = () => {
                     
                     <span className="w-full h-[45px] flex flex-row items-center justify-between bg-slate-800 rounded-b-[5px] border-t border-slate-600 px-[15px] ">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className="text-sm text-slate-200 cursor-pointer" onClick={() => app_users_action('prev')}>Prev</p>
+                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_users_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className="text-sm text-slate-200 cursor-pointer" onClick={() => app_users_action('next')}>Next</p>
+                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_users_action('next')}>Next</p>
                         </span>
                         <span className="flex flex-row items-center justify-end gap-3 h-full">
-                            <p className="text-sm text-slate-200">Showing 1-15 of {app_users?.total_number_of_users || 0}</p>
+                            <p className="text-[15px] text-slate-200">Showing 1-15 of {app_users?.total_number_of_users || 0}</p>
                         </span>
                     </span>
                 </div>
