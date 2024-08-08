@@ -10,7 +10,7 @@ import { get_auth_request } from '@/app/api';
 import User_Management_Modal from './user_management_modal'
 
 
-const UserManagement = () => {
+const Leads_page = () => {
 
     const [modalFor, setModalFor] = useState('')
     const [selectedUser, setSelectedUser] = useState(null)
@@ -72,12 +72,16 @@ const UserManagement = () => {
     }
 
     async function handle_new_filter(item: string) {
-        if (app_users && item.toLocaleLowerCase() == 'all') {            
+        if (app_users && item.toLocaleLowerCase() == 'all') {
+            console.log(app_users);
+            
             // If no filter is provided, reset to the original list
             setFiltered_users(app_users);
         
         } 
-        else if (item && app_users) {            
+        else if (item && app_users) {
+            console.log(item);
+            
             const new_app_users = app_users.users.filter((data: any) => {
                 const user_role = data.user_role?.toLowerCase() || '';
                 const active_status = data.active_status ? 'active' : 'inactive';
@@ -118,9 +122,12 @@ const UserManagement = () => {
             setApp_users(response.data.data)      
             
             setFiltered_users(response.data.data)
+
+            console.log(response.data.data.users);
             
             showAlert(response.data.msg, "success")
         }else{
+        console.log(response);
         
         showAlert(response.response.data.err, "error")
         }
@@ -143,6 +150,7 @@ const UserManagement = () => {
         }
 
         get_all_users(new_page_number)
+        console.log('new page number ', new_page_number);
 
         setPage_number(new_page_number);
     }
@@ -329,4 +337,4 @@ const UserManagement = () => {
     )
 }
 
-export default UserManagement
+export default Leads_page

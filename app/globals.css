@@ -51,7 +51,7 @@
 }
 
 .dark-normal-input {
-    @apply h-[40px] w-[100%] outline-none p-[0] px-[10px] border border-slate-400 text-xs rounded-[3px] text-slate-200 bg-slate-800;
+    @apply h-[40px] w-[100%] outline-none p-[0] px-[10px] border border-slate-200 text-[15px] rounded-[3px] text-slate-200 bg-transparent;
 }
 
 .dark-normal-input:focus {
@@ -281,11 +281,11 @@
 }
 
 .regular-drop-element {
-    @apply h-[35px] flex flex-row items-center justify-start w-full pl-[10px] cursor-pointer
+    @apply h-[35px] flex flex-row items-center justify-start w-full pl-[10px] cursor-pointer text-[15px] text-slate-200;
 }
 
 .regular-drop-element:hover {
-    @apply bg-gray-100
+    @apply bg-slate-800
 }
 
 .regular-drop-element:first-child {
@@ -385,16 +385,16 @@
 }
 
 .active-side-bar-item-icon {
-    @apply w-[40px] h-[40px] m-auto p-[5px] bg-slate-600 text-slate-200 rounded-[5px] cursor-pointer;
+    @apply w-[37.5px] h-[37.5px] m-auto p-[5px] bg-slate-800 text-slate-200 rounded-[5px] cursor-pointer;
 }
 
 .side-bar-item-icon {
-    @apply w-[40px] h-[40px] m-auto p-[5px] text-slate-200 rounded-[5px] cursor-pointer;
+    @apply w-[37.5px] h-[37.5px] m-auto p-[5px] text-slate-200 rounded-[5px] cursor-pointer;
     transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .side-bar-item-desc {
-    @apply absolute top-1/2 transform -translate-y-1/2 h-[40px] bg-slate-600 text-slate-100 flex items-center px-[10px] rounded-[5px];
+    @apply absolute top-1/2 transform -translate-y-1/2 h-[37.5px] bg-slate-600 text-slate-100 flex items-center px-[10px] rounded-[5px] text-xs;
     left: 100%;
     margin-left: 10px;
     opacity: 0;

@@ -9,7 +9,7 @@ const Alert = ({ message, type }:AlertProps) => {
     };
     return (
         <div className={`${alertStyles[type]} px-4 py-3 rounded relative`} role="alert">
-            <span className="block sm:inline">{message}</span>
+            <span className="block sm:inline text-[15px]">{message}</span>
         </div>
     );
 };

@@ -19,7 +19,7 @@ const Navigation = () => {
 
     useEffect(() => {
         const item = sessionStorage.getItem('side_route')
-        if (!item || item == null || !['dashboard', 'user-management'].includes(item)){
+        if (!item || item == null || !['dashboard', 'user-management', 'leads', 'credit-report-management', 'credit-analysis', 'dispute-management', 'appointment-scheduling', 'billing-and-invoice', 'alerts-and-notification'].includes(item)){
             setSide_route('dashboard')
         }else{
             setSide_route(item)
@@ -56,19 +56,26 @@ const Navigation = () => {
                     <span className="block sm:hidden w-[35px] h-[35px] text-slate-200 cursor-pointer" onClick={toggleMenu}>
                         <BiMenu size={'100%'} />
                     </span>
-                    {side_route == 'dashboard' && <p className="text-lg text-slate-100 font-semibold">Dashboard</p>}
-                    {side_route == 'user-management' && <p className="text-lg text-slate-100 font-semibold">User Management</p>}
+                    {side_route == 'dashboard' && <p className="text-md text-slate-100 font-semibold">Dashboard</p>}
+                    {side_route == 'user-management' && <p className="text-md text-slate-100 font-semibold">User Management</p>}
+                    {side_route == 'leads' && <p className="text-md text-slate-100 font-semibold">Leads</p>}
+                    {side_route == 'credit-report-management' && <p className="text-md text-slate-100 font-semibold">Credit Report Management</p>}
+                    {side_route == 'credit-analysis' && <p className="text-md text-slate-100 font-semibold">Credit Analysis</p>}
+                    {side_route == 'dispute-management' && <p className="text-md text-slate-100 font-semibold">Dispute Management</p>}
+                    {side_route == 'appointment-scheduling' && <p className="text-md text-slate-100 font-semibold">Appointment and Scheduling</p>}
+                    {side_route == 'billing-and-invoice' && <p className="text-md text-slate-100 font-semibold">Billing and Invoice</p>}
+                    {side_route == 'alerts-and-notification' && <p className="text-md text-slate-100 font-semibold">Alert and Notification</p>}
                 </span>
                 <span className="w-[50%] md:w-[65%] flex items-center justify-end gap-[25px]">
                     <span className="h-full flex items-center justify-between gap-[10px]">
                         <span className="w-[35px] h-[35px] text-slate-200">
                             <IoMdNotificationsOutline size={'100%'} />
                         </span>
-                        <p className="hidden sm:flex text-sm text-slate-200 h-[35px] bg-slate-600 flex items-center px-[20px] rounded-[35px]">
+                        <p className="hidden sm:flex text-[16px] text-slate-200 h-[35px] bg-slate-600 flex items-center px-[20px] rounded-[35px]">
                             2 new
                         </p>
                     </span>
-                    <p className="hidden md:flex text-sm text-slate-200 font-normal h-[35px] my-auto flex items-center justify-center bg-slate-600 rounded-[40px] px-[20px]">
+                    <p className="hidden md:flex text-[16px] text-slate-200 font-normal h-[35px] my-auto flex items-center justify-center bg-slate-600 rounded-[40px] px-[20px]">
                         3 August, 2024
                     </p>
                     <span className="h-full flex items-center justify-between gap-[20px]">
@@ -81,8 +88,8 @@ const Navigation = () => {
                             />
                         </span>
                         <span className="hidden lg:flex  flex flex-col items-between justify-end">
-                            <p className="text-sm text-slate-100">Andrew Madisson</p>
-                            <p className="text-sm text-end font-semibold text-slate-400">Admin</p>
+                            <p className="text-[16px] text-slate-100">Andrew Madisson</p>
+                            <p className="text-xs text-end font-semibold text-slate-400">Admin</p>
                         </span>
                     </span>
                 </span>
