@@ -5,10 +5,18 @@ import { MdEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import {DropDownBlank, DropDownBlankTransparent} from '../dropDown';
 import Alert from '../alert';
-import { User_Management_Props } from '@/types';
 import { get_auth_request } from '@/app/api';
-import User_Management_Modal from './user_management_modal'
+import Lead_Management_Modal from './lead_management_modal'
 
+
+export interface LeadsProps {
+    forEach(arg0: (data: any, ind: number) => void): unknown;
+    filter(arg0: (user: any) => any): unknown;
+    map(arg0: (data: any) => void): unknown;
+    total_number_of_pages:number;
+    total_number_of_leads:number;
+    leads:any;
+}
 
 const Leads_page = () => {
 
@@ -17,16 +25,16 @@ const Leads_page = () => {
     const [alert, setAlert] = useState({type: '', message: ''})
     const [page_number, setPage_number] = useState(1)
     const [showModal, setShowModal] = useState(false)
-    const [app_users, setApp_users] = useState<User_Management_Props | null>(null);
-    const [filtered_users, setFiltered_users] = useState<User_Management_Props | null>(null); 
+    const [app_leads, setApp_leads] = useState<LeadsProps | null>(null);
+    const [filtered_leads, setFiltered_leads] = useState<LeadsProps | null>(null); 
 
-    const [filters, setFilters] = useState({filter_input: '', active_status: '', user_role: ''})
+    const [filters, setFilters] = useState({filter_input: '', status: '',})
 
     const [dropMenus, setDropMenus] = useState<{ [key: string]: boolean }>({
-        user_role: false, status: false
+        status: false
     });
     const [dropElements, setDropElements] = useState({
-        user_role: 'User Role', status: 'Status'
+        status: 'Status'
 
     })
 
@@ -48,61 +56,57 @@ const Leads_page = () => {
         const value = e.target.value.toLowerCase();
         setFilters({ ...filters, filter_input: value });
     
-        if (app_users && app_users.users) {
+        if (app_leads && app_leads.leads) {
             if (value.trim() !== '') {
-                const new_app_users = app_users.users.filter((data: any) => {
-                const firstName = data.first_name?.toLowerCase() || '';
-                const lastName = data.last_name?.toLowerCase() || '';
-                const otherNames = data.other_names?.toLowerCase() || '';
-                const email = data.email?.toLowerCase() || '';
+                const new_app_leads = app_leads.leads.filter((data: any) => {
+                const name = data.name?.toLowerCase() || '';
+                const last_name = data.assigned_to.last_name?.toLowerCase() || '';
+                const first_name = data.assigned_to.frst_name?.toLowerCase() || '';
         
                 return (
-                    firstName.includes(value) ||
-                    lastName.includes(value) ||
-                    otherNames.includes(value) ||
-                    email.includes(value)
+                    name.includes(value) ||
+                    last_name.includes(value) ||
+                    first_name.includes(value)
                 );
                 });
         
-                setFiltered_users({ ...app_users, users: new_app_users });
+                setFiltered_leads({ ...app_leads, leads: new_app_leads });
             } else {
-                setFiltered_users(app_users); // Reset to the original list
+                setFiltered_leads(app_leads); // Reset to the original list
             }
         }
     }
 
     async function handle_new_filter(item: string) {
-        if (app_users && item.toLocaleLowerCase() == 'all') {
-            console.log(app_users);
+        if (app_leads && item.toLocaleLowerCase() == 'all') {
+            console.log(app_leads);
             
             // If no filter is provided, reset to the original list
-            setFiltered_users(app_users);
+            setFiltered_leads(app_leads);
         
         } 
-        else if (item && app_users) {
+        else if (item && app_leads) {
             console.log(item);
             
-            const new_app_users = app_users.users.filter((data: any) => {
-                const user_role = data.user_role?.toLowerCase() || '';
-                const active_status = data.active_status ? 'active' : 'inactive';
+            const new_app_leads = app_leads.leads.filter((data: any) => {
+                const status = data.status?.toUpperCase() || '';
     
                 // Check if the filter item matches either the user_role or active_status
                 return (
-                    user_role === item.toLowerCase() ||
-                    active_status === item.toLowerCase()
+                    status === item.toUpperCase() 
                 );
             });
     
-            setFiltered_users({ ...app_users, users: new_app_users });
+            setFiltered_leads({ ...app_leads, leads: new_app_leads });
         } else {
             // If no filter is provided, reset to the original list
-            setFiltered_users(app_users);
+            setFiltered_leads(app_leads);
         }
     }
 
     useEffect(() => {
         
-        get_all_users(page_number)
+        get_all_leads(page_number)
 
     }, [showModal])
 
@@ -113,17 +117,17 @@ const Leads_page = () => {
             }, 3000);
     }
 
-    async function get_all_users(page_number:number) {
+    async function get_all_leads(page_number:number) {
 
-        const response = await get_auth_request(`user/all-users/${page_number}`)
+        const response = await get_auth_request(`user/all-leads/${page_number}`)
 
         if (response.status == 200 || response.status == 201){
             
-            setApp_users(response.data.data)      
+            setApp_leads(response.data.data)      
             
-            setFiltered_users(response.data.data)
+            setFiltered_leads(response.data.data)
 
-            console.log(response.data.data.users);
+            console.log(response.data.data.leads);
             
             showAlert(response.data.msg, "success")
         }else{
@@ -133,9 +137,9 @@ const Leads_page = () => {
         }
     }
 
-    async function app_users_action(item: any) {
+    async function app_leads_action(item: any) {
         let new_page_number = page_number;
-        let max_page_number = app_users?.total_number_of_pages
+        let max_page_number = app_leads?.total_number_of_pages
 
         if (item === 'prev') {
             if (page_number > 1) {
@@ -149,7 +153,7 @@ const Leads_page = () => {
             new_page_number = item;
         }
 
-        get_all_users(new_page_number)
+        get_all_leads(new_page_number)
         console.log('new page number ', new_page_number);
 
         setPage_number(new_page_number);
@@ -157,7 +161,7 @@ const Leads_page = () => {
 
     const render_page_numbers = () => {
         const pages = [];
-        const max_page_number = app_users?.total_number_of_pages || 1;
+        const max_page_number = app_leads?.total_number_of_pages || 1;
         const max_displayed_pages = 3;
 
         if (max_page_number <= max_displayed_pages) {
@@ -168,7 +172,7 @@ const Leads_page = () => {
                 className={`text-sm font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer text-slate-200 ${
                 page_number === i ? 'bg-slate-600 text-white' : ''
                 }`}
-                onClick={() => app_users_action(i)}
+                onClick={() => app_leads_action(i)}
             >
                 {i}
             </p>
@@ -193,7 +197,7 @@ const Leads_page = () => {
                 className={`text-sm font-light h-[27px] w-[30px] rounded-[3px] flex items-center justify-center cursor-pointer ${
                 page_number === i ? 'bg-blue-500 text-white' : ''
                 }`}
-                onClick={() => app_users_action(i)}
+                onClick={() => app_leads_action(i)}
             >
                 {i}
             </p>
@@ -213,13 +217,13 @@ const Leads_page = () => {
 
     function edit_user(data:any) {
         setModalFor('edit')
-        setShowModal(true)
+        // setShowModal(true)
         setSelectedUser(data)
     }
 
     function delete_user(data:any) {
         setModalFor('delete')
-        setShowModal(true) 
+        // setShowModal(true) 
         setSelectedUser(data)
     }
 
@@ -232,23 +236,21 @@ const Leads_page = () => {
                 </span>
                 <span className="w-full flex flex-row items-center justify-between">
                     <span className="h-full flex flex-row items-center justify-start gap-4">
-                        <p className="text-md font-semibold text-slate-200">All Users</p>
-                        <p className="text-sm text-slate-200">{app_users?.total_number_of_users}</p>
+                        <p className="text-md font-semibold text-slate-200">All leads</p>
+                        <p className="text-sm text-slate-200">{app_leads?.total_number_of_leads}</p>
                     </span>
                     <span className="flex flex-row items-start justify-start gap-4">
                         <span className=" flex flex-row items-center justif-start gap-5 h-[40px] ">
-                            <span className="h-[40px] min-w-[150px]">
-                                <DropDownBlankTransparent handleSelectDropdown={handleSelectDropdown} title={'status'} dropArray={['Active', 'Inactive', 'Not Approved']} dropElements={dropElements} dropMenus={dropMenus} handleDropMenu={handleDropMenu} setDropElements={setDropElements} setDropMenus={setDropMenus}  /> 
-                            </span>
+                            
                             <span className="w-[250px] h-[40px] ">
-                                <input type="text" name="filter-input" onChange={handleFilter} placeholder='Enter name or email' id="" className='dark-normal-input  ' />
+                                <input type="text" name="filter-input" onChange={handleFilter} placeholder='Enter lead name' id="" className='dark-normal-input  ' />
                             </span>
                             <span className="h-[40px] min-w-[150px]">
-                                <DropDownBlankTransparent handleSelectDropdown={handleSelectDropdown} title={'user_role'} dropArray={['Admin', 'Client', 'Client Manager', 'Team Member', 'Affiliate', 'All']} dropElements={dropElements} dropMenus={dropMenus} handleDropMenu={handleDropMenu} setDropElements={setDropElements} setDropMenus={setDropMenus}  /> 
+                                <DropDownBlankTransparent handleSelectDropdown={handleSelectDropdown} title={'status'} dropArray={['New', 'Contacted', 'In Progress', 'Converted', 'Closed', 'All']} dropElements={dropElements} dropMenus={dropMenus} handleDropMenu={handleDropMenu} setDropElements={setDropElements} setDropMenus={setDropMenus}  /> 
                             </span>
                         </span>
 
-                        <button className="h-[40px] px-4 bg-slate-600 hover:bg-salte-700 text-slate-200 rounded-[3px] flex items-center justify-center text-[16px]" onClick={add_new_user}>Add New User</button>
+                        <button className="h-[40px] px-4 bg-slate-600 hover:bg-salte-700 text-slate-200 rounded-[3px] flex items-center justify-center text-[16px]" onClick={add_new_user}>Add New Lead</button>
 
                     </span>
                 </span>
@@ -257,53 +259,31 @@ const Leads_page = () => {
 
                 <div className="w-full min-h-[150px] flex flex-col rounded-[5px] border border-slate-600">
                     <span className="w-full h-[40px] flex flex-row items-center justify-start bg-slate-600 rounded-t-[5px] border-b border-slate-600 rounded-t-[4px]">
-                        <p className="text-[16px] font-normal w-[11%] px-2 text-slate-200 ">Last Name</p>
-                        <p className="text-[16px] font-normal w-[11%] px-2 text-slate-200 ">First Name</p>
-                        <p className="text-[16px] font-normal w-[24%] px-2 text-slate-200 ">Email</p>
-                        <p className="text-[16px] font-normal w-[16.5%] px-2 text-slate-200 ">Role</p>
-                        <p className="text-[16px] font-normal w-[15%] px-2 text-slate-200 ">Status</p>
-                        <p className="text-[16px] font-normal w-[10%] px-2 text-slate-200 ">Action</p>
-                        <p className="text-[16px] font-normal w-[10%] px-2 text-slate-200 "></p>
+                        <p className="text-[15px] font-normal w-[17.5%] px-2 text-slate-200 ">Name</p>
+                        <p className="text-[15px] font-normal w-[17.5%] px-2 text-slate-200 ">Assigned To </p>
+                        <p className="text-[15px] font-normal w-[30%] px-2 text-slate-200 ">Email</p>
+                        <p className="text-[15px] font-normal w-[12.5%] px-2 text-slate-200 ">Status</p>
+                        <p className="text-[15px] font-normal w-[11%] px-2 text-slate-200 ">Action</p>
+                        <p className="text-[15px] font-normal w-[11.5%] px-2 text-slate-200 "></p>
                     </span>
                     <div className="w-full flex flex-col justify-start items-start user-list-cont overflow-y-auto ">
                         
-                        {filtered_users !== null ?
+                        {filtered_leads !== null ?
                         
                             <div className='h-auto w-full flex flex-col justify-start '>
-                            { filtered_users?.users.map((data:any, ind:number)=>{
-                                const {last_name, first_name, email, user_role, active_status, is_staff, is_approved} = data
+                            { filtered_leads?.leads.map((data:any, ind:number)=>{
+                                const {name, company_name, email, assigned_to, status} = data
                                 return (
                                     <span key={ind} className="recent-activity-table-list " >
-                                        <p className="text-[15px] w-[11%] px-2 text-slate-200 "> {last_name} </p>
-                                        <p className="text-[15px] w-[11%] px-2 text-slate-200 "> {first_name} </p>
-                                        <p className="text-[15px] w-[24%] px-2 text-slate-200 "> {email} </p>
-                                        <p className="text-[15px] w-[16.50%] px-2 text-slate-200 "> {user_role.replace(/_/g, ' ')} </p>
+                                        <p className="text-[15px] w-[17.5%] px-2 text-slate-200 "> {name} </p>
+                                        <p className="text-[15px] w-[17.5%] px-2 text-slate-200 flex gap-[10px] "> {assigned_to.last_name} {assigned_to.first_name} </p>
+                                        <p className="text-[15px] w-[30%] px-2 text-slate-200 "> {email} </p>
                                         
-                                        <p className={`text-[15px] px-2 ${is_staff ? 
-                                            is_approved
-                                                ? active_status
-                                                    ? "text-green-500 w-[15%]"
-                                                    : "text-red-500 w-[15%]"
-                                                : "text-red-500 w-[15%]"
-                                                : active_status
-                                                ? "text-green-500 w-[15%]"
-                                                : "text-red-500 w-[15%]"
-                                            }`}>
-                                            {is_staff
-                                                ? is_approved
-                                                ? active_status
-                                                    ? "Active"
-                                                    : "Not Active"
-                                                : "Not Approved"
-                                                : active_status
-                                                ? "Active"
-                                                : "Not Active"}
-                                            </p>
+                                        <p className={`text-[15px] w-[12.5%] px-2 text-slate-200 `}> {status.replace(/_/,' ')} </p>
 
-
-                                        <p className="text-[15px] w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-lime-600 cursor-pointer" onClick={()=>{edit_user(data)}} ><MdEdit size={16} /> Edit</p>
+                                        <p className="text-[15px] w-[11%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-lime-600 cursor-pointer" onClick={()=>{edit_user(data)}} ><MdEdit size={16} /> Edit</p>
                                         
-                                        <p className="text-[15px] w-[10%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-red-400 cursor-pointer"  onClick={()=>delete_user(data)} ><MdDeleteForever size={18} /> Delete</p>
+                                        <p className="text-[15px] w-[11.5%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-red-400 cursor-pointer"  onClick={()=>delete_user(data)} ><MdDeleteForever size={18} /> Delete</p>
                                     </span>
                                 )
                             })}
@@ -319,20 +299,20 @@ const Leads_page = () => {
                     </div>
                     <span className="w-full h-[40px] flex flex-row items-center justify-between  rounded-b-[5px] border-t border-slate-600 px-[15px] ">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_users_action('prev')}>Prev</p>
+                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_leads_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_users_action('next')}>Next</p>
+                            <p className="text-[15px] text-slate-200 cursor-pointer" onClick={() => app_leads_action('next')}>Next</p>
                         </span>
                         <span className="flex flex-row items-center justify-end gap-3 h-full">
-                            <p className="text-[15px] text-slate-200">Showing 1 - 15 of {app_users?.total_number_of_users || 0}</p>
+                            <p className="text-[15px] text-slate-200">Showing 1 - 15 of {app_leads?.total_number_of_leads || 0}</p>
                         </span>
                     </span>
                 </div>
             </div>
 
-            {showModal && <User_Management_Modal showModal={showModal} setShowModal={setShowModal} selectedUser={selectedUser} setSelectedUser={setSelectedUser} modalFor={modalFor} setModalFor={setModalFor}  />}
+            {showModal && <Lead_Management_Modal showModal={showModal} setShowModal={setShowModal} selectedUser={selectedUser} setSelectedUser={setSelectedUser} modalFor={modalFor} setModalFor={setModalFor}  />}
         </div>
     )
 }
