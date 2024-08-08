@@ -310,7 +310,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
                                                 <span className="h-[40px] w-full ">
                                                     <input type="email" name='assigned_to' placeholder='Enter  name to filter' onChange={filter_user} className='dark-normal-input' />
                                                 </span>
-                                                <div className="w-full h-[280px] flex flex-col items-start justify-start overflow-y-auto p-[10px] bg-slate-800 rounded-[5px] ">
+                                                <div className="w-full h-[375px] flex flex-col items-start justify-start overflow-y-auto p-[10px] bg-slate-800 rounded-[5px] ">
                                                     <div className="w-full flex flex-col items-start justify-start">
                                                         {filtered_staff.map((data, ind)=>{
                                                             const {first_name, last_name, user_id, user_role } = data
