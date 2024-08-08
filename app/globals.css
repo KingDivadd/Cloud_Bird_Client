@@ -394,7 +394,7 @@
 }
 
 .side-bar-item-desc {
-    @apply absolute top-1/2 transform -translate-y-1/2 h-[37.5px] bg-slate-600 text-slate-100 flex items-center px-[10px] rounded-[5px] text-xs;
+    @apply absolute top-1/2 transform -translate-y-1/2 h-[37.5px] bg-slate-600 text-slate-100 flex items-center px-[10px] rounded-[3.5px] text-xs z-[2];
     left: 100%;
     margin-left: 10px;
     opacity: 0;
