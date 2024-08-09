@@ -116,7 +116,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
             try {
                 setLoading(true)
                 
-                const response = await post_auth_request(`user/create-lead`, { name: auth.name, company_name: auth.company_name, phone_number: auth.phone_number, email: auth.email, assigned_to: auth.assigned_to, assigned_name: '' })
+                const response = await post_auth_request(`user/create-lead`, { name: auth.name, company_name: auth.company_name, phone_number: auth.phone_number, email: auth.email, assigned_to: auth.assigned_to })
                 if (response.status == 200 || response.status == 201){
                                 
                     showAlert(response.data.msg, "success")
