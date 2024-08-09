@@ -223,10 +223,10 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                     </span>
 
                                     <div className="w-full flex flex-col items-center justify-center gap-[34px]">
-                                        <p className="text-md font-normal text-center text-slate-200 ">Are you sure you want to delete 
+                                        <p className="text-md font-normal text-center text-slate-200 ">Are you sure you want to delete lead
                                             <strong> {selectedLead.name}</strong> assigned to <strong>{selectedLead.assigned_to.last_name} {selectedLead.assigned_to.first_name} </strong> </p>
                                             
-                                        <p className="text-xs text-slate-200 flex items-center justify-center gap-2 "> <CiWarning size={21} />   Please note action is not reaversible </p>
+                                        <p className="text-xs text-slate-200 flex items-center justify-center gap-2 "> <CiWarning size={20} />   Please note action is not reaversible </p>
 
                                             <button className=" w-[150px] h-[45px] text-white bg-slate-600 rounded-[5px] hover:bg-red-500 flex items-center justify-center"  disabled={loading} onClick={delete_lead} >
                                                 {loading ? (
