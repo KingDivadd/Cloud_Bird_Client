@@ -128,8 +128,6 @@ const Leads_page = () => {
             setApp_leads(response.data.data)      
             
             setFiltered_leads(response.data.data)
-
-            console.log(response.data.data.leads);
             
             showAlert(response.data.msg, "success")
         }else{
@@ -156,7 +154,6 @@ const Leads_page = () => {
         }
 
         get_all_leads(new_page_number)
-        console.log('new page number ', new_page_number);
 
         setPage_number(new_page_number);
     }
@@ -216,7 +213,6 @@ const Leads_page = () => {
         setSelectedLead(null)
     }
     
-
     function edit_lead(data:any) {
         setModalFor('edit')
         setShowModal(true)
