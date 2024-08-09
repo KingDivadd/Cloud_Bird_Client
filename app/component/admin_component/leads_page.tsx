@@ -225,7 +225,7 @@ const Leads_page = () => {
 
     function delete_lead(data:any) {
         setModalFor('delete')
-        // setShowModal(true) 
+        setShowModal(true) 
         setSelectedLead(data)
     }
 
