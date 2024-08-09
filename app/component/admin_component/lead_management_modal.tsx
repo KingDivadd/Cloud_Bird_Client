@@ -352,9 +352,9 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                                         {filtered_staff.map((data, ind)=>{
                                                             const {first_name, last_name, user_id, user_role } = data
                                                             return(
-                                                                <span key={ind} className="w-full flex items-center justify-between hover:bg-slate-600 ">
+                                                                <span key={ind} className="w-full flex items-center justify-between hover:bg-slate-600 px-[10px] gap-[10px] ">
 
-                                                                    <span className="h-[35px] flex items-center justify-start gap-[10px] px-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
+                                                                    <span className="h-[35px] flex items-center justify-start gap-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
 
                                                                         <p className="text-start text-[15px] text-slate-200 " >{ind + 1}. </p>
 
@@ -454,9 +454,9 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                                     {filtered_staff.map((data, ind)=>{
                                                         const {first_name, last_name, user_id, user_role } = data
                                                         return(
-                                                            <span key={ind} className="w-full flex items-center justify-between hover:bg-slate-600 ">
+                                                            <span key={ind} className="w-full flex items-center justify-between hover:bg-slate-600 px-[10px] gap-[10px] ">
 
-                                                                <span className="h-[35px] flex items-center justify-start gap-[10px] px-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
+                                                                <span className="h-[35px] flex items-center justify-start gap-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
 
                                                                     <p className="text-start text-[15px] text-slate-200 " >{ind + 1}. </p>
 
