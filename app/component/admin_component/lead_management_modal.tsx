@@ -87,7 +87,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
             const {name, phone_number, company_name, email, assigned_to} = selectedLead
             console.log('selected lead ', selectedLead);
             
-            setAuth({...auth, name: name, phone_number: phone_number, company_name: company_name, email: email,      })
+            setAuth({...auth, name: name, phone_number: phone_number, company_name: company_name, email: email,  assigned_name: `${assigned_to.last_name} ${assigned_to.first_name}`, assigned_to: assigned_to.user_id    })
         }
     }, [])
 
@@ -121,6 +121,37 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                 setLoading(true)
                 
                 const response = await post_auth_request(`user/create-lead`, { name: auth.name, company_name: auth.company_name, phone_number: auth.phone_number, email: auth.email, assigned_to: auth.assigned_to, assigned_name: '' })
+                if (response.status == 200 || response.status == 201){
+                                
+                    showAlert(response.data.msg, "success")
+                    
+                    setShowModal(false)
+                    
+                    setLoading(false)
+
+                    }else{       
+                                    
+                    showAlert(response.response.data.err, "error")
+                    
+                    setLoading(false)
+                }
+            } catch (err) {
+                showAlert('Error occured ', 'error')
+                setLoading(false)
+            }
+        }
+    }
+
+    async function update_lead(e:any) {
+        e.preventDefault()
+        if (!auth.name || !auth.phone_number || !auth.email || !auth.assigned_to) {
+            showAlert('Please fill required fields', 'error')
+        }else{
+            try {
+                setLoading(true)
+                
+                const response = await patch_auth_request(`lead/edit-lead/${selectedLead.lead_id}`, 
+                    { name: auth.name, company_name: auth.company_name, phone_number: auth.phone_number, email: auth.email, assigned_to: auth.assigned_to })
                 if (response.status == 200 || response.status == 201){
                                 
                     showAlert(response.data.msg, "success")
@@ -321,15 +352,15 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                                         {filtered_staff.map((data, ind)=>{
                                                             const {first_name, last_name, user_id, user_role } = data
                                                             return(
-                                                                <span className="w-full flex items-center justify-between">
+                                                                <span key={ind} className="w-full flex items-center justify-between">
 
                                                                     <span className="h-[35px] flex items-center justify-start gap-[10px] hover:bg-slate-600 px-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
 
-                                                                        <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{ind + 1}. </p>
+                                                                        <p className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{ind + 1}. </p>
 
-                                                                        <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{last_name} </p>
+                                                                        <p className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{last_name} </p>
 
-                                                                        <p key={ind} className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 " > {first_name} </p>
+                                                                        <p className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 " > {first_name} </p>
 
                                                                     </span>
                                                                         
@@ -351,13 +382,13 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
 
                                         <div className="w-1/2"></div>
 
-                                        <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={create_lead} >
+                                        <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={update_lead} >
                                             {loading ? (
                                                 <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                                                 </svg>
-                                            ) : 'Create Lead'}
+                                            ) : 'Update Lead'}
 
                                         </button>
 
@@ -370,7 +401,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                 {modalFor == 'edit' && 
                                 <div className="w-full flex flex-col items-start justify-start gap-[25px] bg-slate-600 rounded-[4px] p-[15px] ">
                                 <span className="w-full flex flex-row items-start justify-start border-b border-slate-200 h-[40px]">
-                                    <p className="text-md font-semibold  text-slate-200 ">Lead Id <strong>{selectedLead.lead_id}</strong> </p>
+                                    <p className="text-md font-semibold  text-slate-200 ">Edit Lead</p>
                                 </span>
 
                                 <form  action="" className="w-full flex items-start justify-between gap-[15px]">
@@ -423,15 +454,15 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                                     {filtered_staff.map((data, ind)=>{
                                                         const {first_name, last_name, user_id, user_role } = data
                                                         return(
-                                                            <span className="w-full flex items-center justify-between">
+                                                            <span key={ind} className="w-full flex items-center justify-between">
 
                                                                 <span className="h-[35px] flex items-center justify-start gap-[10px] hover:bg-slate-600 px-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
 
-                                                                    <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{ind + 1}. </p>
+                                                                    <p className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{ind + 1}. </p>
 
-                                                                    <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{last_name} </p>
+                                                                    <p className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{last_name} </p>
 
-                                                                    <p key={ind} className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 " > {first_name} </p>
+                                                                    <p className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 " > {first_name} </p>
 
                                                                 </span>
                                                                     
