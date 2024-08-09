@@ -256,7 +256,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true">
                     <div className="absolute inset-0 bg-gray-500 opacity-35"></div>
                 </div>
-                <div className={ modalFor == 'delete' ? "w-full h-screen pt-[150px] rounded-lg overflow-hidden shadow-xl transform transition-all": "w-full h-screen pt-[50px] rounded-lg overflow-hidden shadow-xl transform transition-all" } role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" onClick={handleCloseModal}>
+                <div className={ modalFor == 'delete' ? "w-full h-screen pt-[150px] rounded-lg overflow-hidden shadow-xl transform transition-all": "w-full h-screen pt-[30px] rounded-lg overflow-hidden shadow-xl transform transition-all" } role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" onClick={handleCloseModal}>
 
                     <div className={"h-auto w-[70%] mx-auto shadow-xl flex items-start "}>
                         {/* the container for the input fields */}
@@ -382,13 +382,13 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
 
                                         <div className="w-1/2"></div>
 
-                                        <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={update_lead} >
+                                        <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={create_lead} >
                                             {loading ? (
                                                 <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                                                 </svg>
-                                            ) : 'Update Lead'}
+                                            ) : 'Create Lead'}
 
                                         </button>
 
@@ -484,13 +484,13 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
 
                                     <div className="w-1/2"></div>
 
-                                    <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={create_lead} >
+                                    <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={update_lead} >
                                         {loading ? (
                                             <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                                             </svg>
-                                        ) : 'Create Lead'}
+                                        ) : 'Update Lead'}
 
                                     </button>
 
