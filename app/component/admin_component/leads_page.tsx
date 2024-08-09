@@ -11,7 +11,7 @@ import Lead_Management_Modal from './lead_management_modal'
 
 export interface LeadsProps {
     forEach(arg0: (data: any, ind: number) => void): unknown;
-    filter(arg0: (user: any) => any): unknown;
+    filter(arg0: (lead: any) => any): unknown;
     map(arg0: (data: any) => void): unknown;
     total_number_of_pages:number;
     total_number_of_leads:number;
@@ -21,7 +21,7 @@ export interface LeadsProps {
 const Leads_page = () => {
 
     const [modalFor, setModalFor] = useState('')
-    const [selectedUser, setSelectedUser] = useState(null)
+    const [selectedLead, setSelectedLead] = useState(null)
     const [alert, setAlert] = useState({type: '', message: ''})
     const [page_number, setPage_number] = useState(1)
     const [showModal, setShowModal] = useState(false)
@@ -91,7 +91,7 @@ const Leads_page = () => {
             const new_app_leads = app_leads.leads.filter((data: any) => {
                 const status = data.status?.toUpperCase() || '';
     
-                // Check if the filter item matches either the user_role or active_status
+                // Check if the filter item matches either the lead_role or active_status
                 return (
                     status === item.toUpperCase() 
                 );
@@ -119,7 +119,7 @@ const Leads_page = () => {
 
     async function get_all_leads(page_number:number) {
 
-        const response = await get_auth_request(`user/all-leads/${page_number}`)
+        const response = await get_auth_request(`lead/all-leads/${page_number}`)
 
         if (response.status == 200 || response.status == 201){
             
@@ -208,23 +208,23 @@ const Leads_page = () => {
         return pages;
     };
 
-    function add_new_user(){
+    function add_new_lead(){
         setModalFor('add')
         setShowModal(true)
-        setSelectedUser(null)
+        setSelectedLead(null)
     }
     
 
-    function edit_user(data:any) {
+    function edit_lead(data:any) {
         setModalFor('edit')
-        // setShowModal(true)
-        setSelectedUser(data)
+        setShowModal(true)
+        setSelectedLead(data)
     }
 
-    function delete_user(data:any) {
+    function delete_lead(data:any) {
         setModalFor('delete')
         // setShowModal(true) 
-        setSelectedUser(data)
+        setSelectedLead(data)
     }
 
     return (
@@ -250,12 +250,12 @@ const Leads_page = () => {
                             </span>
                         </span>
 
-                        <button className="h-[40px] px-4 bg-slate-600 hover:bg-salte-700 text-slate-200 rounded-[3px] flex items-center justify-center text-[16px]" onClick={add_new_user}>Add New Lead</button>
+                        <button className="h-[40px] px-4 bg-slate-600 hover:bg-salte-700 text-slate-200 rounded-[3px] flex items-center justify-center text-[16px]" onClick={add_new_lead}>Add New Lead</button>
 
                     </span>
                 </span>
 
-                {/* user table */}
+                {/* lead table */}
 
                 <div className="w-full min-h-[150px] flex flex-col rounded-[5px] border border-slate-600">
                     <span className="w-full h-[40px] flex flex-row items-center justify-start bg-slate-600 rounded-t-[5px] border-b border-slate-600 rounded-t-[4px]">
@@ -266,7 +266,7 @@ const Leads_page = () => {
                         <p className="text-[15px] font-normal w-[11%] px-2 text-slate-200 ">Action</p>
                         <p className="text-[15px] font-normal w-[11.5%] px-2 text-slate-200 "></p>
                     </span>
-                    <div className="w-full flex flex-col justify-start items-start user-list-cont overflow-y-auto ">
+                    <div className="w-full flex flex-col justify-start items-start lead-list-cont overflow-y-auto ">
                         
                         {filtered_leads !== null ?
                         
@@ -281,9 +281,9 @@ const Leads_page = () => {
                                         
                                         <p className={`text-[15px] w-[12.5%] px-2 text-slate-200 `}> {status.replace(/_/,' ')} </p>
 
-                                        <p className="text-[15px] w-[11%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-lime-600 cursor-pointer" onClick={()=>{edit_user(data)}} ><MdEdit size={16} /> Edit</p>
+                                        <p className="text-[15px] w-[11%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-lime-600 cursor-pointer" onClick={()=>{edit_lead(data)}} ><MdEdit size={16} /> Edit</p>
                                         
-                                        <p className="text-[15px] w-[11.5%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-red-400 cursor-pointer"  onClick={()=>delete_user(data)} ><MdDeleteForever size={18} /> Delete</p>
+                                        <p className="text-[15px] w-[11.5%] px-2 text-slate-200 flex flex-row items-center justify-start gap-2 text-slate-200 hover:text-red-400 cursor-pointer"  onClick={()=>delete_lead(data)} ><MdDeleteForever size={18} /> Delete</p>
                                     </span>
                                 )
                             })}
@@ -312,7 +312,7 @@ const Leads_page = () => {
                 </div>
             </div>
 
-            {showModal && <Lead_Management_Modal showModal={showModal} setShowModal={setShowModal} selectedUser={selectedUser} setSelectedUser={setSelectedUser} modalFor={modalFor} setModalFor={setModalFor}  />}
+            {showModal && <Lead_Management_Modal showModal={showModal} setShowModal={setShowModal} selectedLead={selectedLead} setSelectedLead={setSelectedLead} modalFor={modalFor} setModalFor={setModalFor}  />}
         </div>
     )
 }

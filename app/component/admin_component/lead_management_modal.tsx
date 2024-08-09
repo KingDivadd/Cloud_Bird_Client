@@ -13,14 +13,14 @@ import { delete_auth_request, get_auth_request, patch_auth_request, post_auth_re
 interface Lead_Management_Props {
     showModal: boolean;
     setShowModal: (showModal:boolean ) => void;
-    selectedUser: any;
-    setSelectedUser: (selectedUser: any) => void;
+    selectedLead: any;
+    setSelectedLead: (selectedLead: any) => void;
     modalFor: string;
     setModalFor: (modalFor: string) => void;
 
 }
 
-const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelectedUser, modalFor}: Lead_Management_Props) => {
+const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelectedLead, modalFor}: Lead_Management_Props) => {
     const [alert, setAlert] = useState({type: '', message: ''})
     const [loading, setLoading] = useState(false)
     const [approve_loading, setApprove_loading] = useState(false)
@@ -37,7 +37,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
 
     async function delete_user() {
         setLoading(true)
-        const response = await delete_auth_request(`user/delete-user-account/${selectedUser.user_id}`)
+        const response = await delete_auth_request(`user/delete-user-account/${selectedLead.user_id}`)
 
         if (response.status == 200 || response.status == 201){
                         
@@ -80,8 +80,14 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
     }
     
     useEffect(() => {
-        if (modalFor !== 'delete'){
+        if (modalFor == 'add'){
             get_all_staff()
+        }else if (modalFor == 'edit'){
+            get_all_staff()
+            const {name, phone_number, company_name, email, assigned_to} = selectedLead
+            console.log('selected lead ', selectedLead);
+            
+            setAuth({...auth, name: name, phone_number: phone_number, company_name: company_name, email: email,      })
         }
     }, [])
 
@@ -140,7 +146,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
         e.preventDefault()
         try {
             setApprove_loading(true)
-            const response = await patch_auth_request(`user/approve-staff-account/${selectedUser.user_id}`, {})
+            const response = await patch_auth_request(`user/approve-staff-account/${selectedLead.user_id}`, {})
             if (response.status == 200 || response.status == 201){
                         
                 showAlert(response.data.msg, "success")
@@ -165,7 +171,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
         e.preventDefault()
         try {
             setLoading(true)
-            const response:any = await patch_auth_request(`user/de-activate-user-account/${selectedUser.user_id}`, {})
+            const response:any = await patch_auth_request(`user/de-activate-user-account/${selectedLead.user_id}`, {})
             if (response.status == 200 || response.status == 201){
                         
                 showAlert(response.data.msg, "success")
@@ -189,7 +195,7 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
         e.preventDefault()
         try {
             setLoading(true)
-            const response = await patch_auth_request(`user/activate-user-account/${selectedUser.user_id}`, {})
+            const response = await patch_auth_request(`user/activate-user-account/${selectedLead.user_id}`, {})
             if (response.status == 200 || response.status == 201){
                         
                 showAlert(response.data.msg, "success")
@@ -231,14 +237,14 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
                                 
                                 <div className="w-full flex flex-col items-start justify-start gap-[25px] ">
                                     <span className="w-full flex flex-row items-start justify-between border-b border-slate-200 h-[40px]">
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedUser.last_name} {selectedUser.first_name} </p>
+                                        <p className="text-md font-semibold  text-slate-200 ">{selectedLead.last_name} {selectedLead.first_name} </p>
 
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedUser.user_role == 'CLIENT' ? "CLIENT" :" STAFF"} </p>
+                                        <p className="text-md font-semibold  text-slate-200 ">{selectedLead.user_role == 'CLIENT' ? "CLIENT" :" STAFF"} </p>
                                     </span>
 
                                     <div className="w-full flex flex-col items-center justify-center gap-[34px]">
                                         <p className="text-md font-normal text-center text-slate-200 ">Are you sure you want to delete 
-                                            <strong> {selectedUser.last_name} {selectedUser.first_name}</strong> </p>
+                                            <strong> {selectedLead.last_name} {selectedLead.first_name}</strong> </p>
                                             
                                         <p className="text-xs text-slate-200 flex items-center justify-center gap-2 "> <CiWarning size={21} />   Please note action is not reaversible </p>
 
@@ -363,78 +369,104 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedUser, setSelec
 
                                 {modalFor == 'edit' && 
                                 <div className="w-full flex flex-col items-start justify-start gap-[25px] bg-slate-600 rounded-[4px] p-[15px] ">
-                                    <span className="w-full flex flex-row items-start justify-between border-b border-slate-200 h-[40px]">
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedUser.last_name} {selectedUser.first_name} </p>
+                                <span className="w-full flex flex-row items-start justify-start border-b border-slate-200 h-[40px]">
+                                    <p className="text-md font-semibold  text-slate-200 ">Lead Id <strong>{selectedLead.lead_id}</strong> </p>
+                                </span>
 
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedUser.user_role == 'CLIENT' ? 'CLIENT' : 'STAFF'} </p>
-                                    </span>
-
-                                    <div className="w-full flex flex-col items-center justify-center gap-[24px]">
-                                        <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">Last Name:</p>
-                                            <p className="text-sm text-slate-200 font-semibold ">{selectedUser.last_name} </p>
+                                <form  action="" className="w-full flex items-start justify-between gap-[15px]">
+                                    <div className="w-1/2 flex flex-col items-start justify-start gap-[24px] ">
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Name</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="text" name='name' value={auth.name} onChange={handle_change} className='dark-normal-input' />
+                                            </span>
                                         </span>
                                         
-                                        <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">First Name:</p>
-                                            <p className="text-sm text-slate-200 font-semibold ">{selectedUser.first_name} </p>
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Phone Number</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="text" name="phone_number" value={auth.phone_number} onChange={handle_change} className='dark-normal-input' />
+                                            </span>
                                         </span>
-
-                                        <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">Email:</p>
-                                            <p className="text-sm text-slate-200 font-semibold ">{selectedUser.email} </p>
+                                        
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Email</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="text" name="email" value={auth.email} onChange={handle_change} className='dark-normal-input' />
+                                            </span>
                                         </span>
-
-                                        {selectedUser.user_role !== 'CLIENT' && <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">User Role:</p>
-                                            <p className="text-sm text-slate-200 font-semibold ">{selectedUser.user_role.replace(/_/g,' ')} </p>
-                                        </span>}
-
-                                        {selectedUser.user_role !== 'CLIENT' && <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">Approval Status:</p>
-                                            <p className={selectedUser.is_approved ? "text-sm text-green-400 font-semibold": "text-sm text-red-300 font-semibold"}>{selectedUser.is_approved ? "Approved": "Not Approved" } </p>
-                                        </span>}
-
-                                        <span className="w-full flex items-center justify-start gap-[10px] ">
-                                            <p className="text-sm text-slate-200 ">Active Status:</p>
-                                            <p className={selectedUser.active_status ? "text-sm text-green-400 font-semibold": "text-sm text-red-400 font-semibold"}>{selectedUser.active_status ? "Active": "Not Active" } </p>
+                                        
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Company Name</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="text" name="company_name" value={auth.company_name} onChange={handle_change} className='dark-normal-input' />
+                                            </span>
                                         </span>
-
-                                        <div className="w-full h-[40px] flex item-center justify-between ">
-                                            {selectedUser.active_status ? <button className=" px-[15px] min-w-[150px] h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-red-400 flex items-center justify-center text-sm "  disabled={loading} onClick={deactivate_user} >
-                                                {loading ? (
-                                                    <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                                    </svg>
-                                                ) : 'Deactivate User'}
-
-                                            </button>: <button className=" px-[15px] min-w-[150px] h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-green-400 flex items-center justify-center text-sm "  disabled={loading} onClick={activate_user} >
-                                                {loading ? (
-                                                    <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                                    </svg>
-                                                ) : 'Activate User'}
-
-                                            </button> }
-
-                                            {(selectedUser.user_role !== 'CLIENT' && !selectedUser.is_approved) && 
-                                            
-                                            <button className=" min-w-[150px] px-[10px] h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-green-600 flex items-center justify-center text-sm"  disabled={approve_loading} onClick={approve_user} >
-                                                {approve_loading ? (
-                                                    <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                                    </svg>
-                                                ) : 'Approve Staff'}
-
-                                            </button>}
-                                        </div>
-
-
+                                        
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Assigned to</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="text" name='assigned_name' value={auth.assigned_name} onChange={handle_change} className='dark-normal-input' />
+                                            </span>
+                                        </span>
+                                        
                                     </div>
+
+                                    <div className="w-1/2 flex flex-col item-start justify-start">
+                                        <span className="w-full flex flex-col items-self justify-self gap-[10px] ">
+                                            <p className="text-[15px] text-slate-200">Select Staff</p>
+                                            <span className="h-[40px] w-full ">
+                                                <input type="email" name='assigned_to' placeholder='Enter  name to filter' onChange={filter_user} className='dark-normal-input' />
+                                            </span>
+                                            <div className="w-full h-[375px] flex flex-col items-start justify-start overflow-y-auto p-[10px] bg-slate-800 rounded-[5px] ">
+                                                <div className="w-full flex flex-col items-start justify-start">
+                                                    {filtered_staff.map((data, ind)=>{
+                                                        const {first_name, last_name, user_id, user_role } = data
+                                                        return(
+                                                            <span className="w-full flex items-center justify-between">
+
+                                                                <span className="h-[35px] flex items-center justify-start gap-[10px] hover:bg-slate-600 px-[10px] w-full cursor-pointer " onClick={()=> setAuth({...auth, assigned_name: `${last_name} ${first_name}`, assigned_to:  user_id })} >
+
+                                                                    <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{ind + 1}. </p>
+
+                                                                    <p key={ind} className="text-start text-[15px] hover:bg-slate-600 text-slate-200 " >{last_name} </p>
+
+                                                                    <p key={ind} className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 " > {first_name} </p>
+
+                                                                </span>
+                                                                    
+                                                                <p key={ind} className=" text-start text-[15px] hover:bg-slate-600 text-slate-200 text-end " > {user_role} </p>
+
+
+                                                            </span>
+                                                        )
+                                                    })}
+
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    
+                                </form>
+
+                                <div className="w-full flex items-center justify-between gap-[24px]">
+
+                                    <div className="w-1/2"></div>
+
+                                    <button className=" w-1/2 h-[45px] text-white bg-slate-800 rounded-[5px] hover:bg-slate-900 flex items-center justify-center text-[15px] "  disabled={loading} onClick={create_lead} >
+                                        {loading ? (
+                                            <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                            </svg>
+                                        ) : 'Create Lead'}
+
+                                    </button>
+
                                 </div>
+
+
+                            </div>
                                 }
 
                             </div>
