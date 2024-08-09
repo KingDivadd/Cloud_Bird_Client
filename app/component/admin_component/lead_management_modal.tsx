@@ -68,7 +68,6 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
 
     function filter_user(e: React.ChangeEvent<HTMLInputElement>) {
 
-        const name = e.target.name
         const value = e.target.value
             
         const filtered_items = all_staff.filter((data: { first_name: string, last_name: string }) =>
@@ -85,7 +84,6 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
         }else if (modalFor == 'edit'){
             get_all_staff()
             const {name, phone_number, company_name, email, assigned_to} = selectedLead
-            console.log('selected lead ', selectedLead);
             
             setAuth({...auth, name: name, phone_number: phone_number, company_name: company_name, email: email,  assigned_name: `${assigned_to.last_name} ${assigned_to.first_name}`, assigned_to: assigned_to.user_id    })
         }
@@ -100,8 +98,6 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
 
                 setFiltered_staff(response.data.staffs)
                             
-                showAlert(response.data.msg, "success")
-
                 }else{       
                                 
                 showAlert(response.response.data.err, "error")
@@ -173,69 +169,22 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
         }
     }
 
-    async function approve_user(e:any) {
-        e.preventDefault()
-        try {
-            setApprove_loading(true)
-            const response = await patch_auth_request(`user/approve-staff-account/${selectedLead.user_id}`, {})
-            if (response.status == 200 || response.status == 201){
-                        
-                showAlert(response.data.msg, "success")
-                
-                setShowModal(false)
-                
-                setApprove_loading(false)
-                }else{
-                
-                showAlert(response.response.data.err, "error")
-                
-                setApprove_loading(false)
-            }
-        } catch (err) {
-            showAlert('Error occured ', 'error')
-            setApprove_loading(false)
-        }
-        
-    }
-
-    async function deactivate_user(e:any) {
+    async function delete_lead(e:any) {
         e.preventDefault()
         try {
             setLoading(true)
-            const response:any = await patch_auth_request(`user/de-activate-user-account/${selectedLead.user_id}`, {})
+            
+            const response = await delete_auth_request(`lead/delete-lead/${selectedLead.lead_id}`)
             if (response.status == 200 || response.status == 201){
-                        
+                            
                 showAlert(response.data.msg, "success")
                 
                 setShowModal(false)
                 
                 setLoading(false)
-                }else{                
-                showAlert(response.response.data.err, "error")
-                
-                setLoading(false)
-            }
-        } catch (err) {
-            showAlert('Error occured ', 'error')
-            setLoading(false)
-        }
-        
-    }
 
-    async function activate_user(e:any) {
-        e.preventDefault()
-        try {
-            setLoading(true)
-            const response = await patch_auth_request(`user/activate-user-account/${selectedLead.user_id}`, {})
-            if (response.status == 200 || response.status == 201){
-                        
-                showAlert(response.data.msg, "success")
-                
-                setShowModal(false)
-                
-                setLoading(false)
-                }else{
-                
+                }else{       
+                                
                 showAlert(response.response.data.err, "error")
                 
                 setLoading(false)
@@ -268,18 +217,18 @@ const Lead_Management_Modal = ({ showModal, setShowModal, selectedLead, setSelec
                                 
                                 <div className="w-full flex flex-col items-start justify-start gap-[25px] ">
                                     <span className="w-full flex flex-row items-start justify-between border-b border-slate-200 h-[40px]">
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedLead.last_name} {selectedLead.first_name} </p>
+                                        <p className="text-md font-semibold  text-slate-200 ">{selectedLead.name} </p>
 
-                                        <p className="text-md font-semibold  text-slate-200 ">{selectedLead.user_role == 'CLIENT' ? "CLIENT" :" STAFF"} </p>
+                                        
                                     </span>
 
                                     <div className="w-full flex flex-col items-center justify-center gap-[34px]">
                                         <p className="text-md font-normal text-center text-slate-200 ">Are you sure you want to delete 
-                                            <strong> {selectedLead.last_name} {selectedLead.first_name}</strong> </p>
+                                            <strong> {selectedLead.name}</strong> assigned to <strong>{selectedLead.assigned_to.last_name} {selectedLead.assigned_to.first_name} </strong> </p>
                                             
                                         <p className="text-xs text-slate-200 flex items-center justify-center gap-2 "> <CiWarning size={21} />   Please note action is not reaversible </p>
 
-                                            <button className=" w-[150px] h-[45px] text-white bg-slate-600 rounded-[5px] hover:bg-red-500 flex items-center justify-center"  disabled={loading} onClick={delete_user} >
+                                            <button className=" w-[150px] h-[45px] text-white bg-slate-600 rounded-[5px] hover:bg-red-500 flex items-center justify-center"  disabled={loading} onClick={delete_lead} >
                                                 {loading ? (
                                                     <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
