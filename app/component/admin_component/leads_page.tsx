@@ -119,7 +119,9 @@ const Leads_page = () => {
 
     async function get_all_leads(page_number:number) {
 
-        const response = await get_auth_request(`lead/all-leads/${page_number}`)
+        console.log('page_number ',page_number);
+        
+        const response = await get_auth_request(`lead/all-leads/${page_number || 1}`)
 
         if (response.status == 200 || response.status == 201){
             
@@ -266,7 +268,7 @@ const Leads_page = () => {
                         <p className="text-[15px] font-normal w-[11%] px-2 text-slate-200 ">Action</p>
                         <p className="text-[15px] font-normal w-[11.5%] px-2 text-slate-200 "></p>
                     </span>
-                    <div className="w-full flex flex-col justify-start items-start lead-list-cont overflow-y-auto ">
+                    <div className="w-full flex flex-col justify-start items-start user-list-cont overflow-y-auto ">
                         
                         {filtered_leads !== null ?
                         
