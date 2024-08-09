@@ -102,16 +102,20 @@ const Signup = () => {
             </span>
             {current_stage == 'role' && 
             <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
-                <div className=" relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden">
-                    <Image 
-                        src="/auth2.png" 
-                        alt="Authentication" 
-                        layout="fill" 
-                        objectFit="cover" 
-                    />
+                <div className=" relative max-sm:hidden w-[50%] h-full rounded-[20px] flex items-center justify-center bg-black ">
+                    
+                    <div className="mx-auto relative w-[400px] h-[400px] rounded-[10px] overflow-hidden auth-bg">
+                        <Image
+                            src="/logo.jpg"
+                            alt="Authentication"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </div>
+                    
                 </div>
 
-                <div className=" max-sm:w-full w-[50%] lg:w-[55%] h-full flex items-start justify-start overflow-y-auto ">
+                <div className=" max-sm:w-full w-[50%] h-full flex items-start justify-start overflow-y-auto ">
                     
                     <div className="w-full min-h-full flex flex-col items-start justify-center max-sm:justify-start sm:rounded-[20px] gap-10 max-sm:gap-[15px] my-auto bg-black  max-sm:p-[20px] max-md:px-[20px] sm:py-[20px] ">
                         
@@ -155,17 +159,22 @@ const Signup = () => {
 
             </div>}
 
-            {current_stage == 'details' && <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
-                <div className="border border-teal-500 relative max-sm:hidden w-[50%] lg:w-[45%] h-full rounded-[20px] overflow-hidden">
-                    <Image 
-                        src="/auth2.png" 
-                        alt="Authentication" 
-                        layout="fill" 
-                        objectFit="cover" 
-                    />
+            {current_stage == 'details' && 
+            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
+                <div className=" relative max-sm:hidden w-[50%] h-full rounded-[20px] flex items-center justify-center bg-black ">
+                    
+                    <div className="mx-auto relative w-[400px] h-[400px] rounded-[10px] overflow-hidden auth-bg">
+                        <Image
+                            src="/logo.jpg"
+                            alt="Authentication"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </div>
+                    
                 </div>
 
-                <div className="max-sm:w-full w-[50%] lg:w-[55%] h-full flex items-start justify-start overflow-y-auto " >
+                <div className="max-sm:w-full w-[50%] h-full flex items-start justify-start overflow-y-auto " >
                     <div className="w-full min-h-full flex flex-col items-start justify-center max-sm:justify-start sm:rounded-[20px] gap-10 max-sm:gap-[15px] my-auto bg-black  max-sm:p-[20px] max-md:px-[20px] sm:py-[20px]">
 
                         <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
