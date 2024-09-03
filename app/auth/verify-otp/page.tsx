@@ -34,7 +34,7 @@ const ForgetPassword = () => {
                 setAuth({...auth, email:email})
             }
             
-            const response = await post_request('auth/generate-otp', {email: email})
+            const response = await post_request('app/generate-otp', {email: email})
                             
             if (response.status == 201 || response.status == 200){
                 
@@ -94,7 +94,7 @@ const ForgetPassword = () => {
                     payload = {email: email, otp: auth.otp}
                 }
                 
-                const response = await post_request('auth/verify-otp', payload)
+                const response = await post_request('app/verify-otp', payload)
                                 
                 if (response.status == 201 || response.status == 200){
                     

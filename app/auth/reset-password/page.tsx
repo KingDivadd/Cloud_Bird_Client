@@ -67,7 +67,7 @@ const RecoverPassword = () => {
                 setLoading(true);
                 
                 try {
-                    const response = await patch_request('auth/reset-password', payload)
+                    const response = await patch_request('app/reset-password', payload)
                                     
                     if (response.status == 201 || response.status == 200){
                         

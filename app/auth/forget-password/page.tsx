@@ -42,7 +42,7 @@ const ForgetPassword = () => {
             
             try {
                 
-                const response = await post_request('auth/generate-otp', auth)
+                const response = await post_request('app/generate-otp', auth)
                                 
                 if (response.status == 201 || response.status == 200){
                     

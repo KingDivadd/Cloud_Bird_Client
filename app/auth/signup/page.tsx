@@ -57,7 +57,7 @@ const Signup = () => {
 
             try {
                 
-                const response = await post_request('auth/user-signup', auth)
+                const response = await post_request('app/user-signup', auth)
 
                 if (response.status == 201){
 
