@@ -59,7 +59,7 @@ const Hero = () => {
 
                     {/* The middle text and button */}
                     <div className="w-full flex flex-col justify-start items-start mt-[50px] lg:mt-[150px] gap-[30px]">
-                        <h1 className="font-bold text-[35.5px] sm:text-[45px] w-full lg:w-[85%] text-center lg:text-start">Advanced Credit Repair Solution</h1>
+                        <h1 className="font-bold text-[35.5px] sm:text-[45px] w-full lg:w-[85%] text-center lg:text-start">Advanced Credit Management Solution</h1>
                         <h4 className="font-normal text-[18px] w-[97.5%] max-lg:mx-auto lg:w-[85%] text-center lg:text-start">Introducing the Most Advanced All-In-One Credit Repair System Ever Created.</h4>
                         <button className="max-lg:mx-auto w-[175px] h-[45px] sm:h-[50px] mt-[20px] sm:mt-[50px] lg:mt-[75px] bg-slate-800 text-slate-200 rounded-[25px] hover:bg-slate-700" onClick={() => { router.push('/auth/signup') }}>Get Started</button>
                     </div>
