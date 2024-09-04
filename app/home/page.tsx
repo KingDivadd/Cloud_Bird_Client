@@ -7,11 +7,11 @@ import { useRouter } from 'next/navigation'
 
 const Dashboard = () => {
     const router = useRouter()
-    const [userRole, setUserRole] = useState('admin')
+    const [userRole, setUserRole] = useState('')
 
     useEffect(() => {
         const user_role = localStorage.getItem('user_role')
-        if (!user_role || user_role == null || !['ADMIN', 'CLIENT', 'CLIENT_MANAGER', 'TEAM_MEMBER', 'AFFILIATE'].includes(user_role) ){
+        if (!user_role || user_role == null || !['admin', 'single_user', 'business_user'].includes(user_role) ){
             router.push('/auth/login')
         }else{
             setUserRole(user_role)
@@ -20,7 +20,9 @@ const Dashboard = () => {
 
     return (
         <div className="">
-            {userRole === 'ADMIN' && <Admin_dashboard />  }
+            {userRole === 'admin' && <Admin_dashboard />  }
+            {userRole === 'single_user' && <Admin_dashboard />  }
+            {userRole === 'business_user' && <Admin_dashboard />  }
 
         </div>
     )

@@ -6,7 +6,7 @@ import { CiUnlock } from "react-icons/ci";
 import { IoMdEyeOff } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
 import Alert from '../../component/alert'
-import { patch_request } from '../../api';
+import { patch_auth_request, patch_request } from '../../api';
 
 const RecoverPassword = () => {
     const router = useRouter();
@@ -67,7 +67,7 @@ const RecoverPassword = () => {
                 setLoading(true);
                 
                 try {
-                    const response = await patch_request('app/reset-password', payload)
+                    const response = await patch_auth_request('app/reset-password', payload)
                                     
                     if (response.status == 201 || response.status == 200){
                         
@@ -112,7 +112,7 @@ const RecoverPassword = () => {
             <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />}
             </span>
-            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
+            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px] bg-black rounded-[10px] ">
                 
                 <div className="relative max-sm:hidden w-[50%] h-full rounded-[20px] flex items-center justify-center bg-black ">
                     
@@ -141,14 +141,14 @@ const RecoverPassword = () => {
                         </div>
 
                         <span className="mx-auto sm:w-[97.5%] flex flex-col items-center justify-start gap-[15px] sm:gap-[25px]">
-                            <h2 className="text-2xl lg:text-3xl font-semibold text-slate-200 text-center">Reset Password</h2>
+                            <h2 className="text-xl lg:text-2xl font-semibold text-slate-200 text-center">Reset Password</h2>
                             <span className='text-white bg-teal-600 p-[10px] rounded-[100%] '> <CiUnlock size={25} /> </span>
                             <h4 className="text-lg text-slate-200 text-center">Create a new password</h4>
                         </span>
 
                         <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[15px] sm:gap-[30px]'>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md text-slate-200">Password</h4>
+                                <h4 className="text-sm text-slate-200">Password</h4>
                                 <span className="w-full relative ">
                                     <input type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ?'password-input-error':'password-input'} value={auth.password} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
@@ -158,7 +158,7 @@ const RecoverPassword = () => {
                             </span>
                             
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md text-slate-200">Re-enter Password</h4>
+                                <h4 className="text-sm text-slate-200">Re-enter Password</h4>
                                 <span className="w-full relative ">
                                     <input type={showPassword ? "text" : "password"} name='newPassword' className={inputError.newPasswordError ?'password-input-error':'password-input'} value={auth.newPassword} onChange={handleChange} />
                                     <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
@@ -167,7 +167,7 @@ const RecoverPassword = () => {
                                 </span>
                             </span>
                             
-                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center" onClick={handleSubmit} disabled={loading}>
+                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center text-sm" onClick={handleSubmit} disabled={loading}>
                                 {loading ? (
                                 <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>

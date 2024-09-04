@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CiUnlock } from "react-icons/ci";
 import { CiLock } from "react-icons/ci";
 import Alert from '../../component/alert'
-import { post_request } from '../../api';
+import { patch_request, post_request } from '../../api';
 
 const ForgetPassword = () => {
     const router = useRouter();
@@ -94,13 +94,15 @@ const ForgetPassword = () => {
                     payload = {email: email, otp: auth.otp}
                 }
                 
-                const response = await post_request('app/verify-otp', payload)
+                const response = await patch_request('app/verify-otp', payload)
                                 
                 if (response.status == 201 || response.status == 200){
                     
                     showAlert(response.data.msg, "success")
 
                     setAuth({email: '', otp: '' })
+
+                    localStorage.setItem('key' ,response.headers.get('x-id-key'));     
                     
                     setLoading(false)
                     
@@ -117,10 +119,7 @@ const ForgetPassword = () => {
                     return;
                 }
 
-            } catch (err:any) {
-
-                console.log(err);
-                
+            } catch (err:any) {                
                 showAlert('Something went worong, try again later ', 'error')
                 setLoading(false)
             }
@@ -132,9 +131,9 @@ const ForgetPassword = () => {
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
 
-            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px]">
+            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px] bg-black rounded-[10px] ">
                 
-                <div className="relative max-sm:hidden w-[50%] h-full rounded-[20px] flex items-center justify-center bg-black ">
+                <div className="relative max-sm:hidden w-[50%] h-full  flex items-center justify-center  ">
                     
                     <div className="mx-auto relative w-[400px] h-[400px] rounded-[10px] overflow-hidden auth-bg">
                         <Image
@@ -148,7 +147,7 @@ const ForgetPassword = () => {
                 </div>
 
                 <div className="max-sm:w-full w-[50%] h-full flex items-start justify-start ">
-                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start  gap-10 max-sm:gap-[15px] my-auto bg-black sm:rounded-[20px]  max-sm:p-[20px] max-md:px-[20px]">
+                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start  gap-[20px] max-sm:gap-[15px] my-auto  max-sm:p-[20px] max-md:px-[20px]">
 
                         <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
                             <Image
@@ -160,21 +159,21 @@ const ForgetPassword = () => {
                         </div>
 
                         <span className="mx-auto sm:w-[97.5%] flex flex-col items-center justify-start gap-[15px] sm:gap-[25px]">
-                            <h2 className=" text-2xl md:text-3xl font-semibold text-slate-200 text-center">Recover Password</h2>
+                            <h2 className=" text-xl md:text-2xl font-semibold text-slate-200 text-center">Recover Password</h2>
                             <span className='text-white bg-teal-600 p-[10px] rounded-[100%] '> {true ? <CiLock size={25} />: <CiUnlock size={25} />} </span>
-                            <h4 className="text-lg text-center text-teal-500">A six digit code has been sent to <p className="text-teal-500">  {auth.email || "your email"} </p> </h4>
+                            <h4 className="text-lg text-center text-teal-500">A six digit code has been sent to <p className="text-teal-500 font-medium">  {auth.email || "your email"} </p> </h4>
                         </span>
 
                         <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[15px] sm:gap-[30px]'>
                             <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-md font-light">OTP</h4>
+                                <h4 className="text-md font-light text-white">OTP</h4>
                                 <span className="w-full h-auto relative">
 
-                                    <input type="text" name='otp' value={auth.otp} onChange={handleChange} className='signup-input' />
+                                    <input type="text" name='otp' value={auth.otp} placeholder='000000' onChange={handleChange} className='signup-input' />
                                 </span>
                             </span>
                             
-                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center" onClick={verifyOtp} disabled={loading}>
+                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center text-sm" onClick={verifyOtp} disabled={loading}>
                                 {loading ? (
                                 <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
