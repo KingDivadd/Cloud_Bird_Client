@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import Image from "next/image";
-import CustomButton from "./custombuttom";
 import Link from "next/link";
 import { IoIosPeople } from "react-icons/io";
 import { FaGlobe } from "react-icons/fa";
@@ -93,10 +92,10 @@ const Hero = () => {
                     <button className="w-[150px] h-[45px] bg-white text-slate-700 font-md rounded-[22.5px] hover:bg-slate-100" onClick={() => { router.push('/auth/login') }}>Login</button>
                 </nav>
 
-                <div className="z-1 h-[80%] lg:h-[70%] w-[110%] absolute top-[10%] lg:top-[15%] max-lg:left-[-5%] lg:right-0 bg-slate-900 rounded-[10px] sm:rounded-[20px] lg:rounded-l-[20px] p-[10px]">
-                    <div className="relative w-full h-full rounded-[10px] sm:rounded-[20px] overflow-hidden bg-slate-700">
+                <div className="z-1 h-[80%] lg:h-[70%] w-[110%] absolute top-[10%] lg:top-[15%] max-lg:left-[-5%] lg:right-0 bg-slate-900 rounded-[10px] sm:rounded-[20px] lg:rounded-l-[20px] p-[15px]">
+                    <div className="relative w-full h-full rounded-[10px] sm:rounded-[10px] overflow-hidden bg-slate-700">
                         <Image
-                            src=""
+                            src="/hero_pg_two.png"
                             alt="Dashboard Img"
                             layout="fill"
                             objectFit="cover"
