@@ -111,12 +111,17 @@ const Dashboard = () => {
                 <div className="w-full  flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
-                        <p className="text-sm font-medium text-white">Current Balance</p>
+                        <p className="text-sm font-medium text-white">Balance</p>
                     </span>
 
                     <span className="w-full h-[50px] mt-[15px] flex items-center justify-between bg-[#475569] px-[10px] rounded-[3px]">
-                        <h4 className="text-sm text-white"></h4>
+                        <h4 className="text-sm text-white">Current Balance</h4>
                         <p className="text-md text-teal-400 font-semibold">$250.00</p>
+                    </span>
+
+                    <span className="w-full h-[50px] mt-[15px] flex items-center justify-between  px-[10px] rounded-[3px]">
+                        <h4 className="text-sm text-white">Next Payment Due</h4>
+                        <p className="text-md text-teal-400 font-semibold">$50.00 on 2024-09-01</p>
                     </span>
                 </div>
 
