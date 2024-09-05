@@ -8,8 +8,8 @@ const Dashboard = () => {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#475569'];
 
     return (
-        <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px] ">
-            <div className="flex-1 flex flex-col items-start justify-start rounded-[5px] bg-slate-900 min-h-[500px] p-[25px] shadow-md">
+        <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px]">
+            <div className="flex-1 flex flex-col items-start justify-start rounded-[5px] bg-slate-900 p-[25px] shadow-md">
                 <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
                     <p className="text-sm font-medium text-white">Latest Scores & Repair Status</p>
                 </span>
@@ -82,24 +82,24 @@ const Dashboard = () => {
 
                     <div className="w-[35%]  flex flex-col items-start justify-start h-full">
                         
-                        <div className="w-full flex flex-col items-start justify-start gap-[15px]  overflow-y-auto">
-                            <div className="w-full flex flex-col items-start justify-start gap-[15px] ">
+                        <div className="w-full flex flex-col items-start justify-start gap-[15px] max-h-[300px] overflow-y-auto">
+                            <div className="w-full flex flex-col items-start justify-start gap-[15px]  ">
 
                                 <span className="h-[50px] px-[10px] flex items-center justify-start text-sm text-white bg-slate-800 w-full ">
                                     Recent Active Dispute
                                 </span>
 
-                                    {['0001', '0002', '0003', '0004', '0005'].map((data:any, ind:number)=>{
-                                            return(
-                                                <span key={ind} className="w-full flex items-center justify-between px-[10px] h-[50px] ">
-                                                    <h4 className="text-sm text-white flex items-center gap-[5px]"> Dispute Id:<p className="text-teal-400">DP{data}</p> </h4>
-                    
-                                                    <p className="text-sm text-white">In Progress</p>
-                                                </span>
-                                            )
-                                        })
+                                {['0001', '0002', '0003', '0004', '0005', '0006', '0007'].map((data:any, ind:number)=>{
+                                        return(
+                                            <span key={ind} className="w-full flex items-center justify-between px-[10px] h-[50px] ">
+                                                <h4 className="text-sm text-white flex items-center gap-[5px]"> Dispute Id:<p className="text-teal-400">DP{data}</p> </h4>
+                
+                                                <p className="text-sm text-white">In Progress</p>
+                                            </span>
+                                        )
+                                    })
 
-                                    }
+                                }
                             </div>
 
                         </div>
@@ -107,7 +107,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="flex w-[400px]  flex-col items-start justify-start  gap-[40px]" >
+            <div className="flex w-[400px] flex-col items-start justify-start  gap-[40px] ">
                 <div className="w-full  flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
@@ -130,7 +130,7 @@ const Dashboard = () => {
                     </span>
                 </div>
 
-                <div className="w-full min-h-[400px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
+                <div className="w-full flex-1 min-h-[373px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
                         <p className="text-sm font-medium text-white">Tracking and Monitoring</p>
