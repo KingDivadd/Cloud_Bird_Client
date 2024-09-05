@@ -8,7 +8,7 @@ const Dashboard = () => {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#475569'];
 
     return (
-        <div className="w-full flex items-start justify-center bg-slate-700 gap-[40px] px-[75px] py-[40px] ">
+        <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px] ">
             <div className="flex-1 flex flex-col items-start justify-start rounded-[5px] bg-slate-900 min-h-[500px] p-[25px] shadow-md">
                 <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
                     <p className="text-sm font-medium text-white">Latest Scores & Repair Status</p>
@@ -107,7 +107,28 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="flex w-[400px]  flex-col items-start justify-start "  >
+            <div className="flex w-[400px]  flex-col items-start justify-start  gap-[40px]" >
+                <div className="w-full min-h-[400px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
+
+                    <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
+                        <p className="text-sm font-medium text-white">Billing Summary</p>
+                    </span>
+                    <div className="w-full flex flex-col items-start justify-start gap-[15px] overflow-y-auto">
+                        <span className="w-full h-[50px] flex items-center justify-between bg-[#475569] px-[10px] rounded-[3px]">
+                            <h4 className="text-sm text-white">Current Balance  </h4>
+                            <p className="text-md text-teal-400 font-semibold">$250.00</p>
+                        </span>
+                        <span className="w-full h-[50px] flex items-center justify-between">
+                            <h4 className="text-sm text-white">Next Report Refresh:  </h4>
+                            <p className="text-sm text-teal-400">2024-09-01</p>
+                        </span>
+                    </div>
+                    <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
+                        <p className="text-sm font-medium text-white">Billing Summary</p>
+                    </span>
+
+                </div>
+
                 <div className="w-full min-h-[400px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
