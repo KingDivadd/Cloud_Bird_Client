@@ -108,7 +108,7 @@ const RecoverPassword = () => {
 
 
     return (
-        <div className="relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-800">
+        <div className="relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-200">
             <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />}
             </span>

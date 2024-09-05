@@ -80,7 +80,7 @@ const GenerateOtp = () => {
     }
 
     return (
-        <div className=" relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-900">
+        <div className=" relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-200">
             <span className="w-[90%] md:w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] z-20 ">
                 {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
             </span>
