@@ -8,7 +8,7 @@ import App_navigation from '../component/app_navigation'
 import Welcome_navigation from '../component/welcome_navigation'
 
 
-const Single_User_dashboard = () => {
+const Admin_User_dashboard = () => {
     const [side_route, setSide_route] = useState('')
     const [nav, setNav] = useState('')
 
@@ -34,4 +34,4 @@ const Single_User_dashboard = () => {
     )
 }
 
-export default Single_User_dashboard
+export default Admin_User_dashboard

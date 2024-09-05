@@ -11,7 +11,7 @@ const Dashboard = () => {
                 <div className="w-full flex flex-col items-start justify-start rounded-[5px] bg-slate-900 p-[25px] shadow-md">
                 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
-                        <p className="text-sm font-medium text-white">Latest Scores & Repair Status (admin)</p>
+                        <p className="text-sm font-medium text-white">Latest Scores & Dispute Status </p>
                     </span>
 
                     
@@ -21,8 +21,8 @@ const Dashboard = () => {
                         {title: "Clients in Progress", value: "15"},
                         {title: "Dispute Sucess Rate", value: "75%"}].map((data:any, ind:number)=>{
                             return(
-                                <span key={ind} className="h-[225px] w-1/4 bg-[#475569] p-[12.5px] rounded-[5px] ">
-                                    <div className="w-full h-full flex flex-col items-center justify-center gap-[10px] bg-slate-900 rounded-[3px] p-[15px] ">
+                                <span key={ind} className="h-[225px] w-1/4 bg-[#475569] p-[12.5px] rounded-[15px] ">
+                                    <div className="w-full h-full flex flex-col items-center justify-center gap-[10px] bg-slate-900 rounded-[10px] p-[15px] ">
                                         <p className="text-sm font-medium text-sky-500 text-center">{data.title}</p>
                                         <p className="text-3xl font-bold text-white">{data.value}</p>
                                     </div>

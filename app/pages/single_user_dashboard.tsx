@@ -12,9 +12,6 @@ const Single_User_dashboard = () => {
     const [side_route, setSide_route] = useState('')
     const [nav, setNav] = useState('')
 
-    useEffect(() => {
-        console.log(nav)
-    }, [nav])
 
     return (
         <div className="bg-slate-700 flex items-start justify-center w-full min-h-[100vh] overflow-y-auto ">

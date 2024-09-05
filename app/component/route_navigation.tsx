@@ -76,11 +76,11 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <h4 className="text-3xl font-semibold text-white flex items-center gap-[10px] ">{user_name || "- -"} </h4>
                 </span>
 
-                <div className="w-[400px]  h-full flex items-center justify-between">
+                {userRole !== 'admin' && <div className="w-[400px]  h-full flex items-center justify-between">
                     <button className="px-[20px] h-[45px] rounded-[3px] bg-teal-600 hover:bg-teal-700 text-white text-sm ">Upload Document</button>
 
                     <button className="px-[20px] h-[45px] rounded-[3px] bg-blue-600 hover:bg-teal-700 text-white text-sm ">Message Us</button>
-                </div>
+                </div>}
             </div>
 
             <div className="w-full flex items-center  gap-[10px] h-[70px] overflow-x-auto ">
@@ -88,8 +88,14 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <p className="text-sm"> {userRole == "single_user" ? "My Dashboard" : "Dashboard"} </p>
                 </span>
 
-                {userRole === 'business_user' && <span className={nav == "profile-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('profile-management')}}>
+                {userRole === 'business_user' || userRole === 'admin' && 
+                <span className={nav == "profile-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('profile-management')}}>
                     <p className="text-sm">Profile Management </p>
+                </span>}
+
+                { userRole === 'admin' && 
+                <span className={nav == "user-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('user-management')}}>
+                    <p className="text-sm">User Management </p>
                 </span>}
 
                 <span className={nav == "credit-report" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('credit-report')}}>
@@ -104,17 +110,17 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <p className="text-sm">Credit Analysis </p>
                 </span>
 
-                <span className={nav == "tracking-and-monitoring" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('tracking-and-monitoring')}}>
+                {userRole !== 'admin' && <span className={nav == "tracking-and-monitoring" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('tracking-and-monitoring')}}>
                     <p className="text-sm">Tracking & Monitoring </p>
-                </span>
+                </span>}
 
                 <span className={nav == "billing-and-invoices" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('billing-and-invoices')}}>
                     <p className="text-sm">Billing & Invices </p>
                 </span>
 
-                <span className={nav == "account-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('account-management')}}>
+                {userRole !== 'admin' && <span className={nav == "account-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('account-management')}}>
                     <p className="text-sm">Account Management </p>
-                </span>
+                </span>}
 {/* 
                 <span className={nav == "billing-and-invoices" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('billing-and-invoices')}}>
                     <p className="text-sm">Settings </p>

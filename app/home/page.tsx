@@ -1,6 +1,7 @@
 
 'use client'
 import React, {useState, useEffect} from 'react'
+import Admin_User_dashboard from '../pages/admin_user_dashboard'
 import Single_User_dashboard from '../pages/single_user_dashboard'
 import Business_User_dashboard from '../pages/business_user_dashboard'
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <div className="">
-            {userRole === 'admin' && <Single_User_dashboard />  }
+            {userRole === 'admin' && <Admin_User_dashboard />  }
             {userRole === 'single_user' && <Single_User_dashboard />  }
             {userRole === 'business_user' && <Business_User_dashboard />  }
 
