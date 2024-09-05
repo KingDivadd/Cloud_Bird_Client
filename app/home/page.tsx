@@ -2,6 +2,7 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 import Single_User_dashboard from '../pages/single_user_dashboard'
+import Business_User_dashboard from '../pages/business_user_dashboard'
 
 import { useRouter } from 'next/navigation'
 
@@ -22,7 +23,7 @@ const Dashboard = () => {
         <div className="">
             {userRole === 'admin' && <Single_User_dashboard />  }
             {userRole === 'single_user' && <Single_User_dashboard />  }
-            {userRole === 'business_user' && <Single_User_dashboard />  }
+            {userRole === 'business_user' && <Business_User_dashboard />  }
 
         </div>
     )

@@ -12,6 +12,16 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
     const [alert, setAlert] = useState({message: '', type: ''})
     const [user_name, setUser_name] = useState('')
     const router = useRouter()
+    const [userRole, setUserRole] = useState('')
+
+    useEffect(() => {
+        const user_role = localStorage.getItem('user_role')
+        if (!user_role || user_role == null || !['admin', 'single_user', 'business_user'].includes(user_role) ){
+            router.push('/auth/login')
+        }else{
+            setUserRole(user_role)
+        }
+    }, [])
 
     useEffect(() => {
         get_user_data()
@@ -63,7 +73,7 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
         <div className="w-full  px-[75px] flex flex-col justify-center items-center justify-center bg-slate-900 ">
             <div className="w-full h-[90px] flex items-center justify-between border-b border-slate-600">
                 <span className="flex-1 flex items-center justify-start">
-                    <p className="text-3xl font-semibold text-white">{user_name || "- -"}</p>
+                    <h4 className="text-3xl font-semibold text-white flex items-center gap-[10px] ">{user_name || "- -"} </h4>
                 </span>
 
                 <div className="w-[400px]  h-full flex items-center justify-between">
@@ -73,10 +83,14 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                 </div>
             </div>
 
-            <div className="w-full flex items-center  gap-[10px] h-[70px]  ">
+            <div className="w-full flex items-center  gap-[10px] h-[70px] overflow-x-auto ">
                 <span className={nav == "dashboard" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('dashboard')}}>
-                    <p className="text-sm">My Dashboard</p>
+                    <p className="text-sm"> {userRole == "single_user" ? "My Dashboard" : "Dashboard"} </p>
                 </span>
+
+                {userRole === 'business_user' && <span className={nav == "profile-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('profile-management')}}>
+                    <p className="text-sm">Profile Management </p>
+                </span>}
 
                 <span className={nav == "credit-report" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('credit-report')}}>
                     <p className="text-sm">Credit Report </p>
@@ -91,16 +105,20 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                 </span>
 
                 <span className={nav == "tracking-and-monitoring" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('tracking-and-monitoring')}}>
-                    <p className="text-sm">Tracking and Monitoring </p>
+                    <p className="text-sm">Tracking & Monitoring </p>
                 </span>
 
                 <span className={nav == "billing-and-invoices" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('billing-and-invoices')}}>
-                    <p className="text-sm">Billing and Invices </p>
+                    <p className="text-sm">Billing & Invices </p>
                 </span>
 
+                <span className={nav == "account-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('account-management')}}>
+                    <p className="text-sm">Account Management </p>
+                </span>
+{/* 
                 <span className={nav == "billing-and-invoices" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('billing-and-invoices')}}>
                     <p className="text-sm">Settings </p>
-                </span>
+                </span> */}
             </div>
             
             

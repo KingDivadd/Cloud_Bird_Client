@@ -3,18 +3,15 @@ import React, {useState, useEffect} from 'react'
 import {DoughnutChartFour} from "../donut_chart"
 
 const Dashboard = () => {
-    const dataValues = [25, 25, 20, 35];
-    const labels = ['Other Services', 'Suspension Inspection and replacement', 'Service 3', 'Service 4'];
-    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#475569'];
 
     return (
         <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px]">
             <div className="flex-1 flex flex-col items-start justify-start rounded-[5px] bg-slate-900 p-[25px] shadow-md">
                 <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
-                    <p className="text-sm font-medium text-white">Latest Scores & Repair Status (single)</p>
+                    <p className="text-sm font-medium text-white">Latest Scores & Repair Status (admin)</p>
                 </span>
 
-                <div className="w-full min-h-[300px] py-[20px] flex items-center justify-center gap-[50px] "> 
+                {/* <div className="w-full min-h-[300px] py-[20px] flex items-center justify-center gap-[50px] "> 
 
                     <span className="  flex flex-col justify-center items-center relative  ">
                         <DoughnutChartFour  /> 
@@ -46,6 +43,14 @@ const Dashboard = () => {
                         </span>
                     </span>
 
+                </div> */}
+                
+                <div className="w-full py- flex items-center justify-between gap-[25px] ">
+                    <span className="h-[225px] w-[225px] bg-[#475569] p-[15px] ">
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-[10px] ">
+                            a
+                        </div>
+                    </span>
                 </div>
 
                 <div className="w-full flex items-start justify-between gap-[25px]  ">

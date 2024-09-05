@@ -1,14 +1,14 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 
-import Dashboard from "../component/single_user_component/dashboard"
+import Dashboard from "../component/business_user_component/dashboard"
 
 import Route_navigation from '../component/route_navigation'
 import App_navigation from '../component/app_navigation'
 import Welcome_navigation from '../component/welcome_navigation'
 
 
-const Single_User_dashboard = () => {
+const Business_User_dashboard = () => {
     const [side_route, setSide_route] = useState('')
     const [nav, setNav] = useState('')
 
@@ -30,4 +30,4 @@ const Single_User_dashboard = () => {
     )
 }
 
-export default Single_User_dashboard
+export default Business_User_dashboard

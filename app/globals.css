@@ -388,7 +388,7 @@
 }
 
 .nav-box {
-    @apply px-[15px] h-[50px] flex items-center justify-center relative text-white
+    @apply px-[15px] h-[50px] flex items-center justify-center relative text-white whitespace-nowrap;
 }
 
 .nav-box:hover {
@@ -396,10 +396,10 @@
 }
 
 .active-nav-box {
-    @apply px-[15px] h-[50px] flex items-center justify-center relative text-white bg-slate-800
+    @apply px-[15px] h-[50px] flex items-center justify-center relative text-white bg-slate-800 whitespace-nowrap;
 }
 
 .active-nav-box::before {
-    @apply absolute w-full h-[5px] bg-teal-500 bottom-0;
+    @apply absolute w-full h-[5px] bg-teal-500 bottom-0 whitespace-nowrap;
     content: "";
 }
