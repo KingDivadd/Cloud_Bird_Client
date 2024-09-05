@@ -119,9 +119,12 @@ const Dashboard = () => {
                         <p className="text-md text-teal-400 font-semibold">$250.00</p>
                     </span>
 
-                    <span className="w-full h-[50px] mt-[15px] flex items-center justify-between  px-[10px] rounded-[3px]">
-                        <h4 className="text-sm text-white">Next Payment Due</h4>
-                        <p className="text-md text-teal-400 font-semibold">$50.00 on 2024-09-01</p>
+                    <span className="w-full h-[50px] mt-[5px] flex items-center justify-start border-b border-slate-700">
+                        <p className="text-sm font-medium text-white">Next Payment Due</p>
+                    </span>
+
+                    <span className="w-full h-[80px] mt-[15px] flex flex-col items-start justify-start gap-[5px]   rounded-[3px]">
+                        <p className="text-sm text-teal-400 font-semibold">$50.00 on 2024-09-01</p>
                     </span>
                 </div>
 
