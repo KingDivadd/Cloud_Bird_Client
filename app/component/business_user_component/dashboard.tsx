@@ -6,7 +6,8 @@ const Dashboard = () => {
 
     return (
         <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px]">
-            <div className="flex-1 flex flex-col items-start justify-start gap-[30px]">
+            <div className="flex flex-col items-start justify-start gap-[30px] flex-1 overflow-x-auto " >
+                {/* section 1 */}
                 <div className="w-full flex flex-col items-start justify-start rounded-[5px] bg-slate-900 p-[25px] shadow-md">
                 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
@@ -62,18 +63,19 @@ const Dashboard = () => {
 
 
                 </div>
-
-                <div className="w-full flex  items-start justify-start gap-[40px] ">
-                    <div className="flex-1 flex flex-col items-start justify-start  rounded-[5px] bg-slate-900 p-[25px] ">
+                    
+                    {/* section 2 */}
+                <div className=" flex w-full  items-start justify-start gap-[40px] ">
+                    <div className="w-1/2 flex flex-col items-start justify-start  rounded-[5px] bg-slate-900 p-[25px] ">
                         <span className="w-full pb-[10px] flex items-center justify-between border-b border-slate-700">
                             <p className="text-sm font-medium text-white">Profile Repairs & Status</p>
                             <p className="text-sm font-medium text-sky-500"></p>
                         </span>
 
-                        <span className="w-full h-[50px] mt-[15px] flex items-center justify-between bg-[#475569] px-[10px] rounded-[3px] ">
-                            <p className="text-sm font-medium text-white w-[42.5%] ">Profile</p>
-                            <p className="text-sm font-medium text-white w-[22.5%] ">Repair Id</p>
-                            <p className="text-sm font-medium text-white w-[35%] ">Status</p>
+                        <span className="w-full h-[50px] mt-[15px] flex items-center justify-start gap-[5px] bg-[#475569] px-[10px] rounded-[3px] ">
+                            <p className="text-sm font-medium text-white w-[150px]">Profile</p>
+                            <p className="text-sm font-medium text-white w-[90px] text-start ">Repair Id</p>
+                            <p className="text-sm font-medium text-white flex-1 ">Status</p>
                         </span>
 
                         <div className="w-full flex flex-col items-start justify-start gap-[15px]">
@@ -96,11 +98,11 @@ const Dashboard = () => {
                                         return(
                                             
                                             <span key={ind} className="w-full overflow-x-auto flex items-center justify-start overflow-x-auto ">
-                                                <span className="whitespace-nowrap h-[50px] hover:bg-slate-800 flex items-center justify-between  px-[10px] rounded-[3px] w-full">
+                                                <span className="whitespace-nowrap h-[50px] hover:bg-slate-800 flex items-center justify-between  px-[10px] rounded-[3px] gap-[5px] w-full">
 
-                                                    <h4 className="text-sm text-white w-[42.5%] ">{data.name}</h4>
-                                                    <p className="text-sm text-sky-500 w-[22.5%] text-start">{data.value}</p>
-                                                    <p className="text-sm text-sky-500 text-start w-[35%] ">{data.status}</p>
+                                                    <h4 className="text-sm text-white w-[150px]  ">{data.name}</h4>
+                                                    <p className="text-sm text-sky-500 w-[90px] ">{data.value}</p>
+                                                    <p className="text-sm text-sky-500 flex-1 text-start ">{data.status}</p>
                                                 </span>
 
                                             </span>
@@ -115,7 +117,7 @@ const Dashboard = () => {
 
                     </div>
 
-                    <div className="w-1/2  flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
+                    <div className="w-1/2 flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                         <span className="w-full pb-[10px] flex items-center justify-between border-b border-slate-700">
                             <p className="text-sm font-medium text-white">Billings & Payment</p>
@@ -132,9 +134,9 @@ const Dashboard = () => {
                             <p className="text-sm font-medium text-sky-500"></p>
                         </span>
 
-                        <div className="w-full flex flex-col items-start justify-start gap-[15px]">
+                        <div className="w-full  flex flex-col items-start justify-start gap-[15px]">
 
-                            <div className="w-full h-[300px] mt-[15px] flex flex-col items-start justify-start overflow-y-auto">
+                            <div className="w-full h-[300px] mt-[15px] flex flex-col items-start justify-start overflow-auto">
                                 <div className="w-full flex flex-col">
 
                                     {[
@@ -149,11 +151,11 @@ const Dashboard = () => {
                                         return(
                                             
                                             <span key={ind} className="w-full overflow-x-auto flex items-center justify-start overflow-x-auto ">
-                                                <span className="whitespace-nowrap h-[50px] hover:bg-slate-800 flex items-center justify-between  px-[10px] rounded-[3px]">
+                                                <span className="whitespace-nowrap h-[50px] hover:bg-slate-800 flex items-center justify-between  px-[10px] rounded-[3px] w-full gap-[5px]">
 
-                                                    <h4 className="text-sm text-white min-w-[200px] ">{data.name}</h4>
-                                                    <p className="text-sm text-sky-500 w-[90px] text-center">${data.value}</p>
-                                                    <p className="text-sm text-sky-500 flex-1 text-end">{data.desc}</p>
+                                                    <h4 className="text-sm text-white w-[175px] ">{data.name}</h4>
+                                                    <p className="text-sm text-sky-500 w-[80px] text-center">${data.value}</p>
+                                                    <p className="text-sm text-sky-500 w-[120px]   text-start">{data.desc}</p>
                                                 </span>
 
                                             </span>
