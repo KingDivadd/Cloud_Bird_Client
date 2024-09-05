@@ -1,7 +1,6 @@
 
 'use client'
 import React, {useState, useEffect} from 'react'
-import Admin_dashboard from '../pages/admin_dashboard'
 import Single_User_dashboard from '../pages/single_user_dashboard'
 
 import { useRouter } from 'next/navigation'

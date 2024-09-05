@@ -123,8 +123,10 @@ const Dashboard = () => {
                         <p className="text-sm font-medium text-white">Next Payment Due</p>
                     </span>
 
-                    <span className="w-full h-[80px] mt-[15px] flex flex-col items-start justify-start gap-[5px]   rounded-[3px]">
-                        <p className="text-sm text-teal-400 font-semibold">$50.00 on 2024-09-01</p>
+                    <span className="w-full h-[50px] mt-[15px] flex flex-row items-center px-[10px] justify-between gap-[5px]  bg-slate-800 rounded-[3px]">
+                        <p className="text-sm text-teal-400 font-semibold">$50.00</p>
+                        <p className="text-sm text-white font-semibold"> - </p>
+                        <p className="text-sm text-teal-400 font-semibold">$ 2024-09-01</p>
                     </span>
                 </div>
 
