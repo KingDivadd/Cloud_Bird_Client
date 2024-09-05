@@ -108,25 +108,16 @@ const Dashboard = () => {
             </div>
 
             <div className="flex w-[400px]  flex-col items-start justify-start  gap-[40px]" >
-                <div className="w-full min-h-[400px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
+                <div className="w-full  flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
 
                     <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
-                        <p className="text-sm font-medium text-white">Billing Summary</p>
-                    </span>
-                    <div className="w-full flex flex-col items-start justify-start gap-[15px] overflow-y-auto">
-                        <span className="w-full h-[50px] flex items-center justify-between bg-[#475569] px-[10px] rounded-[3px]">
-                            <h4 className="text-sm text-white">Current Balance  </h4>
-                            <p className="text-md text-teal-400 font-semibold">$250.00</p>
-                        </span>
-                        <span className="w-full h-[50px] flex items-center justify-between">
-                            <h4 className="text-sm text-white">Next Report Refresh:  </h4>
-                            <p className="text-sm text-teal-400">2024-09-01</p>
-                        </span>
-                    </div>
-                    <span className="w-full pb-[10px] flex items-center justify-start border-b border-slate-700">
-                        <p className="text-sm font-medium text-white">Billing Summary</p>
+                        <p className="text-sm font-medium text-white">Current Balance</p>
                     </span>
 
+                    <span className="w-full h-[50px] mt-[15px] flex items-center justify-between bg-[#475569] px-[10px] rounded-[3px]">
+                        <h4 className="text-sm text-white"></h4>
+                        <p className="text-md text-teal-400 font-semibold">$250.00</p>
+                    </span>
                 </div>
 
                 <div className="w-full min-h-[400px] flex flex-col items-start justify-start bg-slate-900 p-[25px] rounded-[5px] ">
