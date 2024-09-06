@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 
 import Dashboard from "../component/business_user_component/dashboard"
+import Profile_management from "../component/business_user_component/profile_management"
 
 import Route_navigation from '../component/route_navigation'
 import App_navigation from '../component/app_navigation'
@@ -24,6 +25,7 @@ const Business_User_dashboard = () => {
                     <Route_navigation nav={nav} setNav={setNav} />
 
                     {nav === "dashboard" && <Dashboard />}
+                    {nav === "profile-management" && <Profile_management />}
 
             </div>
         </div>

@@ -10,7 +10,7 @@ export const get_todays_date = ()=> {
     return Math.floor(startOfDay.getTime() / 1000);
 }
 
-export function timestamp_to_readable_value(timestamp:number) {
+export function readable_date_time(timestamp:number) {
     // Ensure the timestamp is a number
     if (typeof timestamp !== 'number' || isNaN(timestamp)) {
     throw new Error('Invalid timestamp');

@@ -2,14 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import { ImageUploaderProps, ProjectImageUploaderProps } from '@/types';
 
-export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: ImageUploaderProps) => {
+interface Uploader_props {
+    id: string;
+    title: string;
+    url: string;
+    onFileUpload?: (fileUrl: string) => void;
+
+}
+
+export const FileUploader = ({ id, title, url, onFileUpload }: Uploader_props) => {
     const [filePreview, setFilePreview] = useState('');
     const [file, setFile] = useState<File | null>(null);
 
     useEffect(() => {
         if (url) {
+            console.log('usr ',url)
             setFilePreview(url);
         }
     }, [url]);
@@ -28,7 +36,6 @@ export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: Imag
             try {
                 const response = await axios.post('https://api.cloudinary.com/v1_1/iroegbu-cloud-1/upload', formData);
                 const uploadedFileUrl = response.data.secure_url;
-                console.log('Uploaded File URL:', uploadedFileUrl);
 
                 // Invoke the callback to send the URL back to the parent component
                 if (onFileUpload) {
@@ -45,13 +52,15 @@ export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: Imag
     };
 
     const renderPreview = () => {
+
+        
         if (!filePreview) return null; // Return null if there's no file preview
         
         const fileType = file?.type;
     
         if (fileType?.startsWith('image/')) {
             return (
-                <span className="relative w-full h-[160px] rounded-[3px] overflow-hidden">
+                <span className="relative w-full h-[340px] rounded-[3px] overflow-hidden">
                     <Image
                         src={filePreview}
                         alt="File Preview"
@@ -65,18 +74,19 @@ export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: Imag
                 <iframe
                     src={filePreview}
                     title="PDF Preview"
-                    className="w-full h-[160px] rounded-[3px]"
+                    className="w-full h-[340px] rounded-[3px]"
                 />
             );
         } else if (fileType === 'application/acad' || fileType === 'application/dwg') {
             return (
-                <div className="w-full h-full flex justify-center items-center h-[160px] rounded-[3px] ">
+                <div className="w-full h-full flex justify-center items-center h-[340px] rounded-[3px] ">
                     <p className="text-gray-500">DWG File Uploaded</p>
                 </div>
             );
         } else {
+            console.log(345);
             return (
-                <div className="w-full h-full flex justify-center items-center h-[160px] rounded-[3px] ">
+                <div className="w-full h-full flex justify-center items-center h-[340px] rounded-[3px] ">
                     <p className="text-gray-500">File Uploaded</p>
                 </div>
             );
@@ -86,8 +96,7 @@ export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: Imag
 
     return (
         <div className="w-full flex flex-col justify-start items-start gap-2 h-full">
-            <span className="w-full flex flex-col items-start justify-start gap-2">
-                <h4 className="text-sm font-light">{title}</h4>
+            <span className="w-full flex flex-col items-start justify-start ">
                 <input 
                     type="file" 
                     name={`file-${id}`} 
@@ -98,13 +107,13 @@ export const TaskFilesUploadTwo = ({ id, title, url, image, onFileUpload }: Imag
                 />
                 <button 
                     type="button" 
-                    className="w-full h-[40px] rounded-[3px] text-sm flex items-center justify-center bg-slate-700 text-white hover:bg-slate-800" 
+                    className="w-full h-[50px] rounded-[3px] text-sm flex items-center justify-center bg-blue-600 text-white hover:bg-blue-700" 
                     onClick={() => document.getElementById(`fileInput-${id}`)?.click()}
                 >
                     Select File
                 </button>
             </span>
-            {filePreview && renderPreview()}
+            {filePreview ? renderPreview() : <div className="w-full h-[340px]  "></div> }
         </div>
     );
 };

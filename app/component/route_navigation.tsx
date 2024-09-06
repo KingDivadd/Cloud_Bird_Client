@@ -16,6 +16,7 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
 
     useEffect(() => {
         const user_role = localStorage.getItem('user_role')
+        console.log('user role ', user_role)
         if (!user_role || user_role == null || !['admin', 'single_user', 'business_user'].includes(user_role) ){
             router.push('/auth/login')
         }else{
@@ -79,7 +80,7 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                 {userRole !== 'admin' && <div className="w-[400px]  h-full flex items-center justify-between">
                     <button className="px-[20px] h-[45px] rounded-[3px] bg-teal-600 hover:bg-teal-700 text-white text-sm ">Upload Document</button>
 
-                    <button className="px-[20px] h-[45px] rounded-[3px] bg-blue-600 hover:bg-teal-700 text-white text-sm ">Message Us</button>
+                    <button className="px-[20px] h-[45px] rounded-[3px] bg-blue-600 hover:bg-blue-700 text-white text-sm ">Message Us</button>
                 </div>}
             </div>
 
@@ -88,7 +89,7 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <p className="text-sm"> {userRole == "single_user" ? "My Dashboard" : "Dashboard"} </p>
                 </span>
 
-                {userRole === 'business_user' || userRole === 'admin' && 
+                {(userRole === 'business_user' || userRole === 'admin') && 
                 <span className={nav == "profile-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('profile-management')}}>
                     <p className="text-sm">Profile Management </p>
                 </span>}
