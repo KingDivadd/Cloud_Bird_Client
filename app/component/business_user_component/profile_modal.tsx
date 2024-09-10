@@ -1,7 +1,7 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 import {FileUploader} from "../file_uploader"
-import { post_auth_request } from '@/app/api'
+import { patch_auth_request, post_auth_request } from '@/app/api'
 import { useRouter } from 'next/navigation'
 import Alert from '../alert'
 
@@ -102,9 +102,55 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
             }
         }
     }
+    async function edit_profile(e:any) {
+        e.preventDefault();
+        if (!profile.first_name || !profile.last_name || !profile.email || !profile.phone_number) {
+            setInputError({...inputError, first_name_error: profile.first_name === "", last_name_error: profile.last_name === "", email_error: profile.email === "", phone_number_error: profile.phone_number === "", report_data_error: profile.report_data === "" });
+
+            showAlert("Please Enter all Fields", "warning")
+        }else{
+
+            setLoading(true);
+            
+            try {
+                
+                const response = await patch_auth_request(`app/edit-profile/${selectedItem.profile_id}`, profile)
+                
+                if (response.status == 201 || response.status == 200){
+                    
+                    showAlert(response.data.msg, "success")
+
+                    // setProfile({first_name: '', last_name: '', email: '', phone_number: '', credit_score: 0, report_data: '' })
+                    
+                    setLoading(false)
+
+                    setTimeout(() => {
+                        setShowModal(false)
+                    }, 2000);
+
+                }else{
+                    showAlert(response.response.data.err, "warning")
+                    if ( response.response.status == 401) {
+                        sessionStorage.clear()
+                        localStorage.clear()
+                        showAlert("Session Expired, Login again. ", "warning")
+                        setTimeout(() => {
+                            router.push('/auth/login')
+                        }, 2000);
+                    }
+                    setLoading(false)
+                    return;
+                }
+
+            } catch (err:any) {        
+                console.log(err)        
+                showAlert('Something went worong, try again later ', 'error')
+                setLoading(false)
+            }
+        }
+    }
 
     const handleFileUpload = (fileUrl:string) => {
-        console.log('Received file URL from settings:', fileUrl);
         setProfile({...profile, report_data: fileUrl})
     };
 
@@ -124,29 +170,29 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
                     <form action="" className='w-full h-full  flex flex-col items-start justify-between'>
                         <div className="w-full h-flex-1 flex items-start justify-between gap-[25px]">
 
-                            <div className="w-1/2 flex flex-col items-start justify-start gap-[20px] ">
+                            <div className="w-1/2 flex flex-col items-start justify-between  h-[500px]  ">
                             
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Last Name</h4>
                                     <input type="text" name='last_name' className={inputError.last_name_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.last_name} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">First Name</h4>
                                     <input type="text" name='first_name' className={inputError.first_name_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.first_name} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Email</h4>
                                     <input type="email" name='email' className={inputError.email_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.email} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Phone Number</h4>
                                     <input type="text" name='phone_number' className={inputError.phone_number_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.phone_number} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Credit Score</h4>
                                     <input type="number" name='credit_score' className={'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.credit_score} onChange={handleChange} />
                                 </span>
@@ -154,12 +200,9 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
 
                             </div>
                             
-                            <div className="w-1/2 flex flex-col items-end justify-start gap-[20px] ">
+                            <div className="w-1/2 flex flex-col items-end justify-between h-[500px] gap-[20px]  ">
                                 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
-                                    <h4 className="text-sm  text-slate-200 ">Credit File</h4>
-                                    <FileUploader id='credit_file' title='Select Credit File' url='' onFileUpload={handleFileUpload} />
-                                </span>
+                                <FileUploader id='credit_file' title='Select Credit File' url='' onFileUpload={handleFileUpload} />
                             
                                 <span className="w-full flex flex-col items-end justify-start ">
                                     {profile.report_data === "" ?  
@@ -197,7 +240,7 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
                 modalFor == 'edit' && 
                 <div className="w-[80vw] min-h-[80vh] p-[25px] flex flex-col items-start justify-start gap-[20px] ">
                     <span className="w-full pb-[10px] flex items-center justify-between border-b border-slate-700 ">
-                        <h4 className="text-sm font-medium text-white ">Add Profile </h4>
+                        <h4 className="text-sm font-medium text-white flex items-center justif-start gap-[10px] ">Edit Profile: <p className="font-semibold">{selectedItem.profile_ind}</p> </h4>
 
                     </span>
 
@@ -206,27 +249,27 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
 
                             <div className="w-1/2 flex flex-col items-start justify-start gap-[20px] ">
                             
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Last Name</h4>
                                     <input type="text" name='last_name' className={inputError.last_name_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.last_name} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">First Name</h4>
                                     <input type="text" name='first_name' className={inputError.first_name_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.first_name} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Email</h4>
                                     <input type="email" name='email' className={inputError.email_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.email} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Phone Number</h4>
                                     <input type="text" name='phone_number' className={inputError.phone_number_error ? 'signup-input-error bg-slate-300' : 'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.phone_number} onChange={handleChange} />
                                 </span>
 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
+                                <span className="w-full flex flex-col items-start justify-start gap-[15px] ">
                                     <h4 className="text-sm  text-slate-200 ">Credit Score</h4>
                                     <input type="number" name='credit_score' className={'signup-input bg-slate-300 focus:bg-slate-200'} value={profile.credit_score} onChange={handleChange} />
                                 </span>
@@ -234,12 +277,9 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
 
                             </div>
                             
-                            <div className="w-1/2 flex flex-col items-end justify-start gap-[20px] ">
+                            <div className="w-1/2 flex flex-col items-end justify-between gap-[20px] ">
                                 
-                                <span className="w-full flex flex-col items-start justify-start gap-2">
-                                    <h4 className="text-sm  text-slate-200 ">Credit Report Document</h4>
-                                    <FileUploader id='credit_file' title='Select Credit File' url={profile.report_data || ""} onFileUpload={handleFileUpload} />
-                                </span>
+                                <FileUploader id='credit_file' title='Select Credit File' url={profile.report_data || ""} onFileUpload={handleFileUpload} />
                             
                                 <span className="w-full flex flex-col items-end justify-start ">
                                     {profile.report_data === "" ?  
@@ -252,7 +292,7 @@ const Profile_modal = ({modalFor, showModal, setShowModal,  selectedItem, setSel
                                         ) : 'Submit'}
                                     </button>
                                     :
-                                    <button className=" w-1/2 h-[50px] text-white bg-amber-600 rounded-[3px] hover:bg-amber-700 flex items-center justify-center text-sm" onClick={add_profile} disabled={loading}>
+                                    <button className=" w-1/2 h-[50px] text-white bg-amber-600 rounded-[3px] hover:bg-amber-700 flex items-center justify-center text-sm" onClick={edit_profile} disabled={loading}>
                                     {loading ? (
                                         <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>

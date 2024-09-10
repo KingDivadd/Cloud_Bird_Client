@@ -1,10 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa6'
-import { IoIosWarning } from "react-icons/io";
-import { CiWarning } from 'react-icons/ci'
-import { IoCheckmark } from 'react-icons/io5';
 import Profile_modal from "../component/business_user_component/profile_modal"
+import User_modal from "../component/admin_user_component/user_modals"
+
 import Alert from "./alert"
 
 
@@ -81,9 +79,19 @@ const Modal = ({ showModal, setShowModal, selectedItem, setSelectedItem, modalFo
                                 <></>
                                 }
 
+                                {/* For Profiles (Business Porter) */}
+
                                 {(modalFor == 'add' && modalSource == 'profile') &&  <Profile_modal setShowModal={setShowModal} showModal={showModal} modalFor={modalFor}  selectedItem={selectedItem} setSelectedItem={setSelectedItem}  /> }
 
                                 {(modalFor == 'edit' && modalSource == 'profile') &&  <Profile_modal setShowModal={setShowModal} showModal={showModal} modalFor={modalFor}  selectedItem={selectedItem} setSelectedItem={setSelectedItem}  /> }
+
+                                {/* For Profiles (Admin Porter) */}
+
+                                {(modalFor == 'add' && modalSource == 'user') &&  <User_modal setShowModal={setShowModal} showModal={showModal} modalFor={modalFor}  selectedItem={selectedItem} setSelectedItem={setSelectedItem}  /> }
+
+                                {(modalFor == 'edit' && modalSource == 'user') &&  <User_modal setShowModal={setShowModal} showModal={showModal} modalFor={modalFor}  selectedItem={selectedItem} setSelectedItem={setSelectedItem}  /> }
+
+                                {(modalFor == 'view' && modalSource == 'user') &&  <User_modal setShowModal={setShowModal} showModal={showModal} modalFor={modalFor}  selectedItem={selectedItem} setSelectedItem={setSelectedItem}  /> }
 
                             </div>
                         </div>

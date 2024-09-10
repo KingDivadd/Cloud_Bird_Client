@@ -51,6 +51,8 @@ const Profile_management = () => {
                 setProfile_box(response.data)
                 
                 setFiltered_profile_box(response.data)
+
+                console.log(' profiles ', response.data)
                 
             }else{
                 showAlert(response.response.data.err, "warning")
@@ -67,6 +69,35 @@ const Profile_management = () => {
 
         } catch (err:any) {        
             showAlert('Something went worong, try again later ', 'error')
+        }
+    }
+
+    function handleFilter(e: any) {
+        const value = e.target.value.toLowerCase();
+
+        // setFilters({ ...filters, filter_input: value });
+    
+        if (profile_box && profile_box.profiles) {
+            if (value.trim() !== '') {
+                const filtered_leads = profile_box.profiles.filter((data: any) => {
+
+                    const profile_ind = data.profile_ind?.toLowerCase() || '';
+                    const user_name = data.first_name?.toLowerCase() || data.last_name?.toLowerCase() || '';
+                    
+                    const phone_number = data.phone_number || ''
+                    
+                    return (
+                        profile_ind.includes(value) ||
+                        user_name.includes(value) ||
+                        phone_number.includes(value)
+                    );
+                });
+                
+    
+                setFiltered_profile_box({...profile_box, profiles: filtered_leads});
+            } else {
+                setFiltered_profile_box(profile_box); // Reset to the original list
+            }
         }
     }
 
@@ -157,23 +188,32 @@ const Profile_management = () => {
             <div className="w-full h-full bg-slate-900 rounded-[5px] flex flex-col items-start justify-start gap-[10px] p-[15px] sticky top-0 ">
 
                 <span className="w-full pb-[10px] flex items-center justify-between border-b border-slate-700 ">
-                    <h4 className="text-sm font-medium text-white flex items-center gap-[10px]">All Profiles <p className="text-sky-500">{profile_box?.total_number_of_profiles || "--"}</p> </h4>
+                    <h4 className="text-sm font-medium text-white flex items-center gap-[10px]">All Profiles <p className="text-sky-500">{filtered_profile_box?.profiles.length || "--"}</p> </h4>
 
-                    <button className="h-[50px] min-w-[150px] px-5 rounded-[3px] text-white bg-blue-600 hover:bg-blue-700 text-white text-sm " onClick={add_profile}>
-                        Add Profile
-                    </button>
+
+                    <div className=" flex items-center gap-[15px] ">
+                        <span className="w-[300px]">
+
+                            <input onChange={handleFilter} name='filter-input' placeholder='search by name, profile id, or email' type="text" className={'signup-input bg-[#475569] text-white '} />
+                        </span>
+
+                        <button className="h-[50px] min-w-[150px] px-5 rounded-[3px] text-white bg-blue-600 hover:bg-blue-700 text-white text-sm " onClick={add_profile}>
+                            Add Profile
+                        </button>
+                    </div>
                     
                 </span>
 
                 <div className="w-full h-[50px] bg-[#475569] rounded-[3px] px-[10px] flex items-center justify-between ">
-                    <p className="text-sm text-white w-[15%] ">Profile Id</p>
+                    <p className="text-sm text-white w-[10%] ">Profile Id</p>
+                    <p className="text-sm text-white w-[10%] ">User Id</p>
                     <p className="text-sm text-white w-[15%] ">Profile Name</p>
-                    <p className="text-sm text-white w-[15%] ">Phone Number</p>
+                    <p className="text-sm text-white w-[12.5%] ">Phone Number</p>
                     <p className="text-sm text-white w-[10%] ">Credit Score</p>
                     <p className="text-sm text-white w-[10%] ">Disputes</p>
                     <p className="text-sm text-white w-[10%] ">Repairs</p>
                     <p className="text-sm text-white w-[15%] ">Last Updated</p>
-                    <p className="text-sm text-white w-[10%] text-end  ">Action</p>
+                    <p className="text-sm text-white w-[7.5%] text-end  ">Action</p>
                 </div>
 
                 <div className="w-full flex-1  flex flex-col items-start justify-start overflow-y-auto">
@@ -187,17 +227,18 @@ const Profile_management = () => {
 
                         {filtered_profile_box.profiles.length ? filtered_profile_box?.profiles.map((data:any, ind:number)=>{
 
-                            const {profile_id,  profile_ind, first_name, last_name, phone_number, credit_score, disputes, repairs, updated_at} = data
+                            const {profile_id, user,  profile_ind, first_name, last_name, phone_number, credit_score, disputes, repairs, updated_at} = data
                             return(
                                 <span key={ind} className={(ind % 2) == 1 ? "w-full h-[50px]  hover:bg-slate-700 rounded-[3px] px-[10px] flex items-center justify-between" : "w-full h-[50px] bg-slate-800 hover:bg-slate-700 rounded-[3px] px-[10px] flex items-center justify-between"}>
-                                    <p className="text-sm text-white w-[15%] ">{profile_ind}</p>
+                                    <p className="text-sm text-white w-[10%] ">{profile_ind}</p>
+                                    <p className="text-sm text-white w-[10%] ">{user.user_ind}</p>
                                     <p className="text-sm text-white w-[15%] flex items-center gap-[5px] ">{first_name} {last_name}</p>
-                                    <p className="text-sm text-white w-[15%] ">{phone_number}</p>
+                                    <p className="text-sm text-white w-[12.5%] ">{phone_number}</p>
                                     <p className="text-sm text-white w-[10%] ">{credit_score || 0}</p>
                                     <p className="text-sm text-white w-[10%] ">{disputes || 0}</p>
                                     <p className="text-sm text-white w-[10%] ">{repairs || 0}</p>
                                     <p className="text-sm text-white w-[15%] ">{readable_date_time(Number(updated_at))}</p>
-                                    <p className="text-sm text-sky-500 w-[10%] flex items-center justify-end gap-[10px] hover:underline hover:cursor-pointer " onClick={()=> edit_profile(data)}><BiSolidPencil size={20} /> Edit </p>
+                                    <p className="text-sm text-sky-500 w-[7.5%] flex items-center justify-end gap-[10px] hover:underline hover:cursor-pointer " onClick={()=> edit_profile(data)}><BiSolidPencil size={20} /> Edit </p>
                                 </span>
                             )
                         })
@@ -223,7 +264,7 @@ const Profile_management = () => {
                         <p className="text-sm cursor-pointer text-white" onClick={() => app_users_action('next')}>Next</p>
                     </span>
                     <span className="flex flex-row items-center justify-end gap-3 h-full">
-                        <p className="text-sm text-white">Showing 1-15 of {(profile_box && profile_box?.total_number_of_profiles) || 0}</p>
+                        <p className="text-sm text-white">Showing 1-15 of {(profile_box && filtered_profile_box?.profiles.length) || 0}</p>
                     </span>
                     
                 </span>

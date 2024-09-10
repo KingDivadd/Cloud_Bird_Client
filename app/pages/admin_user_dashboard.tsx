@@ -2,10 +2,12 @@
 import React, {useState, useEffect} from 'react'
 
 import Dashboard from "../component/admin_user_component/dashboard"
-
+import User_management from "../component/admin_user_component/user_management"
+import Profile_management from "../component/business_user_component/profile_management"
 import Route_navigation from '../component/route_navigation'
 import App_navigation from '../component/app_navigation'
 import Welcome_navigation from '../component/welcome_navigation'
+
 
 
 const Admin_User_dashboard = () => {
@@ -28,6 +30,8 @@ const Admin_User_dashboard = () => {
                     <Route_navigation nav={nav} setNav={setNav} />
 
                     {nav === "dashboard" && <Dashboard />}
+                    {nav === "profile-management" && <Profile_management />}
+                    {nav === "user-management" && <User_management />}
 
             </div>
         </div>

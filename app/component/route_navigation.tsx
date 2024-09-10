@@ -94,6 +94,11 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <p className="text-sm">Profile Management </p>
                 </span>}
 
+                { userRole === 'single_user' && 
+                <span className={nav == "user-manag" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('user-manag')}}>
+                    <p className="text-sm">User Management </p>
+                </span>}
+
                 { userRole === 'admin' && 
                 <span className={nav == "user-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('user-management')}}>
                     <p className="text-sm">User Management </p>
@@ -119,10 +124,8 @@ const Route_navigation = ({nav, setNav}: NavProps) => {
                     <p className="text-sm">Billing & Invices </p>
                 </span>
 
-                {userRole !== 'admin' && <span className={nav == "account-management" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('account-management')}}>
-                    <p className="text-sm">Account Management </p>
-                </span>}
-{/* 
+                
+                {/* 
                 <span className={nav == "billing-and-invoices" ? "active-nav-box" : "nav-box"} onClick={()=>{select_nav('billing-and-invoices')}}>
                     <p className="text-sm">Settings </p>
                 </span> */}

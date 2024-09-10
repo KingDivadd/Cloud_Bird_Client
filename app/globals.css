@@ -337,7 +337,7 @@
 }
 
 .image-custom-button {
-    @apply h-[40px] rounded-[3px] text-white bg-teal-600 w-full
+    @apply h-[50px] rounded-[3px] text-white bg-teal-600 w-full
 }
 
 .image-custom-button:hover {

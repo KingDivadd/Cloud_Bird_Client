@@ -14,8 +14,8 @@ import { post_auth_request, post_request } from '@/app/api';
 const Signup = () => {
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
-    const [auth, setAuth] = useState({first_name: '', last_name: '', email: '', password: '', user_role: '' })
-    const [inputError, setInputError] = useState({first_nameError: false, last_nameError: false, emailError: false, passwordError: false})
+    const [auth, setAuth] = useState({first_name: '', last_name: '', email: '', password: '', user_role: '', phone_number: '' })
+    const [inputError, setInputError] = useState({first_nameError: false, last_nameError: false, emailError: false, passwordError: false, phoneError: false})
     const [loading, setLoading] = useState(false); 
     const [alert, setAlert] = useState({message: '', type: ''})
     const [current_stage, setCurrent_stage] = useState('role')
@@ -24,6 +24,7 @@ const Signup = () => {
         if (auth.first_name){setInputError({...inputError, first_nameError: false})}
         if (auth.last_name){setInputError({...inputError, last_nameError: false})}
         if (auth.email){setInputError({...inputError, emailError: false})}
+        if (auth.phone_number){setInputError({...inputError, phoneError: false})}
         if (auth.password){setInputError({...inputError, passwordError: false})}
     }, [auth])
 
@@ -48,7 +49,7 @@ const Signup = () => {
     
     async function create_user_account(e:any){
         e.preventDefault()
-        if (!auth.first_name || !auth.last_name || !auth.email || !auth.password){
+        if (!auth.first_name || !auth.last_name || !auth.email || !auth.password || !auth.phone_number){
             showAlert("Please fill all fields", "warning")
             setInputError({...inputError, emailError: auth.email === "", first_nameError: auth.first_name === '', last_nameError: auth.last_name === '', passwordError: auth.password === ''})
         }else {
@@ -62,7 +63,7 @@ const Signup = () => {
 
                     showAlert(response.data.msg, "success")
 
-                    setAuth({first_name: '', last_name: '', email: '', password: '', user_role: '' })
+                    setAuth({first_name: '', last_name: '', email: '', password: '', user_role: '', phone_number: '' })
 
                     setLoading(false)
 
@@ -87,7 +88,7 @@ const Signup = () => {
 
     async function create_business_account(e:any){
         e.preventDefault()
-        if (!auth.first_name || !auth.last_name || !auth.email || !auth.password){
+        if (!auth.first_name || !auth.last_name || !auth.email || !auth.password || !auth.phone_number){
             showAlert("Please fill all fields", "warning")
             setInputError({...inputError, emailError: auth.email === "", first_nameError: auth.first_name === '', last_nameError: auth.last_name === '', passwordError: auth.password === ''})
         }else {
@@ -103,7 +104,7 @@ const Signup = () => {
 
                     localStorage.setItem('key' ,response.headers.get('x-id-key'));       
 
-                    setAuth({...auth, first_name: '', last_name: '', password: '', user_role: '' })
+                    setAuth({...auth, first_name: '', last_name: '', password: '', user_role: '', phone_number: '' })
 
                     setLoading(false)
 
@@ -144,7 +145,7 @@ const Signup = () => {
 
                     showAlert(response.data.msg, "success")
 
-                    setAuth({first_name: '', last_name: '', email: '', password: '', user_role: '' })
+                    setAuth({first_name: '', last_name: '', email: '', password: '', user_role: '', phone_number: '' })
 
                     setLoading(false)
 
@@ -276,6 +277,10 @@ const Signup = () => {
                                 <h4 className="text-sm  text-slate-200 ">Email</h4>
                                 <input onChange={handleChange} value={auth.email} name='email' type="text" className={inputError.emailError ? 'signup-input-error':'signup-input'} />
                             </span>
+                            <span className="w-full flex flex-col items-start jusitify-start gap-2">
+                                <h4 className="text-sm  text-slate-200 ">Phone</h4>
+                                <input onChange={handleChange} value={auth.phone_number} name='phone_number' type="text" className={inputError.emailError ? 'signup-input-error':'signup-input'} />
+                            </span>
                             
                             <span className="w-full flex flex-col items-start justify-start gap-2">
                                 <h4 className="text-sm text-slate-200 ">Password</h4>
@@ -351,6 +356,10 @@ const Signup = () => {
                             <span className="w-full flex flex-col items-start jusitify-start gap-2">
                                 <h4 className="text-sm  text-slate-200 ">Email</h4>
                                 <input onChange={handleChange} value={auth.email} name='email' type="text" className={inputError.emailError ? 'signup-input-error':'signup-input'} />
+                            </span>
+                            <span className="w-full flex flex-col items-start jusitify-start gap-2">
+                                <h4 className="text-sm  text-slate-200 ">Phone</h4>
+                                <input onChange={handleChange} value={auth.phone_number} name='phone_number' type="text" className={inputError.emailError ? 'signup-input-error':'signup-input'} />
                             </span>
                             
                             <span className="w-full flex flex-col items-start justify-start gap-2">
