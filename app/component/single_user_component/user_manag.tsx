@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { ImgUploader } from '../file_uploader';
 import { get_auth_request, patch_auth_request } from '@/app/api';
 import { useRouter } from 'next/navigation';
+import Alert from '../alert';
 
 const User_manag = () => {
     const router = useRouter()
@@ -34,16 +35,18 @@ const User_manag = () => {
                 
                 const {user_id, avatar, email, first_name, last_name, password, profiles, phone_number} = response.data.profile
 
-                setUser({...user, avatar, email, first_name, last_name, profiles, phone_number, user_id })
+                if (profiles.length ) {
 
-                if (profiles.length && profiles[0].credit_reports.length) {
-                    const score = profiles[0].credit_reports[0].credit_score
-                    setUser({...user, credit_score: score})
+                    const score = profiles[0].credit_score
+
+                    setUser({...user,  avatar, email, first_name, last_name, profiles, phone_number, user_id, credit_score: score})
+
                 }else{
-                    setUser({...user, credit_score: 0})
+
+                    setUser({...user,  avatar, email, first_name, last_name, profiles, phone_number, user_id ,credit_score: 0})
+
                 }
 
-                console.log(' profiles ', response.data)
                 
             }else{
                 showAlert(response.response.data.err, "warning")
@@ -85,11 +88,12 @@ const User_manag = () => {
         if (!user.first_name || !user.last_name || !user.credit_score || !user.email || !user.phone_number) {
             showAlert("Please fill all fields", "warning")
         }else{
+            setLoading(true)
             try {
 
                 const payload = {avatar: user.avatar, first_name: user.first_name, last_name: user.last_name, phone_number: user.phone_number, password: user.password, credit_score: user.credit_score}
 
-                const response = await patch_auth_request(`app/edit-user-profile/${user.user_id}`, payload)
+                const response = await patch_auth_request(`app/edit-user-management/${user.user_id}`, payload)
                 
                 if (response.status == 201 || response.status == 200){
 
@@ -101,19 +105,20 @@ const User_manag = () => {
     
                     setUser({...user, avatar, email, first_name, last_name, profiles, phone_number })
     
-                    if (profiles.length && profiles[0].credit_score) {
+                    // if (profiles.length && profiles[0].credit_score) {
 
-                        const score = profiles[0].credit_score
+                    //     const score = profiles[0].credit_score
 
-                        setUser({...user, credit_score: score})
+                    //     setUser({...user, credit_score: score})
 
-                    }else{
+                    // }else{
 
-                        setUser({...user, credit_score: 0})
+                    //     setUser({...user, credit_score: 0})
 
-                    }
+                    // }
     
-                    console.log(' profiles ', response.data)
+
+                    setLoading(false)
                     
                 }else{
                     showAlert(response.response.data.err, "warning")
@@ -125,22 +130,27 @@ const User_manag = () => {
                             router.push('/auth/login')
                         }, 2000);
                     }
+                    setLoading(false)
                     return;
                 }
     
             } catch (err:any) {        
+                setLoading(false)
+
                 showAlert('Something went worong, try again later ', 'error')
             }
         }
     }
 
     const handleFileUpload = (fileUrl:string) => {
-        console.log('file url ',fileUrl)
-        // setProfile({...profile, report_data: fileUrl})
+        setUser({...user, avatar: fileUrl})
     };
 
     return (
-        <div className="w-full flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px]">
+        <div className="w-full relative flex items-start justify-center bg-[#475569] gap-[40px] px-[75px] py-[40px]">
+            <span className="w-[90%] md:w-1/2  flex items-center justify-end absolute top-[20px] right-[20px] z-20 ">
+                {alert.message && <Alert message={alert.message} type={alert.type} />} {/* Display alert */}
+            </span>
 
             <div className="w-1/2 flex flex-col items-start justify-start gap-[40px] ">
             
@@ -158,7 +168,7 @@ const User_manag = () => {
                     </span>
                 </div>
 
-                <button className="mt-[54px] w-full h-[50px] text-white bg-teal-600 rounded-[3px] hover:bg-teal-700 flex items-center justify-center text-sm"  disabled={loading}>
+                <button className="mt-[54px] w-full h-[50px] text-white bg-teal-600 rounded-[3px] hover:bg-teal-700 flex items-center justify-center text-sm" onClick={save_changes} disabled={loading}>
                     {loading ? (
                     <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
