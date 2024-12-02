@@ -123,7 +123,7 @@ const Signup = () => {
 
             <div className=" max-sm:p-[15px] mx-auto flex flex-wrap items-center justify-center gap-[50px] lg:gap-20  "> 
                 <span className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700 flex items-center justify-center whitespace-nowrap'>
-                    Fintaza<p className="text-amber-600">Pdl</p>
+                Cloud<p className="">Bird</p>
                 </span>
 
                 {phase == 'first' && 

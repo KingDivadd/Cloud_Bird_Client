@@ -33,8 +33,8 @@ const Header = () => {
                 {/* left nav */}
                 <div className=" flex h-full items-center justify-start gap-5">
                     <span className="flex items-center mr-5 cursor-pointer" onClick={()=> setHeader_nav('home') }>
-                        <p className="text-xl font-semibold text-white">Fintaza</p>
-                        <p className="text-xl font-semibold text-amber-500">Pdl</p>
+                        <p className="text-xl font-semibold text-white">Cloud</p>
+                        <p className="text-xl font-semibold text-[#04b2e4]">Bird</p>
                     </span>
 
                 </div>
@@ -42,7 +42,7 @@ const Header = () => {
 
                 <div className=" flex h-full items-center justify-end gap-5">
                     
-                    <button className="h-[50px] font-[500] text-lg px-5 flex items-center text-slate-300 border-2 border-slate-300 hover:text-amber-500 hover:border-amber-500 "  onClick={()=> router.push('/auth/login')}>
+                    <button className="h-[50px] font-[500] text-lg px-5 flex items-center text-slate-300 border-2 border-slate-300 hover:text-sky-400 hover:border-[#04b2e4] "  onClick={()=> router.push('/auth/login')}>
                         Sign in
                     </button>
                 </div>
@@ -50,9 +50,9 @@ const Header = () => {
 
             {(header_nav == 'home' || header_nav == 'features' ) && 
             <div className="w-[70%] mx-auto flex flex-col items-start justify-start gap-5 mb-20">
-                <p className="xl:text-[65px] font-bold text-white">FintazaPdl</p>
-                <p className="xl:text-lg w-[650px] text-start font-[400] text-white">A comprehensive platform for managing loans, streamlining application processes, automating credit evaluation, enabling seamless payments, and enhancing user experience with secure customer and admin portals.</p>
-                <button className="h-[60px] text-xl font-[400] bg-amber-500 px-5 flex items-center text-white hover:bg-amber-600 mt-5"onClick={()=> router.push('/auth/login')}>
+                <p className="xl:text-[65px] font-bold text-white">Cloud Bird</p>
+                <p className="xl:text-lg w-[650px] text-start font-[400] text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique aut consectetur quae quaerat porro qui quia temporibus impedit corporis, ipsam a tempore facilis magni rem ea repudiandae modi nisi eligendi!</p>
+                <button className="h-[60px] text-xl font-[400] bg-sky-400 px-5 flex items-center text-white  mt-5"onClick={()=> router.push('/auth/login')}>
                     Proceed
                 </button>
 
