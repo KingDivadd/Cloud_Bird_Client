@@ -3,9 +3,9 @@ import "./globals.css";
 import {ChatProvider} from '@/app/context/ChatContext'
 
 export const metadata: Metadata = {
-  title: "Fintaza",
-  description: "A comprehensive platform for managing loans, streamlining application processes, automating credit evaluation, enabling seamless payments, and enhancing user experience with secure customer and admin portals.",
-  keywords: "Lending Management, Loan Application Portal, Credit Scoring, KYC/AML Verification, Payment Processing, User Roles & Permissions",
+  title: "Cloud Bird",
+  description: "An AI-driven platform that empowers entrepreneurs and businesses with tools for ideation, growth, funding, and real-time insights in a centralized ecosystem.",
+  keywords: "AI Business Tools, Entrepreneurship Platform, Business Growth Assistant, Funding and Planning, Market Insights",
 
 };
 
