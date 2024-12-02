@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import {useChat} from '../../context/ChatContext'
 import Alert from '../../component/helper'
-import { post_auth_request, post_request } from '../../api/index'
+import { post_request } from '@/app/api'
 
 
 const RecoverPassword = () => {
@@ -95,9 +95,9 @@ const RecoverPassword = () => {
 
 
             <div className=" max-sm:p-[15px] mx-auto flex flex-wrap items-center justify-center gap-[50px] lg:gap-20  "> 
-                <p className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700'>
-                    Cloud Bird
-                </p>
+                <span className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700 flex items-center justify-center whitespace-nowrap'>
+                    Fintaza<p className="text-amber-600">Pdl</p>
+                </span>
 
                 <form action='' className="w-full sm:w-[400px] flex flex-col items-start justify-start rounded-[5px] p-[20px] bg-white min-h-[200px] py-[30px] gap-[35px] shadow-lg border border-slate-200 ">
 

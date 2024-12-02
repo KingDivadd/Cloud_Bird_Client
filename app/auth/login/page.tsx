@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import {useChat} from '../../context/ChatContext'
 import Alert from '../../component/helper'
-import { post_auth_request, post_request } from '../../api/index'
+import { post_auth_request, post_request } from '@/app/api'
 import { IoMdEyeOff } from 'react-icons/io'
 import { IoEye } from 'react-icons/io5'
 
@@ -16,7 +16,7 @@ const Login = () => {
     const [alert, setAlert] = useState({message: '', type: ''})
     const [inputError, setInputError] = useState({email: false, password: false})
     const [showPassword, setShowPassword] = useState(false)
-    // const {loggedInUser, setLoggedInUser} = useChat()
+    const {loggedInUser, setLoggedInUser} = useChat()
 
 
     useEffect(() => {
@@ -30,17 +30,18 @@ const Login = () => {
 
             try {
                 
-                const response = await post_auth_request('app/persist-login', auth)                
+                const response = await post_auth_request('app/persist-login', auth)       
+                
+                console.log('response ', response)
 
                 if (response.status == 200 || response.status == 201){
 
                     const user_data = response.data.user_data
 
-                    const {first_name, last_name, email, avatar, is_admin, is_active, role, title} = user_data
+                    const {first_name, last_name, business_name, address, user_role, email, avatar, is_admin, is_active, } = user_data
 
-                    // setLoggedInUser({...loggedInUser, first_name, last_name, email, avatar, is_admin, is_active, role, title})
+                    setLoggedInUser({...loggedInUser, first_name, last_name, business_name, address, user_role, email, avatar, is_active})
 
-                    
                     showAlert(response.data.msg, "success")
 
                     setTimeout(() => {
@@ -115,9 +116,17 @@ const Login = () => {
 
                     localStorage.setItem('x-id-key' ,response.headers.get('x-id-key'));
                     sessionStorage.setItem('role', response.data.user_data.user_role)
-                    
+
+                    const user_data = response.data.user_data
+
+                    const {first_name, last_name, business_name, address, user_role, email, avatar, is_admin, is_active, } = user_data
+
+                    setLoggedInUser({...loggedInUser, first_name, last_name, business_name, address, user_role, email, avatar, is_active})
+
                     showAlert(response.data.msg, "success")
+
                     setAuth({...auth, email: '', password: ''})
+
                     setLoading(false)
 
                     setTimeout(() => {
@@ -147,9 +156,9 @@ const Login = () => {
 
 
             <div className=" max-sm:p-[15px] mx-auto flex flex-wrap items-center justify-center gap-[50px] lg:gap-20  "> 
-                <p className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700 cursor-pointer'  onClick={()=> router.push('/') }>
-                    Cloud Bird
-                </p>
+                <span className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700 flex items-center justify-center whitespace-nowrap'>
+                    Fintaza<p className="text-amber-600">Pdl</p>
+                </span>
 
                 <form action='' className="w-full sm:w-[400px] flex flex-col items-start justify-start rounded-[5px] p-[20px] bg-white min-h-[200px] py-[30px] gap-[35px] shadow-lg border border-slate-200 ">
 

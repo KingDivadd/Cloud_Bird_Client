@@ -3,9 +3,10 @@ import "./globals.css";
 import {ChatProvider} from '@/app/context/ChatContext'
 
 export const metadata: Metadata = {
-  title: "Cloud Bird",
-  description: "Cloud Bird is an all-in-one business growth platform that empowers entrepreneurs and businesses with AI-driven tools to start, grow, and scale efficiently.",
-  keywords: "Business Growth, AI Tools, Productivity Platform, Startup Solutions, All-in-One Business Tool",
+  title: "Fintaza",
+  description: "A comprehensive platform for managing loans, streamlining application processes, automating credit evaluation, enabling seamless payments, and enhancing user experience with secure customer and admin portals.",
+  keywords: "Lending Management, Loan Application Portal, Credit Scoring, KYC/AML Verification, Payment Processing, User Roles & Permissions",
+
 };
 
 export default function RootLayout({
