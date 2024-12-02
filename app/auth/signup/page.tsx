@@ -130,7 +130,7 @@ const Signup = () => {
                 <form action='' className="w-full sm:w-[400px] flex flex-col items-start justify-start rounded-[5px] p-[20px] bg-white min-h-[200px] gap-[30px] shadow-lg border border-slate-200 ">
 
                     <span className="w-full flex flex-col items-center justify-start gap-[5px]"> 
-                        <p className="text-[27.5px] font-[700] text-blue-600"> Welcome to FintazaPdl</p>
+                        <p className="text-[27.5px] font-[700] text-blue-600"> Welcome to CloudBird</p>
                         <p className="text-sm font-[500] text-slate-700 text-centeer">Provide all Information</p>
                     </span>
                     
@@ -145,7 +145,7 @@ const Signup = () => {
                     <input type="password" name='password' value={auth.password} onChange={handle_change} placeholder='Password'  className={inputError.password ? 'input-error-1' :'input-type-1 '} />
 
                     <span className="text-sm flex items-center justify-center gap-[5px] mx-auto">
-                        Already have account? <p className="text-sm text-blue-600 hover:underline" onClick={()=> router.push('/auth/login')}>Login</p> 
+                        Already have account? <p className="text-sm text-blue-600 hover:underline cursor-pointer" onClick={()=> router.push('/auth/login')}>Login</p> 
                     </span>
 
                     <button className="w-full flex items-center justify-center h-[45px] rounded-[3px] bg-blue-600 hover:bg-blue-700 text-white"

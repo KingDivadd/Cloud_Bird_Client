@@ -42,8 +42,11 @@ const Header = () => {
 
                 <div className=" flex h-full items-center justify-end gap-5">
                     
-                    <button className="h-[50px] font-[500] text-lg px-5 flex items-center text-slate-300 border-2 border-slate-300 hover:text-sky-400 hover:border-[#04b2e4] "  onClick={()=> router.push('/auth/login')}>
+                    <button className="h-[50px] font-[500] text-lg px-5 flex items-center text-white hover:text-sky-400 "  onClick={()=> router.push('/auth/login')}>
                         Sign in
+                    </button>
+                    <button className="h-[50px] font-[500] text-lg px-5 flex items-center text-slate-300 border-2 border-slate-300 hover:text-sky-400 hover:border-[#04b2e4] "  onClick={()=> router.push('/auth/signup')}>
+                        Sign up
                     </button>
                 </div>
             </nav>
@@ -52,7 +55,7 @@ const Header = () => {
             <div className="w-[70%] mx-auto flex flex-col items-start justify-start gap-5 mb-20">
                 <p className="xl:text-[65px] font-bold text-white">Cloud Bird</p>
                 <p className="xl:text-lg w-[650px] text-start font-[400] text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique aut consectetur quae quaerat porro qui quia temporibus impedit corporis, ipsam a tempore facilis magni rem ea repudiandae modi nisi eligendi!</p>
-                <button className="h-[60px] text-xl font-[400] bg-sky-400 px-5 flex items-center text-white  mt-5"onClick={()=> router.push('/auth/login')}>
+                <button className="h-[60px] text-xl font-[400] bg-sky-400 px-5 flex items-center text-white  mt-5"onClick={()=> router.push('/auth/signup')}>
                     Proceed
                 </button>
 
