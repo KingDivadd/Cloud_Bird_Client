@@ -1,35 +1,28 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import Image from "next/image";
-import { useRouter } from 'next/navigation';
-import { CiUnlock } from "react-icons/ci";
-import { IoMdEyeOff } from 'react-icons/io';
-import { IoEye } from 'react-icons/io5';
-import Alert from '../../component/alert'
-import { patch_auth_request, patch_request } from '../../api';
+import {useRouter} from 'next/navigation'
+import {useChat} from '../../context/ChatContext'
+import Alert from '../../component/helper'
+import { post_auth_request, post_request } from '../../api/index'
+import { IoMdEyeOff } from 'react-icons/io'
+import { IoEye } from 'react-icons/io5'
 
-const RecoverPassword = () => {
-    const router = useRouter();
-    const [auth, setAuth] = useState({password: '', newPassword: ''})
-    const [showPassword, setShowPassword] = useState(false)
+
+const ResetPassword = () => {
+    const router = useRouter()
+    const [auth, setAuth] = useState({confirm_password: '', password: ''})
+    const {header_nav, setHeader_nav, } = useChat()
     const [loading, setLoading] = useState(false)
     const [alert, setAlert] = useState({message: '', type: ''})
-    const [inputError, setInputError] = useState({passwordError: false, newPasswordError: false})
+    const [inputError, setInputError] = useState({confirm_password: false, password: false})
+    const [showPassword, setShowPassword] = useState({password: false, confirm_password: false})
 
-    useEffect(() => {
-        if (auth.password){setInputError({...inputError, passwordError: false})}
-        if (auth.newPassword){setInputError({...inputError, newPasswordError: false})}
-    }, [auth])
-    
-    function handlePassword() {
-        if (showPassword){setShowPassword(false)}
-        else if (!showPassword){setShowPassword(true)}
-    }
 
-    function handleChange(e:any) {
+    const handle_change = (e:any)=>{
         const name = e.target.name
         const value = e.target.value
         setAuth({...auth, [name]:value})
+
     }
 
     function showAlert(message: string, type: string){
@@ -39,155 +32,138 @@ const RecoverPassword = () => {
             }, 3000);
     }
 
-    async function handleSubmit (e:any) {
-        e.preventDefault()
-        if (!auth.password || !auth.newPassword){
-            setAlert({message: 'Please create a new password', type: 'warning'})
-            setInputError({...inputError, passwordError: auth.password === '', newPasswordError: auth.newPassword === ''})
-            setTimeout(() => {
-                setAlert({message: '', type: ''})
-            }, 3000);
-        }else {
-            if (auth.password !== auth.newPassword){
-                setAlert({message: 'Password do not match', type: 'error'})
-                setTimeout(() => {
-                    setAlert({message: '', type: ''})
-                }, 3000);
-            } else {
+    const handle_signup = ()=>{
+        setHeader_nav('pricing')
+        router.push('/')
+    }
 
-                let payload;
+    useEffect(() => {
 
-                const email = sessionStorage.getItem('email') || null
+        if (auth.confirm_password) { 
+            setInputError({...inputError, confirm_password: auth.confirm_password == ''} ) 
+            return;
+        }
+        if (auth.password) { 
+            setInputError({...inputError, password: auth.password == ''} ) 
+            return;
+        }
+        
+    }, [auth])
 
-                if (email == null || !email){
-                    router.push('/auth/forget-password')
-                }else{
-                    payload = {email: email, password: auth.password}
-                }
-                setLoading(true);
+
+    async function handle_submit(e: any) {
+        e.preventDefault();
+
+        if ( !auth.confirm_password || !auth.password) {
+            if (!auth.password){showAlert('Please enter password', 'warning'); }
+            if (!auth.confirm_password){showAlert('Please confirm password', 'warning'); }
+            if (!auth.password && !auth.confirm_password){ showAlert('Please fill all fields ', 'warning')}
+            
+            setInputError({
+                ...inputError,
+                password: auth.password === "",
+                confirm_password: auth.confirm_password === "",
+            });
+            return;
+        }else if (auth.password != auth.confirm_password){
+            showAlert('Passwords do not match', "error")
+            return;
+        } 
+        else {
+            setLoading(true); 
+
+            try {
                 
-                try {
-                    const response = await patch_auth_request('app/reset-password', payload)
-                                    
-                    if (response.status == 201 || response.status == 200){
-                        
-                        showAlert(response.data.msg, "success")
-    
-                        setAuth({newPassword: '', password: '' })
+                const response = await post_auth_request('app/reset-password', auth)                
 
-                        sessionStorage.removeItem('email')
-                        
-                        setLoading(false)
-    
-                        localStorage.setItem('key' ,response.headers.get('x-id-key'));                    
-                        
-                        router.push('/auth/login')
-                        
-                    }else if (response.response.status == 401){
-                        showAlert(response.response.data.err, "error")
-                        setAuth({newPassword: '', password: '' })
-                        setLoading(false)
-                    }
-                    else{
-                        showAlert(response.response.data.err, "error")
-                        setLoading(false)
-                        return;
-                    }
-    
-                } catch (err:any) {
-    
-                    console.log(err);
+                if (response.status == 200 || response.status == 201){
                     
-                    showAlert('Something went worong, try again later ', 'error')
+                    showAlert(response.data.msg, "success")
+                    setAuth({confirm_password: '', password: ''})
+                    setLoading(false)
+                    sessionStorage.removeItem('email')
+                    router.push('/user/porter')
+                }
+                else if (response.response.status == 401){
+                    showAlert('something went wrong, restart process', 'error')
+                    router.push('/auth/recover-password')
+                }
+                else{
+                    
+                    showAlert(response.response.data.err, "error")
                     setLoading(false)
                 }
+            } catch (err:any) {
+                console.error('Network or unexpected error:', err);
+                showAlert('An unexpected error occurred. Please try again later.', 'error');
+            } finally {
+                setLoading(false); 
             }
         }
     }
 
 
-
     return (
-        <div className="relative w-full h-[100vh]  sm:p-[20px] flex items-center justify-center bg-slate-200">
-            <span className="w-1/2 flex items-center justify-end absolute top-[20px] right-[20px] ">
-                {alert.message && <Alert message={alert.message} type={alert.type} />}
+        <div className="w-full bg-white h-screen flex flex-col items-center justify-start sm:justify-center gap-10 " >
+            <span className="px-[20px] flex items-center justify-end absolute top-[15px] right-[50px] z-20 h-[50px]  ">
+
+                {alert.message && <Alert message={alert.message} type={alert.type} />} 
             </span>
-            <div className="w-full flex flex-row items-center justify-between h-full gap-[20px] bg-black rounded-[10px] ">
-                
-                <div className="relative max-sm:hidden w-[50%] h-full rounded-[20px] flex items-center justify-center bg-black ">
+
+
+            <div className=" max-sm:p-[15px] mx-auto flex flex-wrap items-center justify-center gap-[50px] lg:gap-20  "> 
+                <p className=' sm:w-[400px] lg:mb-10 max-sm:text-[35px] max-lg:text-[40px] lg:text-[55px] max-lg:font-[700] lg:font-[800] text-center text-blue-700' onClick={()=> router.push('/')  }>
+                    Cloud Bird
+                </p>
+
+                <form action='' className="w-full sm:w-[400px] flex flex-col items-start justify-start rounded-[5px] p-[20px] bg-white min-h-[200px] py-[30px] gap-[35px] shadow-lg border border-slate-200 ">
+
+                    <span className="w-full flex flex-col items-center justify-start gap-[5px]"> 
+                        <p className="text-[27.5px] font-[700] text-blue-600"> Reset Password</p>
+                        <p className="text-sm font-[500] text-slate-700 text-centeer">Create a new password</p>
+                    </span>
                     
-                    <div className="mx-auto relative w-[400px] h-[400px] rounded-[10px] overflow-hidden auth-bg">
-                        <Image
-                            src="/logo.jpg"
-                            alt="Authentication"
-                            layout="fill"
-                            objectFit="cover"
-                        />
-                    </div>
+                    <span className="w-full relative flex flex-col items-start justify-start gap-2 ">
+                        <span className="w-full relative  ">
+                            <input type={showPassword.password ? "text" : "password"} name='password' placeholder='Password' className={inputError.password ? 'input-error-1' : 'input-type-1'} value={auth.password} onChange={handle_change} />
 
-                </div>
-
-                <div className="max-sm:w-full w-[50%] h-full flex items-start justify-start ">
-                    <div className="w-full h-full flex flex-col items-start justify-center max-sm:justify-start  gap-10 max-sm:gap-[15px] my-auto bg-black sm:rounded-[20px]  max-sm:p-[20px] max-md:px-[20px]">
-
-
-                        <div className="hidden mx-auto max-sm:block relative w-[250px] h-[125px] rounded-[10px] overflow-hidden auth-bg">
-                            <Image
-                                src="/logo.jpg"
-                                alt="Authentication"
-                                layout="fill"
-                                objectFit="cover"
-                            />
-                        </div>
-
-                        <span className="mx-auto sm:w-[97.5%] flex flex-col items-center justify-start gap-[15px] sm:gap-[25px]">
-                            <h2 className="text-xl lg:text-2xl font-semibold text-slate-200 text-center">Reset Password</h2>
-                            <span className='text-white bg-teal-600 p-[10px] rounded-[100%] '> <CiUnlock size={25} /> </span>
-                            <h4 className="text-lg text-slate-200 text-center">Create a new password</h4>
-                        </span>
-
-                        <form action="" className='w-full md:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-[15px] sm:gap-[30px]'>
-                            <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-sm text-slate-200">Password</h4>
-                                <span className="w-full relative ">
-                                    <input type={showPassword ? "text" : "password"} name='password' className={inputError.passwordError ?'password-input-error':'password-input'} value={auth.password} onChange={handleChange} />
-                                    <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
-                                        {showPassword ? <IoEye size={20} className='cursor-pointer' />: <IoMdEyeOff size={20} className='cursor-pointer' /> }
-                                    </span>
-                                </span>
+                            <span className='absolute w-[40px] flex items-center justify-center top-[12.5px] right-0 text-blue-600' onClick={()=> setShowPassword({...showPassword, password: !showPassword.password})} >
+                                {showPassword ? <IoEye size={20} className='cursor-pointer' /> : <IoMdEyeOff size={20} className='cursor-pointer' />}
                             </span>
-                            
-                            <span className="w-full flex flex-col items-start justify-start gap-2">
-                                <h4 className="text-sm text-slate-200">Re-enter Password</h4>
-                                <span className="w-full relative ">
-                                    <input type={showPassword ? "text" : "password"} name='newPassword' className={inputError.newPasswordError ?'password-input-error':'password-input'} value={auth.newPassword} onChange={handleChange} />
-                                    <span className='absolute w-[40px] flex items-center justify-center top-[30%] right-0 text-teal-600' onClick={handlePassword} >
-                                        {showPassword ? <IoEye size={20} className='cursor-pointer' />: <IoMdEyeOff size={20} className='cursor-pointer' /> }
-                                    </span>
-                                </span>
-                            </span>
-                            
-                            <button className="mt-[10px] w-full h-[50px] text-white bg-teal-600 rounded-[5px] hover:bg-teal-500 flex items-center justify-center text-sm" onClick={handleSubmit} disabled={loading}>
-                                {loading ? (
-                                <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                </svg>
-                                ) : 'Submit'}
-                            </button>
-                        </form>
-
-                        <span className="w-[80%] flex flex-row items-center justify-between h-[40px] mx-auto"> 
-
-                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/login') }}></p>
-                            <p className="text-sm text-teal-400 hover:text-amber-600 hover:underline cursor-pointer mt-[10px]" onClick={() => { router.push('/auth/login') }}>Back to Login</p>
-                        
                         </span>
-                    </div>
-                </div>
+                    </span>
+                    
+                    <span className="w-full relative flex flex-col items-start justify-start gap-2 ">
+                        <span className="w-full relative  ">
+                            <input type={showPassword.confirm_password ? "text" : "password"} name='confirm_password' placeholder='Confirm Password' className={inputError.password ? 'input-error-1' : 'input-type-1'} value={auth.confirm_password} onChange={handle_change} />
+
+                            <span className='absolute w-[40px] flex items-center justify-center top-[12.5px] right-0 text-blue-600' onClick={()=> setShowPassword({...showPassword, confirm_password: !showPassword.confirm_password})} >
+                                {showPassword ? <IoEye size={20} className='cursor-pointer' /> : <IoMdEyeOff size={20} className='cursor-pointer' />}
+                            </span>
+                        </span>
+                    </span>
+
+                    <button className="w-full flex items-center justify-center h-[45px] rounded-[3px] bg-blue-600 hover:bg-blue-700 text-white" onClick={handle_submit} disabled={loading}>
+                        {loading ? (
+                        <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        ) : 'submit'}
+                    </button>
+
+                    <span className="w-full flex items-center justify-center gap-[5px]">
+                        <p className="text-sm font-[500] text-slate-700  " >Remembered password</p>
+                        <p className="text-sm font-[500] cursor-pointer text-blue-600 hover:underline " onClick={()=> router.push('/auth/login')} >Login</p>
+                    </span>
+
+                </form>
             </div>
+
+
+
         </div>
     )
 }
 
-export default RecoverPassword;
+export default ResetPassword

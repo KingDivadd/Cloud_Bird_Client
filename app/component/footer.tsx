@@ -5,15 +5,18 @@ import { footerLinks } from '@/constants'
 
 const Footer = () => {
     return (
-        <footer className='flex m-auto flex-col text-black-100  mt-5 border-t border-gray-200 bg-slate-800  '>
+        <footer className='flex m-auto flex-col text-black-100  mt-5 border-t border-gray-200 bg-black  '>
             
             <div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10 ">
                 <div className="flex flex-col justify-start items-start gap-6  ">
                     <Link href={'/'} className='flex justify-center items-center max-md:w-full  '>
-                        <p className='text-teal-500 font-bold text-xl'>CR</p><p className='text-slate-200 font-bold text-xl'>S</p>
-                        {/* <Image src={'/logo.svg'} alt='logo' width={118} height={18} className='object-contain'></Image> */}
+                        <span className="flex items-center mr-5">
+                            <p className="text-xl font-semibold text-white">insight</p>
+                            <p className="text-xl font-semibold text-amber-500">Edge</p>
+                        </span>
                     </Link>                
                 </div>
+
                 <div className="flex-1 max-md:justify-center  w-full flex flex-row md:justify-end flex-wrap max-md:mt-10 gap-20">
                     {footerLinks.map((link, ind)=>{
                         return(
@@ -29,8 +32,8 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="bg-slate-800 flex max-md:gap-[35px] max-md:flex-col justify-between items-center mt-10 border-t border-slate-300 px-[15px] sm:px-[30px] lg:pl-[40px] xl:px-[70px] py-10">
-                <p className='max-sm:text-center text-slate-200'>@2024 CRS. All Rights Reserved</p>
+            <div className="bg-black flex max-md:gap-[35px] max-md:flex-col justify-between items-center mt-10 border-t border-slate-400 px-[15px] sm:px-[30px] lg:pl-[40px] xl:px-[70px] py-10">
+                <p className='max-sm:text-center text-slate-200'>@2024 insightEdge. All Rights Reserved</p>
                 <div className='flex-1 flex sm:justify-end justify-center max-sm:mt-4 gap-5 sm:gap-10'>
                     <Link href={'/'} className='text-slate-400'>Privacy Policy</Link>
                     <Link href={'/'} className='text-slate-400'>Term of Use</Link>

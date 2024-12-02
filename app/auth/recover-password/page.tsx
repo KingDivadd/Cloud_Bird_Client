@@ -3,16 +3,16 @@ import React, {useState, useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import {useChat} from '../../context/ChatContext'
 import Alert from '../../component/helper'
-import { post_request } from '../../api/index'
+import { post_auth_request, post_request } from '../../api/index'
 
 
-const VerifyOtp = () => {
+const RecoverPassword = () => {
     const router = useRouter()
-    const [auth, setAuth] = useState({email: '', otp: ''})
+    const [auth, setAuth] = useState({email: ''})
     const {header_nav, setHeader_nav, } = useChat()
     const [loading, setLoading] = useState(false)
     const [alert, setAlert] = useState({message: '', type: ''})
-    const [inputError, setInputError] = useState({email: false, otp: false})
+    const [inputError, setInputError] = useState({email: false, password: false})
 
 
     const handle_change = (e:any)=>{
@@ -35,32 +35,23 @@ const VerifyOtp = () => {
     }
 
     useEffect(() => {
-        
-        if (auth.otp) { 
-            setInputError({...inputError, otp: auth.otp == ''} ) 
+        if (auth.email) { 
+            setInputError({...inputError, email: auth.email == ''} );
             return;
         }
         
     }, [auth])
 
-    useEffect(() => {
-        const fetched_email = sessionStorage.getItem('email')
-                
-        if (!fetched_email || fetched_email == null){ router.push('/auth/recover-password')}
 
-        setAuth({...auth, email: fetched_email || ''})
-    }, [])
-
-
-    async function handle_submit(e: any) {
+    async function handle_login(e: any) {
         e.preventDefault();
 
-        if ( !auth.otp) {
-            if (!auth.otp){showAlert('Please provide otp sent to your email  address', 'warning'); }
+        if (!auth.email ) {
+            if (!auth.email){ showAlert('Please provide email address', 'warning');  }
             
             setInputError({
                 ...inputError,
-                otp: auth.otp === "",
+                email: auth.email === "",
             });
             return;
         } else {
@@ -68,18 +59,18 @@ const VerifyOtp = () => {
 
             try {
                 
-                const response = await post_request('app/verify-otp', auth)                
+                const response = await post_request('app/generate-otp', auth)                
 
                 if (response.status == 200 || response.status == 201){
 
-                    localStorage.setItem('x-id-key' ,response.headers.get('x-id-key'));
-
+                    sessionStorage.setItem('email', auth.email)
+                    
                     showAlert(response.data.msg, "success")
-                    setAuth({...auth, otp: ''})
-                    setTimeout(() => {
-                        router.push('/auth/reset-password')
-                    }, 1500);
+                    setAuth({email: ''})
                     setLoading(false)
+                    setTimeout(() => {
+                        router.push('/auth/verify-otp')
+                    }, 3000);
                 }
                 else{
                     showAlert(response.response.data.err, "error")
@@ -111,13 +102,13 @@ const VerifyOtp = () => {
                 <form action='' className="w-full sm:w-[400px] flex flex-col items-start justify-start rounded-[5px] p-[20px] bg-white min-h-[200px] py-[30px] gap-[35px] shadow-lg border border-slate-200 ">
 
                     <span className="w-full flex flex-col items-center justify-start gap-[5px]"> 
-                        <p className="text-[27.5px] font-[700] text-blue-600"> Verify Email</p>
-                        <p className="text-sm font-[500] text-slate-700 text-centeer">Provide the otp sent to your email address</p>
+                        <p className="text-[27.5px] font-[700] text-blue-600"> Recover Password</p>
+                        <p className="text-sm font-[500] text-slate-700 text-centeer">Provide your registered email address</p>
                     </span>
                     
-                    <input type="text" name='otp' value={auth.otp} onChange={handle_change} placeholder='00000' className={inputError.email ? 'input-error-1' : 'input-type-1'} />
+                    <input type="email" name='email' onChange={handle_change} placeholder='Email' className={inputError.email ? 'input-error-1' : 'input-type-1'} />
 
-                    <button className="w-full flex items-center justify-center h-[45px] rounded-[3px] bg-blue-600 hover:bg-blue-700 text-white" onClick={handle_submit} disabled={loading}>
+                    <button className="w-full flex items-center justify-center h-[45px] rounded-[3px] bg-blue-600 hover:bg-blue-700 text-white" onClick={handle_login} disabled={loading}>
                         {loading ? (
                         <svg className="w-[25px] h-[25px] animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
@@ -126,7 +117,6 @@ const VerifyOtp = () => {
                         ) : 'submit'}
                     </button>
 
-                    <p className=" mx-auto text-sm font-[500] text-amber-700 cursor-pointer hover:underline " onClick={()=> router.push('/auth/recover-password')} >Resend Otp</p>
                     <span className="w-full flex items-center justify-center gap-[5px]">
                         <p className="text-sm font-[500] text-slate-700  " >Remembered password</p>
                         <p className="text-sm font-[500] cursor-pointer text-blue-600 hover:underline " onClick={()=> router.push('/auth/login')} >Login</p>
@@ -141,4 +131,4 @@ const VerifyOtp = () => {
     )
 }
 
-export default VerifyOtp
+export default RecoverPassword
