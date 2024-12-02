@@ -34,7 +34,7 @@ const Header = () => {
                     </span>
                     
 
-                    <div className="w-full flex items-center gap-5">
+                    <div className="hidden w-full flex items-center gap-5">
                         <Link href={'/'} onClick={()=> nav_to('features')} className={header_nav == 'features'? 'active-header-nav-link': 'header-nav-link'}>Features</Link>
                         <Link href={'/'} onClick={()=> nav_to('pricing')} className={header_nav == 'pricing'? 'active-header-nav-link': 'header-nav-link'}>Pricing</Link>
                         <Link href={'/'} onClick={()=> nav_to('about_us')} className={header_nav == 'about_us'? 'active-header-nav-link': 'header-nav-link'}>About Us</Link>
